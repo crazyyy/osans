@@ -174,12 +174,36 @@ function wpeSideNav() {
     )
   );
 }
+// WPE sidebar navigation
+function wpeSideNavTwo() {
+  wp_nav_menu(
+  array(
+    'theme_location'  => 'sidebar-two-menu',
+    'menu'            => '',
+    'container'       => 'div',
+    'container_class' => 'menu-{menu slug}-container',
+    'container_id'    => '',
+    'menu_class'      => 'menu',
+    'menu_id'         => '',
+    'echo'            => true,
+    'fallback_cb'     => 'wp_page_menu',
+    'before'          => '',
+    'after'           => '',
+    'link_before'     => '',
+    'link_after'      => '',
+    'items_wrap'      => '<ul class="sidebar-two-nav">%3$s</ul>',
+    'depth'           => 0,
+    'walker'          => ''
+    )
+  );
+}
 //  Register WPE Navigation
 function register_html5_menu() {
   register_nav_menus(array(
     'top-header-menu' => __('Первое меню в шапке', 'wpeasy'),
     'header-menu' => __('Меню в шапке', 'wpeasy'),
-    'sidebar-menu' => __('Меню в сайдбар', 'wpeasy'),
+    'sidebar-menu' => __('Меню 1 сайдбар', 'wpeasy'),
+    'sidebar-two-menu' => __('Меню 2 сайдбар', 'wpeasy'),
     'footer-menu' => __('Меню в подвал', 'wpeasy')
   ));
 }

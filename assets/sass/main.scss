@@ -558,6 +558,61 @@ article {
     }
   }
 }
+.widget {
+  margin: 0 0 40px;
+  h6 {
+    font-family: $foslr;
+    font-size: 18px;
+
+    position: relative;
+
+    margin: 0 0 20px;
+    padding: 14px 0 0;
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      @extend .dblock;
+      @include sprite($sprite-widget-before);
+    }
+  }
+}
+.widget-select-equio {
+  height: 160px;
+  padding: 105px 0 0;
+
+  background-image: url(../img/bg/widget-select-equio.jpg);
+  h4 {
+    font-size: 16px;
+
+    position: relative;
+
+    padding: 10px;
+
+    text-transform: uppercase;
+
+    background-color: rgba(255, 255, 255, .85);
+    a {
+      color: $gray;
+      border-bottom: 1px solid $red;
+    }
+    &:after {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      @extend .dblock;
+      @include sprite($sprite-ico-square);
+    }
+    &:hover {
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
 .breadcrumbs {
   display: block;
 
