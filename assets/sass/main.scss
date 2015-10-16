@@ -94,8 +94,15 @@ picture {
   font-size: 40px;
 
   width: 100%;
+  margin-bottom: 30px;
+  padding-bottom: 50px;
 
   text-align: center;
+
+  color: $gray;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJEAAAAJCAYAAAAy7c4NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjUxNTFCMzA0NzQ0NDExRTU5RUU1RTU5NzAwOTg1MUQxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjUxNTFCMzA1NzQ0NDExRTU5RUU1RTU5NzAwOTg1MUQxIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTE1MUIzMDI3NDQ0MTFFNTlFRTVFNTk3MDA5ODUxRDEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTE1MUIzMDM3NDQ0MTFFNTlFRTVFNTk3MDA5ODUxRDEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5TXyozAAAAqklEQVR42mL8//8/wyhgYHjha4tNmAuIs4G4G5uYxObDowEHBEyjQYAXTATiTUSIjWjAgiMHjgIGBnUofROX2GjYQRPRaBBgBYxAvAqILQmIjQJoIhptFGEHkUD8DYkfDsR6QPx1NGgwExHjaDCgAG4gPgbEK9HEKqFtyNFMh15sj/bOMHpns4G4B60thE2MYbR3Nto7I6sxPQpGExEx7aB8IsRGARIACDAATjwlnSbUpKwAAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  background-position: center bottom;
 }
 
 .header-top {
@@ -181,7 +188,7 @@ header {
   background-color: $light-gray;
   .header-slider-container {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     top: 0;
     right: 0;
     bottom: 0;
@@ -194,7 +201,7 @@ header {
       left: 0;
 
       height: 249px;
-background-color: red;
+
       background-image: url(../img/bg/header-png.png);
       background-repeat: no-repeat;
       background-position: center bottom;
@@ -258,7 +265,215 @@ article {
 }
 
 .container-descr {
+  margin-bottom: 55px;
   padding: 0 200px;
+
+  text-align: center;
+}
+.equipment-list-container {
+  position: relative;
+
+  margin-bottom: 60px;
+
+  text-align: center;
+  &:after {
+    position: absolute;
+    top: 150px;
+    right: 25px;
+
+    @extend .dblock;
+  }
+  img {
+    width: 205px;
+    height: 205px;
+    margin-bottom: 30px;
+
+    border-radius: 50%;
+  }
+  h4 {
+    font-size: 16px;
+
+    margin-bottom: 25px;
+    padding: 0 5px;
+    a {
+      color: $gray;
+    }
+  }
+  &.equipment-list-container-1 {
+    &:after {
+      @include sprite($sprite-ico-acum);
+    }
+  }
+  &.equipment-list-container-2 {
+    h4 {
+      padding: 0 10px;
+    }
+    &:after {
+      @include sprite($sprite-ico-batter);
+    }
+  }
+  &.equipment-list-container-3 {
+    &:after {
+      @include sprite($sprite-ico-gener);
+    }
+  }
+  &.equipment-list-container-4 {
+    h4 {
+      padding: 0;
+    }
+    &:after {
+      @include sprite($sprite-ico-note);
+    }
+  }
+}
+
+.services {
+  padding: 60px 0 80px;
+
+  background-color: #f9f9f9;
+  background-image: url(../img/bg/services.png);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  .selection-equipment,
+  .service-repair {
+    position: relative;
+
+    padding: 0 0 0 30px;
+    h3 {
+      font-family: $foslr;
+      font-size: 30px;
+
+      margin: 0 0 30px;
+      a {
+        color: #252525;
+        border-bottom: 1px solid $red;
+        &:hover {
+          text-decoration: none;
+
+          color: $red;
+        }
+      }
+      &:before {
+        font-family: $fosr;
+
+        position: absolute;
+        left: 10px;
+
+        content: '-';
+
+        color: $red;
+      }
+    }
+    img {
+      margin-bottom: 25px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}
+.about-company {
+  padding: 70px 0 100px;
+  .about-company-content {
+    padding: 0 0 0 30px;
+    h2 {
+      font-size: 30px;
+
+      position: relative;
+
+      margin: 0 0 30px;
+      &:before {
+        font-family: $fosr;
+
+        position: absolute;
+        top: 0;
+        left: -20px;
+
+        content: '-';
+
+        color: $red;
+      }
+      .main {
+        font-family: $foslr;
+
+        display: inline-block;
+
+        color: $gray;
+      }
+      .second {
+        font-family: $fosli;
+        font-size: 13px;
+
+        display: inline-block;
+
+        width: 270px;
+        margin: 0 0 0 20px;
+        padding: 0 0 0 20px;
+
+        color: $red;
+        border-left: 1px solid $gray;
+      }
+    }
+    p {
+      font-size: 14px;
+
+      margin: 0 0 30px;
+      padding: 0 20px 0 0;
+    }
+    .read-more {
+      font-family: $fosb;
+      font-size: 14px;
+
+      position: relative;
+
+      color: $gray;
+      border-bottom: 1px solid $red;
+      &:hover {
+        text-decoration: none;
+
+        color: $red;
+      }
+      &:after {
+        display: inline;
+
+        content: ' →';
+        text-decoration: none;
+      }
+    }
+  }
+  .about-company-img {
+    padding: 64px 0 0;
+    img {
+      width: 100%;
+    }
+  }
+}
+.our-clients {
+  padding-bottom: 70px;
+  .our-clients-logo {
+    height: 160px;
+
+    border: 1px solid #e1e1e1;
+
+    @extend .align-center-parent;
+    img {
+      @extend .align-center;
+    }
+    &.our-clients-logo-1,
+    &.our-clients-logo-2,
+    &.our-clients-logo-3,
+    &.our-clients-logo-4 {
+      border-bottom: 0;
+    }
+    &.our-clients-logo-2,
+    &.our-clients-logo-3,
+    &.our-clients-logo-4,
+    &.our-clients-logo-6,
+    &.our-clients-logo-7,
+    &.our-clients-logo-8 {
+      border-left: 0;
+    }
+  }
 }
 
 
