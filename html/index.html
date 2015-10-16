@@ -24,18 +24,18 @@
 </head>
 <body>
 <!-- wrapper -->
-<div class="wrapper">
+<div class="wrapper container">
 
   <div class="header-top inner row">
 
-    <nav class="col header-top-nav">
+    <nav class="col-md-4 header-top-nav">
       <ul>
         <li><a href="">О компании</a></li>
         <li><a href="">Технический сервис</a></li>
         <li><a href="">Контакты</a></li>
       </ul>
     </nav><!-- header-top-nav -->
-    <div class="col-2 header-top-contact">
+    <div class="col-md-8 header-top-contact">
       <a href="tel:+74956661364" class="phone">+7 (495) <span>666-13-64</span></a>
       <a href="mailto:info@nord-energo.ru" class="mail">info@nord-energo.ru</a>
     </div><!-- header-top-contact -->
@@ -49,22 +49,21 @@
     </div><!-- /.header-slider-container -->
 
     <div class="row inner header-inner">
-      <div class="col-3">
+      <div class="col-md-4">
         <div class="logo">
           <img src="img/logo.png" alt="" title="">
         </div><!-- /logo -->
+      </div><!-- /.col-md-4 -->
 
-        <nav class="nav" role="navigation">
-          <ul class="headnav">
-            <li>Главная</li>
-            <li>ИБП</li>
-            <li>АКБ</li>
-            <li>ДГУ</li>
-            <li>СКВ</li>
-          </ul>
-        </nav><!-- /nav -->
-
-      </div><!-- /.inner header-slider -->
+      <nav class="nav col-md-8" role="navigation">
+        <ul class="headnav">
+          <li>Главная</li>
+          <li>ИБП</li>
+          <li>АКБ</li>
+          <li>ДГУ</li>
+          <li>СКВ</li>
+        </ul>
+      </nav><!-- /nav -->
     </div><!-- header-inner -->
 
   </header><!-- /header -->
@@ -72,46 +71,68 @@
   <section role="main">
 
     <article class="row inner equipment">
-      <h2 class="title4">Оборудование</h2>
-      <div class="equipment-descr">
+      <h2 class="title4 col-md-12">Оборудование</h2>
+      <div class="equipment-descr col-md-12">
         Одним из наших приоритетных направлений является специализация в области создания систем бесперебойного и гарантированного питания
       </div><!-- /.equipment-descr -->
-      <div class="col-l equipment-list clearfix">
-        <div class="equipment-list-container">
-          <img src="img/content/equipment-list-container-1.jpg" alt="">
-          <h4>Источники бесперебойного питания</h4>
-          <p>Высоконадежные системы резервного электропитания для любых технических задач</p>
-        </div><!-- /.equipment-list-container -->
-        <div class="equipment-list-container">
-          <img src="img/content/equipment-list-container-2.jpg" alt="">
-          <h4>Аккумуляторные батареи</h4>
-          <p>Для объектов с повышенными требованиями к энергоснабжению</p>
-        </div><!-- /.equipment-list-container -->
-      </div><!-- equipment-list -->
-      <div class="col-r equipment-list clearfix">
-        <div class="equipment-list-container">
-          <img src="img/content/equipment-list-container-3.jpg" alt="">
-          <h4>Дизельные электростанции</h4>
-          <p>Как небольшие установки, так и крупные энергетические станции</p>
-        </div><!-- /.equipment-list-container -->
-        <div class="equipment-list-container">
-          <img src="img/content/equipment-list-container-4.jpg" alt="">
-          <h4>Системы кондицинирования воздуха</h4>
-          <p>Качественные и надежные системы кондиционирования</p>
-        </div><!-- /.equipment-list-container -->
-      </div><!-- equipment-list -->
+
+      <div class="equipment-list-container col-md-3">
+        <img src="img/content/equipment-list-container-1.jpg" alt="">
+        <h4>Источники бесперебойного питания</h4>
+        <p>Высоконадежные системы резервного электропитания для любых технических задач</p>
+      </div><!-- /.equipment-list-container -->
+      <div class="equipment-list-container col-md-3">
+        <img src="img/content/equipment-list-container-2.jpg" alt="">
+        <h4>Аккумуляторные батареи</h4>
+        <p>Для объектов с повышенными требованиями к энергоснабжению</p>
+      </div><!-- /.equipment-list-container -->
+      <div class="equipment-list-container col-md-3">
+        <img src="img/content/equipment-list-container-3.jpg" alt="">
+        <h4>Дизельные электростанции</h4>
+        <p>Как небольшие установки, так и крупные энергетические станции</p>
+      </div><!-- /.equipment-list-container -->
+      <div class="equipment-list-container col-md-3">
+        <img src="img/content/equipment-list-container-4.jpg" alt="">
+        <h4>Системы кондицинирования воздуха</h4>
+        <p>Качественные и надежные системы кондиционирования</p>
+      </div><!-- /.equipment-list-container -->
+
     </article><!-- equipment -->
+
+    <article class="services row inner">
+      <div class="selection-equipment col-md-6">
+        <h3><a href="">Подбор оборудования</a></h3>
+        <img src="img/content/select-equio.jpg" alt="">
+        <p>На нашем сайте вы сможете быстро и удобно подорать всё необходимое оборудование</p>
+      </div><!-- selection-equipment -->
+      <div class="service-repair col-md-6">
+        <h3><a href="">Сервисное обслуживание</a></h3>
+        <img src="img/content/service-repair.jpg" alt="">
+        <p>Мы предоставляем выгодные условия сервисного обслуживания и ремонта</p>
+      </div><!-- service-repair -->
+    </article><!-- /.services -->
 
   </section><!-- /section -->
 </div><!-- /wrapper -->
 
-<footer role="contentinfo">
-  <div class="inner">
-
-    <p class="copyright">
-      © 2015 Собственность. Работает на html2wp easy.
-    </p><!-- /copyright -->
-
+<footer role="contentinfo" class="container">
+  <div class="inner row">
+    <h5 class="col-md-12">Свяжитесь с нами</h5>
+    <div class="col-md-4 contact-phone">
+      <h6>Телефон</h6>
+      <a href="tel:+74956661364">+7 (495) 666-13-64</a>
+    </div>
+    <div class="col-md-4 contact-adress">
+      <h6>Адрес</h6>
+      <p>129626, г. Москва, <br>ул. 2-я Мытищинская, дом 2, стр.1</p>
+    </div>
+    <div class="col-md-4 contact-phone">
+      <h6>Email</h6>
+      <a href="mailto:info@nord-energo.ru">info@nord-energo.ru</a>
+    </div>
+    <div class="copy col-md-12">
+      <p>2008-2015 ©  Норд-Энерго - лидер на рынке бесперебойного гарантированного электропитания</p>
+    </div>
   </div><!-- /.inner -->
 </footer>
 
