@@ -214,6 +214,9 @@ if (function_exists('register_sidebar')) {
 function wpeExcerpt10($length) {
     return 10;
 }
+function wpeExcerpt15($length) {
+    return 15;
+}
 function wpeExcerpt20($length) {
     return 20;
 }
@@ -240,13 +243,13 @@ function wpeExcerpt($length_callback = '', $more_callback = '')
 
 //  Custom View Article link to Post
 //  RU: Добавляем "Читать дальше" к обрезанным записям
-/*
+
 function html5_blank_view_article($more) {
   global $post;
   return '... <!-- noindex --><a rel="nofollow" class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'wpeasy') . '</a><!-- /noindex -->';
 }
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
-*/
+
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
 function my_wp_nav_menu_args($args = '')
 {

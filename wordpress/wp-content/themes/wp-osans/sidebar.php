@@ -1,4 +1,4 @@
-<aside class="sidebar" role="complementary">
+<aside class="sidebar col-md-4" role="complementary">
 
   <?php if ( is_active_sidebar('widgetarea1') ) : ?>
     <?php dynamic_sidebar( 'widgetarea1' ); ?>
@@ -8,4 +8,4 @@
 		RU: Здесь код вывода того, что необходимо для статического контента виджетов -->
 
   <?php endif; ?>
-</aside><!-- /sidebar -->
+</aside><!-- /sidebar col-md-4-->
