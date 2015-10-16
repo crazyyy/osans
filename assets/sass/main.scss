@@ -1,7 +1,8 @@
 @import 'import/reset';
 @import 'font_opensans';
 @import 'import/variables';
-@import 'grid';
+@import 'bootstrap/bootstrap';
+@import 'bootstrap/bootstrap-theme';
 @import 'import/buttons';
 @import 'import/forms';
 @import 'import/lists';
@@ -88,8 +89,10 @@ picture {
   @extend .clearfix;
 }
 .title4 {
-  font-size: 40px;
   font-family: $foslr;
+  font-size: 40px;
+  text-align: center;
+  width: 100%;
 }
 
 
@@ -97,8 +100,6 @@ header {
   background-color: $light-gray;
   .logo {
     display: block;
-
-    width: $width / 10;
     img {
       max-width: 100%;
     }
@@ -126,6 +127,25 @@ article {
 .looper {
   @extend .clearfix;
 }
+.equipment {
+  .title4 {
+    float: left;
+  }
+  .equipment-descr {
+    padding: 0 200px;
+    width: 100%;
+    float: left;
+  }
+  .equipment-list {
+    float: left;
+  }
+  .equipment-list-container {
+    margin: 0 !important;
+    float: left;
+    width: 50%;
+  }
+}
+
 
 
 footer {
