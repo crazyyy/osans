@@ -257,6 +257,9 @@ header {
   z-index: 1;
   top: 45px;
   right: 0;
+  .sub-menu {
+    display: none;
+  }
   ul {
     @extend .justify-child;
     @extend .clearfix;
@@ -278,6 +281,13 @@ header {
           border-bottom: 2px solid $red;
         }
       }
+      &.current-menu-item {
+        a {
+          text-decoration: none;
+
+          border-bottom: 2px solid $red;
+        }
+      }
     }
   }
 }
@@ -291,9 +301,10 @@ article {
 .looper {
   @extend .clearfix;
   .feature-img {
+    overflow: hidden;
+
     width: 240px;
     height: 180px;
-    overflow: hidden;
     img {
       max-width: 100%;
       max-height: 100%;
