@@ -1,6 +1,7 @@
 @import 'import/reset';
+@import 'font_opensans';
 @import 'import/variables';
-/* @import 'import/gridpak'; */
+@import 'grid';
 @import 'import/buttons';
 @import 'import/forms';
 @import 'import/lists';
@@ -9,7 +10,7 @@
 @import 'import/wordpress';
 @import 'sprite';
 @import 'font_fontawesome';
-@import 'font_opensans';
+
 
 body {
   font-family: $base-font-family;
@@ -86,6 +87,11 @@ picture {
 
   @extend .clearfix;
 }
+.title4 {
+  font-size: 40px;
+  font-family: $foslr;
+}
+
 
 header {
   background-color: $light-gray;
