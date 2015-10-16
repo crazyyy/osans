@@ -23,6 +23,22 @@ body {
   background-color: $base-background-color;
 
   -webkit-font-smoothing: antialiased;
+  &.home {
+    header {
+      height: 700px;
+      margin-bottom: 0;
+    }
+    .header-slider-container {
+      display: block;
+    }
+  }
+  &.blog {
+    header {
+      background-image: url(../img/bg/page-blog.jpg);
+      background-repeat: no-repeat;
+      background-position: center top;
+    }
+  }
 }
 h1,
 h2,
@@ -90,11 +106,20 @@ picture {
   @extend .clearfix;
 }
 .title4 {
-  font-family: $foslr;
   font-size: 40px;
 
-  width: 100%;
   margin-bottom: 30px;
+}
+.title3 {
+  font-size: 30px;
+
+  margin-bottom: 40px;
+}
+.title4,
+.title3 {
+  font-family: $foslr;
+
+  width: 100%;
   padding-bottom: 50px;
 
   text-align: center;
@@ -179,36 +204,39 @@ picture {
     }
   }
 }
+.header-slider-container {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: none;
+  &:after {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 249px;
+
+    background-image: url(../img/bg/header-png.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+
+    @extend .dblock;
+  }
+}
 
 header {
   position: relative;
 
-  height: 700px;
+  height: 450px;
+  margin-bottom: 60px;
 
   background-color: $light-gray;
-  .header-slider-container {
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    &:after {
-      position: absolute;
-      z-index: 2;
-      right: 0;
-      bottom: 0;
-      left: 0;
-
-      height: 249px;
-
-      background-image: url(../img/bg/header-png.png);
-      background-repeat: no-repeat;
-      background-position: center bottom;
-
-      @extend .dblock;
-    }
-  }
   .logo {
     position: absolute;
     z-index: 1;
@@ -262,6 +290,15 @@ article {
 }
 .looper {
   @extend .clearfix;
+  .feature-img {
+    width: 240px;
+    height: 180px;
+    overflow: hidden;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
 }
 
 .container-descr {
