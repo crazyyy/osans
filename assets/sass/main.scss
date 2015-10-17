@@ -668,6 +668,43 @@ article {
 
   border: 1px solid $light-gray;
 }
+.block-select {
+  margin: 0 0 45px;
+  padding: 0 0 50px;
+
+  border-bottom: 5px solid #f9f9f9;
+  h3 {
+    font-family: $foslr;
+    font-size: 28px;
+
+    margin: 0 0 25px;
+
+    text-align: center;
+  }
+}
+.category-listing-container {
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  @extend .clearfix;
+  .category-item {
+    display: inline-block;
+    float: left;
+
+    width: 300px;
+    margin: 0 4px 40px;
+    padding: 0;
+    &:nth-child(2n+1) {
+      margin-right: 5px;
+      margin-left: 0;
+    }
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+}
 .widget {
   margin: 0 0 40px;
   h6 {
