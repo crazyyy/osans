@@ -1,7 +1,6 @@
 <?php get_header(); ?>
   <div class="row inner">
     <div class="col-md-8">
-      <h1 class="title3"><?php the_category(', '); ?></h1>
 
       <?php if (have_posts()): while (have_posts()) : the_post(); ?>
         <h1 class="single-title inner-title title3"><?php the_title(); ?></h1>

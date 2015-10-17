@@ -99,8 +99,9 @@ picture {
 .btn-red {
   background-color: $red;
   &:hover {
-    background-color: #c74639;
     text-decoration: none;
+
+    background-color: #c74639;
   }
 }
 .wrapper {
@@ -588,9 +589,84 @@ article {
   }
   p {
     font-size: 11px;
-    color: $light-gray;
+
     margin: 0;
+
+    color: $light-gray;
   }
+}
+.product-listing {
+  .product-listing-title {
+    font-family: $foslr;
+    font-size: 24px;
+
+    margin: 0 0 30px;
+
+    color: $light-gray;
+  }
+  .product-listing-container {
+    display: block;
+
+    width: 100%;
+    margin: 0;
+    margin: 0 0 25px;
+    padding: 0;
+
+    @extend .clearfix;
+    .product-item {
+      display: inline-block;
+      float: left;
+
+      width: 190px;
+      margin: 0 0 25px;
+      margin: 0 9px;
+
+      text-decoration: none;
+      span {
+        display: block;
+        overflow: hidden;
+
+        width: 100%;
+        height: 190px;
+        margin: 0 0 20px;
+
+        border: 1px solid $light-gray;
+        img {
+          width: 100%;
+        }
+      }
+      h2 {
+        font-size: 16px;
+
+        text-decoration: underline;
+
+        color: $red;
+      }
+      &:hover {
+        text-decoration: none;
+        h2 {
+          text-decoration: none;
+        }
+      }
+      &:nth-child(1),
+      &:nth-child(3n+4) {
+        margin-right: 10px;
+        margin-left: 0;
+      }
+      &:nth-child(3n) {
+        margin-right: 0;
+        margin-left: 11px;
+      }
+    }
+  }
+}
+.subcat-thumbs {
+  margin: 0 0 40px;
+  padding: 15% 0;
+
+  text-align: center;
+
+  border: 1px solid $light-gray;
 }
 .widget {
   margin: 0 0 40px;
