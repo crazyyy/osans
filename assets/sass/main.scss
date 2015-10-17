@@ -86,6 +86,23 @@ picture {
   max-width: 100%;
   margin: 0;
 }
+.btn {
+  font-family: $fosb;
+
+  width: 100%;
+  margin: 0 0 5px;
+  padding: 15px 0;
+
+  text-align: center;
+  text-decoration: none;
+}
+.btn-red {
+  background-color: $red;
+  &:hover {
+    background-color: #c74639;
+    text-decoration: none;
+  }
+}
 .wrapper {
   position: relative;
 
@@ -556,6 +573,23 @@ article {
     &.our-clients-logo-8 {
       border-left: 0;
     }
+  }
+}
+.product-additional {
+  float: right;
+
+  width: 250px;
+  margin: 0 0 20px 30px;
+  img {
+    width: 100%;
+    margin: 0 0 20px;
+
+    border: 1px solid $light-gray;
+  }
+  p {
+    font-size: 11px;
+    color: $light-gray;
+    margin: 0;
   }
 }
 .widget {
