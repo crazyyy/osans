@@ -702,4 +702,41 @@ function top_level_cats_remove_cat_base($link)
     return preg_replace('|' . $category_base . '|', '', $link, 1);
 }
 
+
+add_action( 'init', 'register_cpt_products' );
+function register_cpt_products() {
+  $labels = array(
+    'name' => _x( 'Продукция', 'products' ),
+    'singular_name' => _x( 'Продукция', 'products' ),
+    'add_new' => _x( 'Добавить', 'products' ),
+    'add_new_item' => _x( 'Добавить продукцию', 'products' ),
+    'edit_item' => _x( 'Редактироваь продукцию', 'products' ),
+    'new_item' => _x( 'Новый продукт', 'products' ),
+    'view_item' => _x( 'Посмотреть продукт', 'products' ),
+    'search_items' => _x( 'Искать отзыв', 'products' ),
+    'not_found' => _x( 'Ничего не найдено', 'products' ),
+    'not_found_in_trash' => _x( 'Ничего не найдено', 'products' ),
+    'parent_item_colon' => _x( 'Родительский:', 'products' ),
+    'menu_name' => _x( 'Продукция', 'products' ),
+  );
+  $args = array(
+    'labels' => $labels,
+    'hierarchical' => true,
+    'supports' => array( 'title', 'editor', 'thumbnail', 'comments', 'revisions', 'custom-fields' ),
+    'public' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'menu_position' => 5,
+    'show_in_nav_menus' => true,
+    'publicly_queryable' => true,
+    'exclude_from_search' => false,
+    'has_archive' => true,
+    'query_var' => true,
+    'can_export' => true,
+    'rewrite' => true,
+    'capability_type' => 'page'
+  );
+  register_post_type( 'products', $args );
+}
+
 ?>
