@@ -26,8 +26,6 @@
                   <h2><?php the_title(); ?></h2>
                   <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
                   <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
-                  <a href="#" class="manufacturer-prods">ИБП переменного тока</a>
-                  <a href="#" class="manufacturer-prods">ИБП переменного тока</a>
                 </li><!-- /.category-item -->
 
               <?php endforeach; ?>
