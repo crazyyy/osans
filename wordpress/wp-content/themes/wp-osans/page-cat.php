@@ -4,12 +4,7 @@
 
       <?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
-        <div class="block-select">
-          <h3>Подбор ИБП</h3>
-          <form action="">
-
-          </form>
-        </div><!-- /.block-select -->
+        <?php get_template_part('include-block-select'); ?>
 
         <div id="post-<?php the_ID(); ?>" <?php post_class('category-listing'); ?>>
 
@@ -31,6 +26,8 @@
                   <h2><?php the_title(); ?></h2>
                   <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
                   <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
+                  <a href="#" class="manufacturer-prods">ИБП переменного тока</a>
+                  <a href="#" class="manufacturer-prods">ИБП переменного тока</a>
                 </li><!-- /.category-item -->
 
               <?php endforeach; ?>

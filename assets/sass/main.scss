@@ -748,6 +748,29 @@ article {
   p {
     margin: 0 0 18px;
   }
+  .manufacturer-prods {
+    position: relative;
+
+    display: block;
+
+    margin: 0 0 10px;
+    padding: 0 0 0 30px;
+
+    text-decoration: underline;
+
+    color: $red;
+    &:before {
+      position: absolute;
+      top: 8px;
+      left: 15px;
+
+      @extend .dblock;
+      @include sprite($sprite-dash);
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 .widget {
   margin: 0 0 40px;
