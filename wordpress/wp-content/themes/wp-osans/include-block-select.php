@@ -36,6 +36,7 @@
         </td>
       </tr>
     </table>
-    <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button><button type="reset" value="reset" class="btn-gray">Очистить форму</button>
+    <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
+    <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
   </form>
 </div><!-- /.block-select -->

@@ -44,6 +44,11 @@ body {
       background-image: url(../img/bg/category-listing.jpg);
     }
   }
+  &.page-template-page-contacts {
+    header {
+      background-image: url(../img/bg/page-contacts.jpg);
+    }
+  }
 }
 h1,
 h2,
@@ -338,10 +343,12 @@ article {
     width: 240px;
     height: 180px;
     margin: 0 30px 0 0;
-
+position: relative;
     border: 1px solid $base-border-color;
     img {
       width: 100%;
+      @extend .align-center;
+
     }
   }
   h2 {
