@@ -21,7 +21,7 @@
               <?php setup_postdata($post); ?>
 
                 <li class="category-item">
-                  <a class="" href="<?php the_permalink(); ?>">
+                  <a class="category-item-image" href="<?php the_permalink(); ?>">
                     <?php if ( has_post_thumbnail()) :
                       the_post_thumbnail('medium');
                     else: ?>
@@ -32,59 +32,6 @@
                   <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
                   <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
                 </li><!-- /.category-item -->
-
-
-                <li class="category-item">
-                  <a class="" href="<?php the_permalink(); ?>">
-                    <?php if ( has_post_thumbnail()) :
-                      the_post_thumbnail('medium');
-                    else: ?>
-                      <img src="<?php echo catchFirstImage(); ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" />
-                    <?php endif; ?>
-                  </a>
-                  <h2><?php the_title(); ?></h2>
-                  <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
-                  <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
-                </li><!-- /.category-item -->
-                <li class="category-item">
-                  <a class="" href="<?php the_permalink(); ?>">
-                    <?php if ( has_post_thumbnail()) :
-                      the_post_thumbnail('medium');
-                    else: ?>
-                      <img src="<?php echo catchFirstImage(); ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" />
-                    <?php endif; ?>
-                  </a>
-                  <h2><?php the_title(); ?></h2>
-                  <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
-                  <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
-                </li><!-- /.category-item -->
-                <li class="category-item">
-                  <a class="" href="<?php the_permalink(); ?>">
-                    <?php if ( has_post_thumbnail()) :
-                      the_post_thumbnail('medium');
-                    else: ?>
-                      <img src="<?php echo catchFirstImage(); ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" />
-                    <?php endif; ?>
-                  </a>
-                  <h2><?php the_title(); ?></h2>
-                  <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
-                  <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
-                </li><!-- /.category-item -->
-                <li class="category-item">
-                  <a class="" href="<?php the_permalink(); ?>">
-                    <?php if ( has_post_thumbnail()) :
-                      the_post_thumbnail('medium');
-                    else: ?>
-                      <img src="<?php echo catchFirstImage(); ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" />
-                    <?php endif; ?>
-                  </a>
-                  <h2><?php the_title(); ?></h2>
-                  <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
-                  <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
-                </li><!-- /.category-item -->
-
-
-
 
               <?php endforeach; ?>
               </ul><!-- /.category-listing-container -->
@@ -92,6 +39,13 @@
           <?php endif; ?>
 
         </div><!-- /.category-listing -->
+        <?php if(get_field('header-image')) { ?>
+        <style>
+          header {
+            background-image: url(<?php the_field('header-image'); ?>) !important;
+          }
+        </style>
+        <?php } ?>
       <?php endwhile; else: ?>
         <article>
           <h2 class="page-title inner-title"><?php _e( 'Sorry, nothing to display.', 'wpeasy' ); ?></h2>
