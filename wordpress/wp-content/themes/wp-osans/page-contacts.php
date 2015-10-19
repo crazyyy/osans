@@ -25,7 +25,7 @@
           <label for="theme">Тема</label>
           <input type="text" name="theme" id="theme">
           <label for="textfield">Сообщение</label>
-          <textfield id="textfield"></textfield>
+          <textarea name="textfield" id="textfield"></textarea>
           <input type="submit" class="btn" value="Отправить">
         </form>
       </div>
