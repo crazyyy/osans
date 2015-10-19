@@ -1,0 +1,7 @@
+<form action="">
+
+
+  <label for="name">Ваше имя</label>[text name id:name class:name]<label for="email">Ваше email</label>[text email id:email class:email]<label for="theme">Тема</label>[text theme id:theme class:theme]<label for="textfield">Сообщение</label>[textarea textfield id:textfield class:textfield][submit class:btn "Отправить"]
+
+
+</form>

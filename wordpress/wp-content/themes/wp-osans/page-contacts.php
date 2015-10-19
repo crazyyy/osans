@@ -17,17 +17,7 @@
     <aside class="sidebar contact-form col-md-4" role="complementary">
       <div class="widget widget-contacts">
         <h6>Обратная связь</h6>
-        <form action="">
-          <label for="name">Ваше имя</label>
-          <input type="text" name="name" id="name">
-          <label for="email">Ваше email</label>
-          <input type="text" name="email" id="email">
-          <label for="theme">Тема</label>
-          <input type="text" name="theme" id="theme">
-          <label for="textfield">Сообщение</label>
-          <textarea name="textfield" id="textfield"></textarea>
-          <input type="submit" class="btn" value="Отправить">
-        </form>
+        <?php echo do_shortcode('[contact-form-7 id="71" title="contact-form"]'); ?>
       </div>
     </aside><!-- contact-form -->
   </div><!-- /.row inner -->
