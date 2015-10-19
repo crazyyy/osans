@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php /* Template Name: Homepage Template */ get_header(); ?>
 
     <article class="row inner equipment">
       <h2 class="title4 col-md-12">Оборудование</h2>

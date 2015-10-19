@@ -40,7 +40,7 @@
   <header role="banner">
 
     <div class="header-slider-container">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam saepe iste cumque veritatis, nemo obcaecati illum possimus quidem fugiat hic ratione quaerat ab incidunt sit, tenetur esse. Sint, eligendi eum!
+      <?php echo do_shortcode('[new_royalslider id="1"]'); ?>
     </div><!-- /.header-slider-container -->
 
     <div class="row inner header-inner">

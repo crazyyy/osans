@@ -248,6 +248,9 @@ picture {
   left: 0;
 
   display: none;
+  .rsGCaption {
+    display: none;
+  }
   &:after {
     position: absolute;
     z-index: 2;
@@ -271,7 +274,6 @@ header {
   height: 450px;
   margin-bottom: 60px;
 
-  background-color: $light-gray;
   background-repeat: no-repeat;
   background-position: center top;
   &:before,
@@ -283,6 +285,7 @@ header {
     @extend .dblock;
   }
   &:before {
+    z-index: 5;
     top: 99px;
 
     height: 1px;
@@ -313,31 +316,70 @@ header {
 }
 .nav {
   position: absolute;
-  z-index: 1;
+  z-index: 54;
   top: 45px;
   right: 0;
-  .sub-menu {
-    display: none;
-  }
+
+  height: 50px;
   ul {
     @extend .justify-child;
     @extend .clearfix;
     li {
+      position: relative;
+
       display: inline-block;
+
+      height: 50px;
       a {
         font-family: $fosb;
         font-size: 14px;
 
-        padding-bottom: 30px;
+        padding: 0 10px 30px;
 
         color: #fff;
         border-bottom: 2px solid transparent;
+      }
+      .sub-menu {
+        position: absolute;
+        z-index: 55;
+        top: 49px;
+        left: 0;
+        display: none;
+        /* display: block; */
+padding: 6px 0 0;
+
+        li {
+          display: block;
+                  background-color: #fff;
+          a {
+            display: block;
+
+            padding: 10px;
+
+            text-align: left;
+            white-space: nowrap;
+            text-decoration: none;
+
+            color: $gray;
+            border: 0;
+          }
+          &:hover {
+            a {
+              text-decoration: underline;
+
+              color: $red;
+            }
+          }
+        }
       }
       &:hover {
         a {
           text-decoration: none;
 
           border-bottom: 2px solid $red;
+        }
+        .sub-menu {
+          display: block;
         }
       }
       &.current-menu-item {
