@@ -161,6 +161,9 @@ picture {
     color: $gray;
   }
 }
+.title-gray {
+  filter: grayscale(100%);
+}
 
 .header-top {
   height: 50px;
@@ -786,6 +789,16 @@ article {
     }
   }
 }
+.select-equiper-block {
+  margin: 0 0 50px;
+  padding: 0 0 40px;
+
+  border-bottom: 5px solid $base-border-color;
+}
+
+
+
+
 .widget {
   margin: 0 0 40px;
   h6 {
@@ -806,6 +819,9 @@ article {
     }
   }
 }
+
+
+
 .widget-select-equio {
   height: 160px;
   padding: 105px 0 0;
