@@ -344,13 +344,14 @@ header {
         z-index: 55;
         top: 49px;
         left: 0;
-        display: none;
-        /* display: block; */
-padding: 6px 0 0;
 
+        display: none;
+
+        padding: 6px 0 0;
         li {
           display: block;
-                  background-color: #fff;
+
+          background-color: #fff;
           a {
             display: block;
 
