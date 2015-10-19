@@ -34,19 +34,12 @@
           <?php endif; ?>
 
         </div><!-- /.category-listing -->
-        <?php if(get_field('header-image')) { ?>
-        <style>
-          header {
-            background-image: url(<?php the_field('header-image'); ?>) !important;
-          }
-        </style>
-        <?php } ?>
       <?php endwhile; else: ?>
         <article>
           <h2 class="page-title inner-title"><?php _e( 'Sorry, nothing to display.', 'wpeasy' ); ?></h2>
         </article>
       <?php endif; ?>
-
+      <?php get_template_part('include-header-image'); ?>
       <?php if (function_exists('dimox_breadcrumbs')) dimox_breadcrumbs(); ?>
 
     </div><!-- /.col-md-8 -->
