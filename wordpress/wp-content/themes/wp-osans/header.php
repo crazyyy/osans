@@ -40,7 +40,7 @@
   <header role="banner">
 
     <div class="header-slider-container">
-      <?php echo do_shortcode('[new_royalslider id="1"]'); ?>
+      <?php putRevSlider("homeslider","homepage") ?>
     </div><!-- /.header-slider-container -->
 
     <div class="row inner header-inner">
