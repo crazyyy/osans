@@ -96,26 +96,33 @@
             <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
             </form>
           </div><!-- /.select-equiper block -->
-          <h4 class="title3 title-gray">Результаты подбора</h4>
+          <h4 class="title3 grayscale">Результаты подбора</h4>
           <div class="product-listing">
-            <ul class="product-listing-container">
-            <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
-                <?php setup_postdata($post); ?>
-                  <li class="product-item">
-                    <a href="<?php the_permalink(); ?>">
-                      <span>
-                        <?php if ( has_post_thumbnail()) :
-                          the_post_thumbnail('medium');
-                        else: ?>
-                          <img src="<?php echo catchFirstImage(); ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" />
-                        <?php endif; ?>
-                      </span>
-                      <h2><?php the_title(); ?></h2>
-                    </a>
-                  </li><!-- /.product-item -->
-            <?php endforeach; ?>
-            </ul><!-- /.product-listing-container -->
-          </div><!-- product-listing -->
+
+<!-- !!!!!!!!!!!!!! -->
+
+                <ul class="product-listing-container">
+                <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
+                    <?php setup_postdata($post); ?>
+                      <li class="product-item">
+                        <a href="<?php the_permalink(); ?>">
+                          <span>
+                            <?php if ( has_post_thumbnail()) :
+                              the_post_thumbnail('medium');
+                            else: ?>
+                              <img src="<?php echo catchFirstImage(); ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" />
+                            <?php endif; ?>
+                          </span>
+                          <h2><?php the_title(); ?></h2>
+                        </a>
+                      </li><!-- /.product-item -->
+                <?php endforeach; ?>
+                </ul><!-- /.product-listing-container -->
+
+<!-- ./!!!!!!!!!!!!!! -->
+
+
+          </div><!-- /.product-listing -->
           <?php the_content(); ?>
         </article><!-- select-equiper -->
       <?php endwhile; else: ?>
