@@ -97,6 +97,7 @@
             </form>
           </div><!-- /.select-equiper block -->
           <h4 class="title3 title-gray">Результаты подбора</h4>
+          <div class="product-listing">
             <ul class="product-listing-container">
             <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
                 <?php setup_postdata($post); ?>
@@ -114,6 +115,7 @@
                   </li><!-- /.product-item -->
             <?php endforeach; ?>
             </ul><!-- /.product-listing-container -->
+          </div><!-- product-listing -->
           <?php the_content(); ?>
         </article><!-- select-equiper -->
       <?php endwhile; else: ?>
