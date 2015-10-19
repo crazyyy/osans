@@ -274,6 +274,28 @@ header {
   background-color: $light-gray;
   background-repeat: no-repeat;
   background-position: center top;
+  &:before,
+  &:after {
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    @extend .dblock;
+  }
+  &:before {
+    top: 99px;
+
+    height: 1px;
+
+    background-color: $base-border-color;
+  }
+  &:after {
+    bottom: 0;
+
+    height: 75px;
+
+    @extend .header-after;
+  }
   .logo {
     position: absolute;
     z-index: 1;
@@ -306,7 +328,7 @@ header {
         font-family: $fosb;
         font-size: 14px;
 
-        padding-bottom: 45px;
+        padding-bottom: 30px;
 
         color: #fff;
         border-bottom: 2px solid transparent;

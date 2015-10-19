@@ -43,6 +43,7 @@
         </article>
       <?php endif; ?>
 
+      <?php get_template_part('include-header-image'); ?>
       <?php if (function_exists('dimox_breadcrumbs')) dimox_breadcrumbs(); ?>
 
     </div><!-- /.col-md-8 -->
