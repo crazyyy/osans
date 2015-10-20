@@ -103,11 +103,11 @@ picture {
 .btn {
   font-family: $fosb;
   font-size: 14px !important;
-  line-height: 1.8 !important;
+  line-height: 3.4!important;
 
   width: 100%;
   margin: 0 0 5px;
-  padding: 15px 0;
+  padding: 0 !important;
 
   text-align: center;
   text-decoration: none;
@@ -189,6 +189,7 @@ picture {
   padding: 15px 0 0;
 }
 .header-top-nav {
+  padding-left: 0;
   ul {
     margin: 0;
     padding: 0;
@@ -214,6 +215,7 @@ picture {
   }
 }
 .header-top-contact {
+  padding-right: 0;
   .phone,
   .mail {
     position: relative;
@@ -221,14 +223,13 @@ picture {
     display: inline-block;
     float: right;
 
-    margin: 0 0 0 20px;
+    margin: 0 0 0 30px;
     padding: 0 0 0 20px;
 
     color: #707070;
     &:before {
       position: absolute;
-      top: 0;
-      left: 0;
+      left: -5px;
 
       @extend .dblock;
     }
@@ -247,13 +248,15 @@ picture {
       font-size: 18px;
     }
     &:before {
-      top: 5px;
+      top: 8px;
 
       @include sprite($sprite-ico-phone);
     }
   }
   .mail {
     &:before {
+      top: 3px;
+
       @include sprite($sprite-ico-mail);
     }
   }
@@ -363,7 +366,7 @@ header {
 .nav {
   position: absolute;
   z-index: 54;
-  top: 45px;
+  top: 35px;
   right: 0;
 
   height: 50px;
@@ -375,20 +378,20 @@ header {
 
       display: inline-block;
 
-      height: 50px;
+      height: 60px;
       a {
         font-family: $fosb;
         font-size: 14px;
 
-        padding: 0 10px 30px;
+        padding: 0 10px 40px;
 
         color: #fff;
-        border-bottom: 2px solid transparent;
+        border-bottom: 3px solid transparent;
       }
       .sub-menu {
         position: absolute;
         z-index: 55;
-        top: 49px;
+        top: 59px;
         left: 0;
 
         display: none;
@@ -396,6 +399,8 @@ header {
         padding: 6px 0 0;
         li {
           display: block;
+
+          height: auto;
 
           background-color: #fff;
           a {
@@ -423,7 +428,7 @@ header {
         a {
           text-decoration: none;
 
-          border-bottom: 2px solid $red;
+          border-bottom: 3px solid $red;
         }
         .sub-menu {
           display: block;
@@ -433,7 +438,7 @@ header {
         a {
           text-decoration: none;
 
-          border-bottom: 2px solid $red;
+          border-bottom: 3px solid $red;
         }
       }
     }
