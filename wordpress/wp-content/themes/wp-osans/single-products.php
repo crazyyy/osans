@@ -11,6 +11,26 @@
             <p>Мы свяжемся с Вами в течение 15 минут</p>
           </div><!-- /.product-additional -->
           <?php the_content(); ?>
+
+
+
+
+
+<?php
+
+if(get_field('cat-product') == "ibp")
+{
+  echo "string";
+}
+
+
+
+?>
+
+
+
+
+
         </article>
       <?php endwhile; else: ?>
         <article>
@@ -18,7 +38,7 @@
         </article>
       <?php endif; ?>
 
-      <?php get_template_part('include-header-image'); ?>
+      <?php get_template_part('include-prod-header-image'); ?>
       <?php if (function_exists('dimox_breadcrumbs')) dimox_breadcrumbs(); ?>
 
     </div><!-- /.col-md-8 -->

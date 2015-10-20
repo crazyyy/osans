@@ -1,4 +1,5 @@
 <?php /* Template Name: Search Template */ get_header(); ?>
+
   <div class="row inner">
     <div class="col-md-8">
 
@@ -100,6 +101,15 @@
           <div class="product-listing">
 
 <!-- !!!!!!!!!!!!!! -->
+              <?php get_template_part('filter'); ?>
+              <?php
+                $args = array(
+                    'post_type' => 'products',
+                    'meta_query' => $meta_query
+                );
+              $query = new WP_Query;
+              $posts = $query->query($args);
+              ?>
 
                 <ul class="product-listing-container">
                 <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>

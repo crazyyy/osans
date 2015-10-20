@@ -736,6 +736,7 @@ function register_cpt_products() {
     'rewrite' => true,
     'capability_type' => 'page'
   );
+
   register_post_type( 'products', $args );
 }
 

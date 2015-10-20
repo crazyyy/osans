@@ -737,6 +737,7 @@ article {
 
   color: $light-gray;
 }
+
 .product-listing-container {
   display: block;
 
@@ -908,8 +909,6 @@ article {
 }
 
 
-
-
 .widget {
   margin: 0 0 40px;
   h6 {
@@ -930,7 +929,6 @@ article {
     }
   }
 }
-
 
 
 .widget-select-equio {
@@ -968,7 +966,38 @@ article {
   }
 }
 
+.widget-sales-top {
+  li {
+    display: block;
 
+    margin: 0 0 20px;
+    padding: 0;
+
+    @extend .clearfix;
+    .thumb {
+      display: block;
+      float: left;
+
+      width: 60px;
+      height: 60px;
+      margin: 0 20px 0 0;
+
+      border: 1px solid $base-border-color;
+      img {
+        max-width: 100%;
+      }
+    }
+    a {
+      text-decoration: underline;
+
+      color: $gray;
+    }
+    h5 {
+      font-family: 16px;
+      font-size: $fosr;
+    }
+  }
+}
 
 
 
