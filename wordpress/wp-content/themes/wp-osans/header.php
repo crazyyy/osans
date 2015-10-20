@@ -60,6 +60,9 @@
       <nav class="nav col-offset-md-3 col-md-5" role="navigation">
         <?php wpeHeadNav(); ?>
       </nav><!-- /nav -->
+
+      <?php if(get_field('subtitle')) { echo '<h3 class="col-md-12 subtitle">' . get_field('subtitle') . '</h3><!-- /.subtitle -->'; } ?>
+
     </div><!-- header-inner -->
 
   </header><!-- /header -->

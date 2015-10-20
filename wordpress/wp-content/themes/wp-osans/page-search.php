@@ -105,7 +105,8 @@
               <?php
                 $args = array(
                     'post_type' => 'products',
-                    'meta_query' => $meta_query
+                    'meta_query' => $meta_query,
+                    'posts_per_page'=> -1
                 );
               $query = new WP_Query;
               $posts = $query->query($args);

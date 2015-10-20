@@ -23,7 +23,7 @@
                       <img src="<?php echo catchFirstImage(); ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" />
                     <?php endif; ?>
                   </a>
-                  <h2><?php the_title(); ?></h2>
+                  <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                   <?php if(get_field('description')) { echo '<h3 class="category-listing-title">' . get_field('description') . '</h3>'; } ?>
                   <?php if(get_field('full-descr')) { echo '<p>' . get_field('full-descr') . '</p>'; } ?>
                 </li><!-- /.category-item -->

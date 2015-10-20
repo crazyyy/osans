@@ -5,6 +5,12 @@
  * Date: 10/20/2015
  * Time: 3:48 AM
  */
+$currentID = get_the_ID();
+if ($currentID == 721) $p_type = 'akb';
+if ($currentID == 723) $p_type = 'dgu';
+if ($currentID == 719) $p_type = 'ibp';
+if ($currentID == 725) $p_type = 'skv';
+
 if ($p_type == 'ibp') {
 
     $power_ibp_va = $wpdb->get_row("SELECT MIN(meta_value) as min, MAX(meta_value) as max FROM $wpdb->postmeta WHERE meta_key = 'power-ibp-va'", ARRAY_A);
