@@ -40,7 +40,7 @@
   <header role="banner">
 
     <div class="header-slider-container">
-      <?php putRevSlider("homeslider","homepage") ?>
+      <?php putRevSlider('homeslider', 'homepage'); ?>
     </div><!-- /.header-slider-container -->
 
     <div class="row inner header-inner">
