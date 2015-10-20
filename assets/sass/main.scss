@@ -998,7 +998,44 @@ article {
     }
   }
 }
+.widget_nav_menu {
+  ul {
+    margin: 0;
+  }
+  li {
+    position: relative;
 
+    margin: 0;
+    padding: 20px;
+
+    border-bottom: 1px solid $base-border-color;
+    &:before {
+      position: absolute;
+      top: 27px;
+      left: 7px;
+
+      @include sprite($sprite-widget-nav-normal);
+      @extend .dblock;
+    }
+    &.menu-item-has-children {
+      &:before {
+        @include sprite($sprite-widget-nav-plus);
+      }
+    }
+  }
+  .sub-menu {
+    padding: 0 0 0 20px;
+    li {
+      border: 0;
+    }
+  }
+  a {
+    color: $gray;
+    &:hover {
+      color: $red;
+    }
+  }
+}
 
 
 
