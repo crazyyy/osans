@@ -30,17 +30,18 @@ jQuery(document).ready(function(){
 		_renderMenu: function( ul, items ) {
 			var that = this,
 			currentCategory = "";
-			jQuery.each( items, function( index, item ) {
-				var li;
-				if ( item.version != currentCategory ) {
-					ul.append( "<li class='ui-autocomplete-category' style='font-size: 24px;'>Version: " + item.version + "</li>" );
-					currentCategory = item.version;
-				}
-				li = that._renderItemData( ul, item );
-				if ( item.version ) {
-					li.attr( "aria-label", item.version + " : " + item.label );
-				}
-			});
+			if (items)
+				jQuery.each( items, function( index, item ) {
+					var li;
+					if ( item.version != currentCategory ) {
+						ul.append( "<li class='ui-autocomplete-category' style='font-size: 24px;'>Version: " + item.version + "</li>" );
+						currentCategory = item.version;
+					}
+					li = that._renderItemData( ul, item );
+					if ( item.version ) {
+						li.attr( "aria-label", item.version + " : " + item.label );
+					}
+				});
 		}
 	});
 });
@@ -91,7 +92,10 @@ var UniteLayersRev = new function(){
 		totalHeight = 0,
 		unique_layer_id = 0,
 		add_meta_into = '',
-		global_action_template = null;
+		global_action_template = null,
+		updateRevTimer = 0;
+
+	t.ulff_core = 0;
 		
 	t.setGlobalAction = function (glfunc){
 		global_action_template = glfunc;
@@ -534,7 +538,8 @@ var UniteLayersRev = new function(){
 						case "youtube":
 						case "vimeo":
 						case "html5":
-							var urlImage = initDemoSettings[sv]['image'];
+							var urlImage = initDemoSettings[sv]['image'];							
+							jQuery('#the_image_source_url').html(urlImage);
 							nextsh.find('.defaultimg, .slotslidebg').css("background-image","url('"+urlImage+"')");
 							nextsh.find('.defaultimg, .slotslidebg').css("background-color","transparent");
 							nextsh.find('.defaultimg, .slotslidebg').css("background-size",bgfit);
@@ -555,6 +560,7 @@ var UniteLayersRev = new function(){
 						break;
 						case "external":
 							var urlImage = initDemoSettings[sv]['slide_bg_external'];
+							jQuery('#the_image_source_url').html(urlImage);
 							nextsh.find('.defaultimg, .slotslidebg').css("background-image","url('"+urlImage+"')");
 							nextsh.find('.defaultimg, .slotslidebg').css("background-color","transparent");
 							nextsh.find('.defaultimg, .slotslidebg').css("background-size",bgfit);
@@ -710,8 +716,9 @@ var UniteLayersRev = new function(){
 		}
 
 		
-		// KRIKI
-		jQuery('#button_edit_layer, #button_change_video_settings').click(function(){
+		function edit_content_current_layer(){
+			
+
 			var layer = t.getCurrentLayer();
 			if(layer !== null){
 
@@ -754,9 +761,11 @@ var UniteLayersRev = new function(){
 					//break;
 				}
 			}
+		}
+		
 
-		});
-
+		jQuery('body').on('dblclick','.layer_selected',edit_content_current_layer);
+		jQuery('#button_edit_layer, #button_change_video_settings').click(edit_content_current_layer);
 		
 		t.showHideContentEditor(false);
 
@@ -812,6 +821,9 @@ var UniteLayersRev = new function(){
 					}
 				}
 			}
+			
+			
+			
 			t.updateLayerFromFields();
 		});
 
@@ -1408,11 +1420,7 @@ var UniteLayersRev = new function(){
 			t.changeSlotBGs();
 		})
 
-		
-		jQuery('body').on("click",'.timer-layer-text',function() {
-			jQuery(this).focus();
-		})
-
+				
 		jQuery('body').on('blur','.timer-layer-text',function() {
 			t.updateLayerFromFields(); 			
 		});
@@ -1459,6 +1467,8 @@ var UniteLayersRev = new function(){
 			bgfit = (jQuery('#slide_bg_fit').val() == 'percentage') ? jQuery("input[name='bg_fit_x']").val() + '% ' + jQuery("input[name='bg_fit_y']").val() + '% ' : jQuery('#slide_bg_fit').val(),
 			bgcolor = jQuery('#slide_bg_color').val();
 			gallery_type = jQuery('input[name="rs-gallery-type"]').val();
+
+			jQuery('#the_image_source_url').html(bgimg);
 		
 		jQuery('#video-settings').hide();
 		jQuery('#bg-setting-wrap').show();
@@ -1535,6 +1545,8 @@ var UniteLayersRev = new function(){
 			break;
 			case "external":
 				bgimg = jQuery('#slide_bg_external').val();
+
+				jQuery('#the_image_source_url').html(bgimg);
 				nextsh.find('.defaultimg, .slotslidebg').css({
 						backgroundImage:("url("+bgimg+")"),
 						backgroundPosition:bgpos,
@@ -1860,7 +1872,6 @@ var UniteLayersRev = new function(){
 
 	// SET SUFFIX FOR INPUT FIELD OR LEAVE THE CURRENT VALUE 
 	var specOrVal = function(putin,possiblevalues,suffix) {			
-
 		var result = jQuery.inArray(putin,possiblevalues)>=0 ? putin : putin===undefined || !jQuery.isNumeric(parseInt(putin,0)) || putin.length===0 ? "" : parseInt(putin,0)+suffix;		
 		return result;
 	}
@@ -2023,11 +2034,16 @@ var UniteLayersRev = new function(){
 				jQuery(this).parent().addClass("notselected")
 		});
 
+		var keyuprefresh;
 		// UPDATE LAYER TEXT FIELD
 		jQuery("#layer_text").keyup(function(){
-			updateLayerTextField("",jQuery('.sortlist li.ui-state-hover .tl-fullanim'),jQuery(this).val());			
-			t.toolbarInPos();
-			t.updateLayerFromFields();
+			clearTimeout(keyuprefresh);
+			var v = jQuery(this).val();
+			keyuprefresh = setTimeout(function() {						
+				updateLayerTextField("",jQuery('.sortlist li.ui-state-hover .tl-fullanim'),v);						
+				t.toolbarInPos();
+				t.updateLayerFromFields();
+			},150);
 		});
 
 		jQuery('.rev-visibility-on-sizes input').click(function(){
@@ -2074,15 +2090,31 @@ var UniteLayersRev = new function(){
 			var inp = jQuery(this),
 				cv = parseFloat(inp.val()),
 				min = parseFloat(inp.data("min")),
-				max = parseFloat(inp.data("max"));
+				max = parseFloat(inp.data("max")),
+				lsuffix = inp.val().slice(-1) || "",
+				ltsuffix = inp.val().slice(-2) || "",
+				usuffix = inp.data('suffix'),
+				asuffix = inp.data('suffixalt');
 			
-			if (inp.data('suffix')!=undefined) {
+			
+			if (usuffix!=undefined) {				
 				if (jQuery.isNumeric(cv) && cv > -9999999 && cv<9999999 ) {
 					if (min!=undefined && cv<min) cv = min;
 					if (min!=undefined && cv>max) cv = max;					
 					if (isNaN(cv)) cv = 0;
 					cv = Math.round(cv*100)/100;
-					inp.val(cv+inp.data('suffix'));
+
+					if (asuffix==undefined)
+						inp.val(cv+usuffix);
+					else {						
+						if (lsuffix == asuffix)
+							inp.val(cv+lsuffix)
+						else
+						if (ltsuffix == asuffix)
+							inp.val(cv+ltsuffix)
+						else
+							inp.val(cv+usuffix);
+					}
 				}
 			}
 			
@@ -2120,7 +2152,8 @@ var UniteLayersRev = new function(){
 	var initButtons = function(){
 		
 		//set event buttons actions:
-		jQuery('#button_add_layer').click(function(){			
+		jQuery('#button_add_layer').click(function(){	
+			//ADDING NEW TEXT LAYER		
 			addLayerText(jQuery(this).data('isstatic') == true ? 'static' : null);			
 		});
 
@@ -2192,7 +2225,8 @@ var UniteLayersRev = new function(){
 					data.text = ' ';
 					data.alias = 'Shape';
 					data.type = 'shape';
-					data.style = 'tp-shape tp-shapewrapper';
+					//data.style = 'tp-shape tp-shapewrapper';
+					data.style = '';
 					
 					data.internal_class = 'tp-shape tp-shapewrapper';
 					
@@ -2269,6 +2303,11 @@ var UniteLayersRev = new function(){
 			data['static_styles']['line-height'] = jQuery(this).css('font-size');
 			//data['static_styles']['line-height'] = jQuery(this).css('line-height');
 			data['static_styles']['font-weight'] = jQuery(this).css('font-weight');
+			
+			data['max_width'] = 'auto';
+			data['max_height'] = 'auto';
+			
+			data['autolinebreak'] = false;
 			
 			data['deformation']['padding'] = [jQuery(this).css('paddingTop'), jQuery(this).css('paddingRight'), jQuery(this).css('paddingBottom'), jQuery(this).css('paddingLeft')];
 			
@@ -2462,6 +2501,7 @@ var UniteLayersRev = new function(){
 			UniteAdminRev.openAddImageDialog(rev_lang.select_layer_image,function(urlImage){
 				var objData = {};
 				objData.image_url = urlImage;
+
 				updateCurrentLayer(objData);
 				jQuery('#layer-short-toolbar').appendTo(jQuery('#layer-settings-toolbar-bottom'));
 				jQuery('#layer_text_wrapper').appendTo(jQuery('#layer_text_holder'));
@@ -2535,6 +2575,7 @@ var UniteLayersRev = new function(){
 		if(what == 'start'){
 			customAnim['movex'] = jQuery('input[name="layer_anim_xstart"]').val();
 			customAnim['movey'] = jQuery('input[name="layer_anim_ystart"]').val();
+			customAnim['mask'] = jQuery('input[name="masking-start"]').is(':checked');
 			customAnim['movez'] = jQuery('input[name="layer_anim_zstart"]').val();
 			customAnim['rotationx'] = jQuery('input[name="layer_anim_xrotate"]').val();
 			customAnim['rotationy'] = jQuery('input[name="layer_anim_yrotate"]').val();
@@ -2553,6 +2594,18 @@ var UniteLayersRev = new function(){
 			customAnim['speed'] = jQuery('input[name="layer_speed"]').val();
 			customAnim['split'] = jQuery('select[name="layer_split"] option:selected').val();
 			customAnim['splitdelay'] = jQuery('input[name="layer_splitdelay"]').val();
+			
+			customAnim['movex_reverse'] = jQuery('input[name="layer_anim_xstart_reverse"]').is(':checked');
+			customAnim['movey_reverse'] = jQuery('input[name="layer_anim_ystart_reverse"]').is(':checked');
+			customAnim['rotationx_reverse'] = jQuery('input[name="layer_anim_xrotate_reverse"]').is(':checked');
+			customAnim['rotationy_reverse'] = jQuery('input[name="layer_anim_yrotate_reverse"]').is(':checked');
+			customAnim['rotationz_reverse'] = jQuery('input[name="layer_anim_zrotate_reverse"]').is(':checked');
+			customAnim['scalex_reverse'] = jQuery('input[name="layer_scale_xstart_reverse"]').is(':checked');
+			customAnim['scaley_reverse'] = jQuery('input[name="layer_scale_ystart_reverse"]').is(':checked');
+			customAnim['skewx_reverse'] = jQuery('input[name="layer_skew_xstart_reverse"]').is(':checked');
+			customAnim['skewy_reverse'] = jQuery('input[name="layer_skew_ystart_reverse"]').is(':checked');
+			customAnim['mask_x_reverse'] = jQuery('input[name="mask_anim_xstart_reverse"]').is(':checked');
+			customAnim['mask_y_reverse'] = jQuery('input[name="mask_anim_ystart_reverse"]').is(':checked');
 			
 		}else{
 			customAnim['movex'] = jQuery('input[name="layer_anim_xend"]').val();
@@ -2575,6 +2628,18 @@ var UniteLayersRev = new function(){
 			customAnim['speed'] = jQuery('input[name="layer_endspeed"]').val();
 			customAnim['split'] = jQuery('select[name="layer_endsplit"] option:selected').val();
 			customAnim['splitdelay'] = jQuery('input[name="layer_endsplitdelay"]').val();
+			
+			customAnim['movex_reverse'] = jQuery('input[name="layer_anim_xend_reverse"]').is(':checked');
+			customAnim['movey_reverse'] = jQuery('input[name="layer_anim_yend_reverse"]').is(':checked');
+			customAnim['rotationx_reverse'] = jQuery('input[name="layer_anim_xrotate_end_reverse"]').is(':checked');
+			customAnim['rotationy_reverse'] = jQuery('input[name="layer_anim_yrotate_end_reverse"]').is(':checked');
+			customAnim['rotationz_reverse'] = jQuery('input[name="layer_anim_zrotate_end_reverse"]').is(':checked');
+			customAnim['scalex_reverse'] = jQuery('input[name="layer_scale_xend_reverse"]').is(':checked');
+			customAnim['scaley_reverse'] = jQuery('input[name="layer_scale_yend_reverse"]').is(':checked');
+			customAnim['skewx_reverse'] = jQuery('input[name="layer_skew_xend_reverse"]').is(':checked');
+			customAnim['skewy_reverse'] = jQuery('input[name="layer_skew_yend_reverse"]').is(':checked');
+			customAnim['mask_x_reverse'] = jQuery('input[name="mask_anim_xend_reverse"]').is(':checked');
+			customAnim['mask_y_reverse'] = jQuery('input[name="mask_anim_xend_reverse"]').is(':checked');
 		}
 		return customAnim;
 
@@ -2610,6 +2675,21 @@ var UniteLayersRev = new function(){
 			if(obj_v['speed'] !== undefined) { jQuery('input[name="layer_speed"]').val(obj_v['speed']); }
 			if(obj_v['split'] !== undefined) { jQuery('select[name="layer_split"] option[value="'+obj_v['split']+'"]').attr('selected', 'selected'); }
 			if(obj_v['splitdelay'] !== undefined) { jQuery('input[name="layer_splitdelay"]').val(obj_v['splitdelay']); }
+			
+
+
+			if(obj_v['movex_reverse'] !== undefined && (obj_v['movex_reverse'] == 'true' || obj_v['movex_reverse'] == true)) { jQuery('input[name="layer_anim_xstart_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_xstart_reverse"]').attr('checked', false); }
+			if(obj_v['movey_reverse'] !== undefined && (obj_v['movey_reverse'] == 'true' || obj_v['movey_reverse'] == true)) { jQuery('input[name="layer_anim_ystart_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_ystart_reverse"]').attr('checked', false); }
+			if(obj_v['rotationx_reverse'] !== undefined && (obj_v['rotationx_reverse'] == 'true' || obj_v['rotationx_reverse'] == true)) { jQuery('input[name="layer_anim_xrotate_start_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_xrotate_start_reverse"]').attr('checked', false); }
+			if(obj_v['rotationy_reverse'] !== undefined && (obj_v['rotationy_reverse'] == 'true' || obj_v['rotationy_reverse'] == true)) { jQuery('input[name="layer_anim_yrotate_start_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_yrotate_start_reverse"]').attr('checked', false); }
+			if(obj_v['rotationz_reverse'] !== undefined && (obj_v['rotationz_reverse'] == 'true' || obj_v['rotationz_reverse'] == true)) { jQuery('input[name="layer_anim_zrotate_start_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_zrotate_start_reverse"]').attr('checked', false); }
+			if(obj_v['scalex_reverse'] !== undefined && (obj_v['scalex_reverse'] == 'true' || obj_v['scalex_reverse'] == true)) { jQuery('input[name="layer_scale_xstart_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_scale_xstart_reverse"]').attr('checked', false); }
+			if(obj_v['scaley_reverse'] !== undefined && (obj_v['scaley_reverse'] == 'true' || obj_v['scaley_reverse'] == true)) { jQuery('input[name="layer_scale_ystart_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_scale_ystart_reverse"]').attr('checked', false); }
+			if(obj_v['skewx_reverse'] !== undefined && (obj_v['skewx_reverse'] == 'true' || obj_v['skewx_reverse'] == true)) { jQuery('input[name="layer_skew_xstart_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_skew_xstart_reverse"]').attr('checked', false); }
+			if(obj_v['skewy_reverse'] !== undefined && (obj_v['skewy_reverse'] == 'true' || obj_v['skewy_reverse'] == true)) { jQuery('input[name="layer_skew_ystart_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_skew_ystart_reverse"]').attr('checked', false); }
+			if(obj_v['mask_x_reverse'] !== undefined && (obj_v['mask_x_reverse'] == 'true' || obj_v['mask_x_reverse'] == true)) { jQuery('input[name="mask_anim_xstart_reverse"]').attr('checked', true); }else{ jQuery('input[name="mask_anim_xstart_reverse"]').attr('checked', false); }
+			if(obj_v['mask_y_reverse'] !== undefined && (obj_v['mask_y_reverse'] == 'true' || obj_v['mask_y_reverse'] == true)) { jQuery('input[name="mask_anim_ystart_reverse"]').attr('checked', true); }else{ jQuery('input[name="mask_anim_ystart_reverse"]').attr('checked', false); }
+					
 		}else{
 			if(obj_v['movex'] !== undefined) { jQuery('input[name="layer_anim_xend"]').val(obj_v['movex']); }else{ jQuery('input[name="layer_anim_xend"]').val(0); }
 			if(obj_v['movey'] !== undefined) { jQuery('input[name="layer_anim_yend"]').val(obj_v['movey']); }else{ jQuery('input[name="layer_anim_yend"]').val(0); }
@@ -2633,6 +2713,17 @@ var UniteLayersRev = new function(){
 			if(obj_v['split'] !== undefined) { jQuery('select[name="layer_endsplit"] option[value="'+obj_v['split']+'"]').attr('selected', 'selected'); }
 			if(obj_v['splitdelay'] !== undefined) { jQuery('input[name="layer_endsplitdelay"]').val(obj_v['splitdelay']); }
 			
+			if(obj_v['movex_reverse'] !== undefined && (obj_v['movex_reverse'] == 'true' || obj_v['movex_reverse'] == true)) { jQuery('input[name="layer_anim_xend_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_xend_reverse"]').attr('checked', false); }
+			if(obj_v['movey_reverse'] !== undefined && (obj_v['movey_reverse'] == 'true' || obj_v['movey_reverse'] == true)) { jQuery('input[name="layer_anim_yend_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_yend_reverse"]').attr('checked', false); }
+			if(obj_v['rotationx_reverse'] !== undefined && (obj_v['rotationx_reverse'] == 'true' || obj_v['rotationx_reverse'] == true)) { jQuery('input[name="layer_anim_xrotate_end_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_xrotate_end_reverse"]').attr('checked', false); }
+			if(obj_v['rotationy_reverse'] !== undefined && (obj_v['rotationy_reverse'] == 'true' || obj_v['rotationy_reverse'] == true)) { jQuery('input[name="layer_anim_yrotate_end_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_yrotate_end_reverse"]').attr('checked', false); }
+			if(obj_v['rotationz_reverse'] !== undefined && (obj_v['rotationz_reverse'] == 'true' || obj_v['rotationz_reverse'] == true)) { jQuery('input[name="layer_anim_zrotate_end_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_anim_zrotate_end_reverse"]').attr('checked', false); }
+			if(obj_v['scalex_reverse'] !== undefined && (obj_v['scalex_reverse'] == 'true' || obj_v['scalex_reverse'] == true)) { jQuery('input[name="layer_scale_xend_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_scale_xend_reverse"]').attr('checked', false); }
+			if(obj_v['scaley_reverse'] !== undefined && (obj_v['scaley_reverse'] == 'true' || obj_v['scaley_reverse'] == true)) { jQuery('input[name="layer_scale_yend_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_scale_yend_reverse"]').attr('checked', false); }
+			if(obj_v['skewx_reverse'] !== undefined && (obj_v['skewx_reverse'] == 'true' || obj_v['skewx_reverse'] == true)) { jQuery('input[name="layer_skew_xend_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_skew_xend_reverse"]').attr('checked', false); }
+			if(obj_v['skewy_reverse'] !== undefined && (obj_v['skewy_reverse'] == 'true' || obj_v['skewy_reverse'] == true)) { jQuery('input[name="layer_skew_yend_reverse"]').attr('checked', true); }else{ jQuery('input[name="layer_skew_yend_reverse"]').attr('checked', false); }
+			if(obj_v['mask_x_reverse'] !== undefined && (obj_v['mask_x_reverse'] == 'true' || obj_v['mask_x_reverse'] == true)) { jQuery('input[name="mask_anim_xend_reverse"]').attr('checked', true); }else{ jQuery('input[name="mask_anim_xend_reverse"]').attr('checked', false); }
+			if(obj_v['mask_y_reverse'] !== undefined && (obj_v['mask_y_reverse'] == 'true' || obj_v['mask_y_reverse'] == true)) { jQuery('input[name="mask_anim_yend_reverse"]').attr('checked', true); }else{ jQuery('input[name="mask_anim_yend_reverse"]').attr('checked', false); }
 			
 		}
 	
@@ -2644,6 +2735,8 @@ var UniteLayersRev = new function(){
 		
 		RevSliderSettings.onoffStatus(jQuery('input[name="masking-start"]'));
 		RevSliderSettings.onoffStatus(jQuery('input[name="masking-end"]'));
+		
+		t.updateReverseList();
 		
 	}
 
@@ -2801,7 +2894,7 @@ var UniteLayersRev = new function(){
 			else
 				jQuery(this).prop('selected', false);
 		});
-		animSelect.change();
+		animSelect.change();		
 	}
 
 	/**
@@ -3182,7 +3275,7 @@ var UniteLayersRev = new function(){
 		if(typeof objLayer.special_type !== 'undefined' && objLayer.special_type == 'static') static_class = ' static_layer';
 		
 		var internal_class = '';
-		if(typeof objLayer.type !== 'undefined' && (objLayer.type == 'button')) internal_class = ' '+objLayer.internal_class; // || objLayer.type == 'no_edit' 
+		if(typeof objLayer.type !== 'undefined' && (objLayer.type == 'button' || objLayer.type == 'shape')) internal_class = ' '+objLayer.internal_class; // || objLayer.type == 'no_edit' 
 		
 
 		if(type == "image") style += "line-height:0;";
@@ -3405,10 +3498,40 @@ var UniteLayersRev = new function(){
 
 		arrLayers[serial] = jQuery.extend({},layer);
 		
+		t.updateReverseList();
+		
 	}
 	
 	
 
+	t.updateReverseList = function() {
+		clearTimeout(updateRevTimer);
+		updateRevTimer =  setTimeout(function() {
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_xstart_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_ystart_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_xrotate_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_yrotate_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_zrotate_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_scale_xstart_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_scale_ystart_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_skew_xstart_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_skew_ystart_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="mask_anim_xstart_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="mask_anim_ystart_reverse"]'));
+
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_xend_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_yend_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_xrotate_end_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_yrotate_end_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_anim_zrotate_end_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_scale_xend_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_scale_yend_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_skew_xend_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="layer_skew_yend_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="mask_anim_xend_reverse"]'));
+			RevSliderSettings.onoffStatus(jQuery('input[name="mask_anim_yend_reverse"]'));
+		},100);
+	}
 
 	/**
 	 * update current layer
@@ -3421,6 +3544,7 @@ var UniteLayersRev = new function(){
 		}
 
 		t.updateLayer(selectedLayerSerial,objData,del_certain);
+
 	}
 
 
@@ -3551,7 +3675,8 @@ var UniteLayersRev = new function(){
 
 		setTimeout(function() {
 				jQuery('#layer_text_wrapper').appendTo(jQuery('.layer_selected.slide_layer'));																	
-				t.showHideContentEditor(true);
+				t.showHideContentEditor(true);				
+				jQuery('#layer_text').data('new_content',true);
 				jQuery('#layer_text').focus();						
 			},50);
 	}
@@ -3638,6 +3763,32 @@ var UniteLayersRev = new function(){
 		objLayer.mask_start = objLayer.mask_start	 		|| false;//jQuery('input[name="masking-start"]').is(':checked');
 		objLayer.mask_end = objLayer.mask_end		 		|| false;//jQuery('input[name="masking-end"]').is(':checked');
 		
+
+		// Set Reverse Basics					
+		objLayer.x_start_reverse = objLayer.x_start_reverse || false;
+		objLayer.y_start_reverse = objLayer.y_start_reverse || false;
+		objLayer.x_end_reverse = objLayer.x_end_reverse || false;
+		objLayer.y_end_reverse = objLayer.y_end_reverse || false;
+		objLayer.x_rotate_start_reverse = objLayer.x_rotate_start_reverse || false;
+		objLayer.y_rotate_start_reverse = objLayer.y_rotate_start_reverse || false;
+		objLayer.z_rotate_start_reverse = objLayer.z_rotate_start_reverse || false;
+		objLayer.x_rotate_end_reverse = objLayer.x_rotate_end_reverse || false;
+		objLayer.y_rotate_end_reverse = objLayer.y_rotate_end_reverse || false;
+		objLayer.z_rotate_end_reverse = objLayer.z_rotate_end_reverse || false;
+		objLayer.scale_x_start_reverse = objLayer.scale_x_start_reverse || false;
+		objLayer.scale_y_start_reverse = objLayer.scale_y_start_reverse || false;
+		objLayer.scale_x_end_reverse = objLayer.scale_x_end_reverse || false;
+		objLayer.scale_y_end_reverse = objLayer.scale_y_end_reverse || false;
+		objLayer.skew_x_start_reverse = objLayer.skew_x_start_reverse || false;
+		objLayer.skew_y_start_reverse = objLayer.skew_y_start_reverse || false;
+		objLayer.skew_x_end_reverse = objLayer.skew_x_end_reverse || false;
+		objLayer.skew_y_end_reverse = objLayer.skew_y_end_reverse || false;
+		objLayer.mask_x_start_reverse = objLayer.mask_x_start_reverse || false;
+		objLayer.mask_y_start_reverse = objLayer.mask_y_start_reverse || false;
+		objLayer.mask_x_end_reverse = objLayer.mask_x_end_reverse || false;
+		objLayer.mask_y_end_reverse = objLayer.mask_y_end_reverse || false;
+
+
 		objLayer.mask_x_start = objLayer.mask_x_start 			|| 0;//jQuery("#mask_anim_xstart").val();
 		objLayer.mask_y_start = objLayer.mask_y_start 			|| 0;//jQuery("#mask_anim_ystart").val();
 		objLayer.mask_speed_start = objLayer.mask_speed_start 	|| "inherit";//jQuery("#mask_speed").val();
@@ -4407,11 +4558,11 @@ var UniteLayersRev = new function(){
 	// UPDATE LAYER TEXT ON WRITE && UPDATE TITLE OF LAYER
 	var updateLayerTextField = function(event,timerobj,txt) {
 		var jobj = getjQueryLayer();
-		if (selectedLayerSerial!=-1 && jobj.length>0) jobj.find('.innerslide_layer.tp-caption').html(txt);
+		
+		if (selectedLayerSerial!=-1 && jobj.length>0) jobj.find('.innerslide_layer.tp-caption').html(txt);			
 		var li = timerobj.closest("li");
 		txt = u.getSortboxText(txt);
-		li.find('.timer-layer-text').html(txt);
-
+		li.find('.timer-layer-text').html(txt);				
 	}
 
 	/**
@@ -4507,6 +4658,7 @@ var UniteLayersRev = new function(){
 		
 		switch(objLayer.type){
 			case 'button':
+			case 'shape':
 				className += ' '+objLayer.internal_class;
 			break;
 			/*case 'no_edit':
@@ -4529,10 +4681,11 @@ var UniteLayersRev = new function(){
 			break;
 			default:
 			case "text":				
-			case "button":				
+			case "button":		
+				
 				htmlLayer.find('.innerslide_layer').html(objLayer.text);
 				t.makeCurrentLayerRotatable(serial);
-				t.updateHtmlLayerCorners(htmlLayer,objLayer);
+				t.updateHtmlLayerCorners(htmlLayer,objLayer);				
 			break;
 			/*case 'no_edit':
 				
@@ -4620,6 +4773,7 @@ var UniteLayersRev = new function(){
 						jQuery('#layer_max_height').attr('disabled', 'disabled');
 					break;
 					case 'cover':
+					case 'cover-proportional':
 						jQuery('#layer_scaleX').attr('disabled', 'disabled');
 						jQuery('#layer_scaleY').attr('disabled', 'disabled');
 						jQuery('#layer_max_width').attr('disabled', 'disabled');
@@ -4631,10 +4785,20 @@ var UniteLayersRev = new function(){
 	}
 	
 	
+
 	/**
 	 * update layer from html fields
 	 */
-	t.updateLayerFromFields = function(){
+
+	 t.updateLayerFromFields = function() {
+	 	//clearTimeout(t.ulff_core);
+	 	//t.ulff_core = setTimeout(function() {
+	 		t.updateLayerFromFields_Core();
+	 	//},350);
+	 }
+
+	t.updateLayerFromFields_Core = function(){
+
 		if(selectedLayerSerial == -1) return(false);
 		
 		UniteCssEditorRev.compare_to_original(); //compare style changes and mark elements depending on state
@@ -4653,10 +4817,16 @@ var UniteLayersRev = new function(){
 		
 		objUpdate['lazy-load'] = jQuery('#layer-lazy-loading option:selected').val();
 		objUpdate['image-size'] = jQuery('#layer-image-size option:selected').val();
-		
+				
 		objUpdate.text = jQuery("#layer_text").val();
+		
 		objUpdate.alias = jQuery('#layer_sort_'+selectedLayerSerial+" .timer-layer-text").val();
 
+		// IF NEW CONTENT IS EDITED FIRST TIME, USE THE SAME CONTENT FOR LAYER DESCRIPTION
+		if (jQuery('#layer_text').data('new_content'))
+			jQuery('#layer_sort_'+selectedLayerSerial+" .timer-layer-text").val(objUpdate.text);
+
+		
 		jQuery('#layer_quicksort_'+selectedLayerSerial+" .add-layer-txt").html(objUpdate.alias);
 		
 		objUpdate = t.setVal(objUpdate, 'top', Number(parseInt(jQuery("#layer_top").val(),0)));
@@ -4729,6 +4899,9 @@ var UniteLayersRev = new function(){
 		objUpdate.mask_y_end = jQuery("#mask_anim_yend").val();
 		objUpdate.mask_speed_end = jQuery("#mask_speed_end").val();
 		objUpdate.mask_ease_end =  jQuery("#mask_easing_end").val();
+
+
+
 		
 		objUpdate.animation = jQuery("#layer_animation option:selected").val();
 		objUpdate.speed = jQuery("#layer_speed").val();
@@ -4784,7 +4957,32 @@ var UniteLayersRev = new function(){
 		objUpdate.y_origin_start = jQuery('input[name="layer_2d_origin_y"]').val(); //jQuery("#layer_anim_yoriginstart").val();
 		objUpdate.x_origin_end = jQuery('input[name="layer_2d_origin_x"]').val(); //jQuery("#layer_anim_xoriginend").val();
 		objUpdate.y_origin_end = jQuery('input[name="layer_2d_origin_y"]').val(); //jQuery("#layer_anim_yoriginend").val();
-
+		
+		
+		objUpdate.x_start_reverse =  jQuery('input[name="layer_anim_xstart_reverse"]').is(':checked') || false;
+		objUpdate.y_start_reverse =  jQuery('input[name="layer_anim_ystart_reverse"]').is(':checked') || false;
+		objUpdate.x_end_reverse =  jQuery('input[name="layer_anim_xend_reverse"]').is(':checked') || false;
+		objUpdate.y_end_reverse =  jQuery('input[name="layer_anim_yend_reverse"]').is(':checked') || false;
+		objUpdate.x_rotate_start_reverse =  jQuery('input[name="layer_anim_xrotate_reverse"]').is(':checked') || false;
+		objUpdate.y_rotate_start_reverse =  jQuery('input[name="layer_anim_yrotate_reverse"]').is(':checked') || false;
+		objUpdate.z_rotate_start_reverse =  jQuery('input[name="layer_anim_zrotate_reverse"]').is(':checked') || false;
+		objUpdate.x_rotate_end_reverse =  jQuery('input[name="layer_anim_xrotate_end_reverse"]').is(':checked') || false;
+		objUpdate.y_rotate_end_reverse =  jQuery('input[name="layer_anim_yrotate_end_reverse"]').is(':checked') || false;
+		objUpdate.z_rotate_end_reverse =  jQuery('input[name="layer_anim_zrotate_end_reverse"]').is(':checked') || false;
+		objUpdate.scale_x_start_reverse = jQuery('input[name="layer_scale_xstart_reverse"]').is(':checked') || false;
+		objUpdate.scale_y_start_reverse = jQuery('input[name="layer_scale_ystart_reverse"]').is(':checked') || false;
+		objUpdate.scale_x_end_reverse = jQuery('input[name="layer_scale_xend_reverse"]').is(':checked') || false;
+		objUpdate.scale_y_end_reverse = jQuery('input[name="layer_scale_yend_reverse"]').is(':checked') || false;
+		objUpdate.skew_x_start_reverse = jQuery('input[name="layer_skew_xstart_reverse"]').is(':checked') || false;
+		objUpdate.skew_y_start_reverse = jQuery('input[name="layer_skew_ystart_reverse"]').is(':checked') || false;
+		objUpdate.skew_x_end_reverse = jQuery('input[name="layer_skew_xend_reverse"]').is(':checked') || false;
+		objUpdate.skew_y_end_reverse = jQuery('input[name="layer_skew_yend_reverse"]').is(':checked') || false;
+		objUpdate.mask_x_start_reverse = jQuery('input[name="mask_anim_xstart_reverse"]').is(':checked') || false;
+		objUpdate.mask_y_start_reverse =  jQuery('input[name="mask_anim_ystart_reverse"]').is(':checked') || false;
+		objUpdate.mask_x_end_reverse =  jQuery('input[name="mask_anim_xend_reverse"]').is(':checked') || false;
+		objUpdate.mask_y_end_reverse =  jQuery('input[name="mask_anim_yend_reverse"]').is(':checked') || false;
+		
+		
 		objUpdate.autolinebreak = jQuery("#layer_auto_line_break").is(":checked");
 
 		objUpdate.pers_start = jQuery("#layer_pers_start").val();
@@ -4955,11 +5153,14 @@ var UniteLayersRev = new function(){
 		//objUpdate.type = jQuery('#layer_type option:selected').val();
 		
 		
+
 		//update object - Write back changes in ObjArray
 		updateCurrentLayer(objUpdate, ['layer_action']);
 
+
 		//update html layers
 		updateHtmlLayersFromObject();
+
 
 		//update html sortbox
 		updateHtmlSortboxFromObject();
@@ -4974,7 +5175,8 @@ var UniteLayersRev = new function(){
 		//update the timeline with the new data
 		u.updateCurrentLayerTimeline();
 		
-		t.set_cover_mode();
+		t.set_cover_mode();		
+
 	}
 
 
@@ -5028,8 +5230,8 @@ var UniteLayersRev = new function(){
 		var objLayer = t.getLayer(serial, isDemo);
 		var html = t.makeLayerHtml(serial,objLayer, isDemo)
 		var htmlInner = jQuery(html).html();
-		var htmlLayer = t.getHtmlLayerFromSerial(serial, isDemo);
-
+		var htmlLayer = t.getHtmlLayerFromSerial(serial, isDemo);		
+		
 		htmlLayer.html(htmlInner);
 	}
 
@@ -5054,7 +5256,12 @@ var UniteLayersRev = new function(){
 		var hover_styles = fullstyles.hover;
 		if(hover_styles == undefined) hover_styles = {};
 		
-		var is_hover = (typeof(fullstyles.settings) !== 'undefined' && typeof(fullstyles.settings.hover) !== undefined) ? fullstyles.settings.hover : false;
+		var is_hover = false;
+		
+		try{
+			is_hover = fullstyles!==undefined ? fullstyles.hasOwnProperty('settings') ? (typeof(fullstyles.settings) !== 'undefined' && typeof(fullstyles.settings.hover) !== undefined) ? fullstyles.settings.hover : false : false : false;
+		} catch(e) { 
+		}
 		
 		// INSERT STANDART SETTINGS FROM TEMPLATE STYLE
 		if(objLayer.deformation != undefined && styles !== undefined){
@@ -5333,7 +5540,9 @@ var UniteLayersRev = new function(){
 		jQuery('.rs-internal-class-wrapper').text(objLayer.internal_class);
 		
 		jQuery('#layer_caption').val(objLayer.style);
-		jQuery('#layer_text').val(UniteAdminRev.stripslashes(objLayer.text));
+
+		jQuery('#layer_text').val(UniteAdminRev.stripslashes(objLayer.text));				
+		jQuery('#layer_text').data('new_content',false)
 		jQuery('#layer_alt_option option[value="'+objLayer.alt_option+'"]').attr('selected', 'selected');
 		jQuery('#layer_alt').val(objLayer.alt);
 		
@@ -5466,9 +5675,9 @@ var UniteLayersRev = new function(){
 		
 
 		RevSliderSettings.onoffStatus(jQuery('input[name="masking-start"]'));		
-		RevSliderSettings.onoffStatus(jQuery('input[name="masking-end"]'));	
+		RevSliderSettings.onoffStatus(jQuery('input[name="masking-end"]'));
 		
-		
+
 
 		jQuery("#mask_anim_xstart").val(objLayer.mask_x_start);
 		jQuery("#mask_anim_ystart").val(objLayer.mask_y_start);
@@ -5573,6 +5782,32 @@ var UniteLayersRev = new function(){
 
 		jQuery("#layer_pers_start").val(objLayer.pers_start);
 		jQuery("#layer_pers_end").val(objLayer.pers_end);
+				
+		if(typeof(objLayer.x_start_reverse) !== 'undefined' && (objLayer.x_start_reverse == "true" || objLayer.x_start_reverse == true)) { jQuery('input[name="layer_anim_xstart_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_xstart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.y_start_reverse) !== 'undefined' && (objLayer.y_start_reverse == "true" || objLayer.y_start_reverse == true)) { jQuery('input[name="layer_anim_ystart_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_ystart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.x_end_reverse) !== 'undefined' && (objLayer.x_end_reverse == "true" || objLayer.x_end_reverse == true)) { jQuery('input[name="layer_anim_xend_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_xend_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.y_end_reverse) !== 'undefined' && (objLayer.y_end_reverse == "true" || objLayer.y_end_reverse == true)) { jQuery('input[name="layer_anim_yend_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_yend_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.x_rotate_start_reverse) !== 'undefined' && (objLayer.x_rotate_start_reverse == "true" || objLayer.x_rotate_start_reverse == true)) { jQuery('input[name="layer_anim_xrotate_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_xrotate_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.y_rotate_start_reverse) !== 'undefined' && (objLayer.y_rotate_start_reverse == "true" || objLayer.y_rotate_start_reverse == true)) { jQuery('input[name="layer_anim_yrotate_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_yrotate_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.z_rotate_start_reverse) !== 'undefined' && (objLayer.z_rotate_start_reverse == "true" || objLayer.z_rotate_start_reverse == true)) { jQuery('input[name="layer_anim_zrotate_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_zrotate_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.x_rotate_end_reverse) !== 'undefined' && (objLayer.x_rotate_end_reverse == "true" || objLayer.x_rotate_end_reverse == true)) { jQuery('input[name="layer_anim_xrotate_end_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_xrotate_end_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.y_rotate_end_reverse) !== 'undefined' && (objLayer.y_rotate_end_reverse == "true" || objLayer.y_rotate_end_reverse == true)) { jQuery('input[name="layer_anim_yrotate_end_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_yrotate_end_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.z_rotate_end_reverse) !== 'undefined' && (objLayer.z_rotate_end_reverse == "true" || objLayer.z_rotate_end_reverse == true)) { jQuery('input[name="layer_anim_zrotate_end_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_anim_zrotate_end_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.scale_x_start_reverse) !== 'undefined' && (objLayer.scale_x_start_reverse == "true" || objLayer.scale_x_start_reverse == true)) { jQuery('input[name="layer_scale_xstart_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_scale_xstart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.scale_y_start_reverse) !== 'undefined' && (objLayer.scale_y_start_reverse == "true" || objLayer.scale_y_start_reverse == true)) { jQuery('input[name="layer_scale_ystart_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_scale_ystart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.scale_x_end_reverse) !== 'undefined' && (objLayer.scale_x_end_reverse == "true" || objLayer.scale_x_end_reverse == true)) { jQuery('input[name="layer_scale_xend_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_scale_xend_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.scale_y_end_reverse) !== 'undefined' && (objLayer.scale_y_end_reverse == "true" || objLayer.scale_y_end_reverse == true)) { jQuery('input[name="layer_scale_yend_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_scale_yend_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.skew_x_start_reverse) !== 'undefined' && (objLayer.skew_x_start_reverse == "true" || objLayer.skew_x_start_reverse == true)) { jQuery('input[name="layer_skew_xstart_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_skew_xstart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.skew_y_start_reverse) !== 'undefined' && (objLayer.skew_y_start_reverse == "true" || objLayer.skew_y_start_reverse == true)) { jQuery('input[name="layer_skew_ystart_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_skew_ystart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.skew_x_end_reverse) !== 'undefined' && (objLayer.skew_x_end_reverse == "true" || objLayer.skew_x_end_reverse == true)) { jQuery('input[name="layer_skew_xend_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_skew_xend_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.skew_y_end_reverse) !== 'undefined' && (objLayer.skew_y_end_reverse == "true" || objLayer.skew_y_end_reverse == true)) { jQuery('input[name="layer_skew_yend_reverse"]').attr('checked',true); }else{ jQuery('input[name="layer_skew_yend_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.mask_x_start_reverse) !== 'undefined' && (objLayer.mask_x_start_reverse == "true" || objLayer.mask_x_start_reverse == true)) { jQuery('input[name="mask_anim_xstart_reverse"]').attr('checked',true); }else{ jQuery('input[name="mask_anim_xstart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.mask_y_start_reverse) !== 'undefined' && (objLayer.mask_y_start_reverse == "true" || objLayer.mask_y_start_reverse == true)) { jQuery('input[name="mask_anim_ystart_reverse"]').attr('checked',true); }else{ jQuery('input[name="mask_anim_ystart_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.mask_x_end_reverse) !== 'undefined' && (objLayer.mask_x_end_reverse == "true" || objLayer.mask_x_end_reverse == true)) { jQuery('input[name="mask_anim_xend_reverse"]').attr('checked',true); }else{ jQuery('input[name="mask_anim_xend_reverse"]').removeAttr('checked'); }
+		if(typeof(objLayer.mask_y_end_reverse) !== 'undefined' && (objLayer.mask_y_end_reverse == "true" || objLayer.mask_y_end_reverse == true)) { jQuery('input[name="mask_anim_yend_reverse"]').attr('checked',true); }else{ jQuery('input[name="mask_anim_yend_reverse"]').removeAttr('checked'); }
+		
+		t.updateReverseList();
+
 
 		//set advanced params
 
@@ -6335,7 +6570,7 @@ var UniteLayersRev = new function(){
 		var objHtmlLayer = t.getHtmlLayerFromSerial(serial);
 		
 		checkMaskingAvailabity();
-		
+						
 		u.rebuildLayerIdle(objHtmlLayer);
 		
 		jQuery('.form_layers').removeClass('notselected');
@@ -6345,6 +6580,8 @@ var UniteLayersRev = new function(){
 		//change the style classes available depending on .type
 		
 		UniteCssEditorRev.updateCaptionsInput(initArrCaptionClasses);
+
+		t.updateReverseList();
 	}
 
 

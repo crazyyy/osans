@@ -761,15 +761,16 @@ var RevSliderAdmin = new function(){
 			if(confirm(rev_lang.set_settings_on_all_slider) == false)
 				return(false);
 			
-			var data = {sliderid: jQuery("#sliderid").val()}
+			var data = {sliderid: jQuery("#sliderid").val()};
 			
 			if(jQuery('input[name="reset-transitions"]').is(':checked')) data['slide_transition'] = jQuery('select[name="def-transitions"] option:selected').val();
 			if(jQuery('input[name="reset-transition_duration"]').is(':checked')) data['transition_duration'] = jQuery('input[name="def-transition_duration"]').val();
+			if(jQuery('input[name="reset-image_source_type"]').is(':checked')) data['image_source_type'] = jQuery('select[name="def-image_source_type"] option:selected').val(); 
 			if(jQuery('input[name="reset-background_fit"]').is(':checked')){
-				data['transitions'] = jQuery('#def-background_fit option:selected').val();
-				if(data['transitions'] == 'percentage'){
-					data['bg_fit_x'] = jQuery('#def-bg_fit_x').val();
-					data['bg_fit_y'] = jQuery('#def-bg_fit_y').val();
+				data['bg_fit'] = jQuery('#def-background_fit option:selected').val();
+				if(data['bg_fit'] == 'percentage'){
+					data['bg_fit_x'] = jQuery('input[name="def-bg_fit_x"]').val();
+					data['bg_fit_y'] = jQuery('input[name="def-bg_fit_y"]').val();
 				}
 			}
 			if(jQuery('input[name="reset-bg_position"]').is(':checked')){
@@ -779,13 +780,23 @@ var RevSliderAdmin = new function(){
 					data['bg_position_y'] = jQuery('input[name="def-bg_position_y"]').val();
 				}
 			}
-			if(jQuery('input[name="reset-bg_repeat"]').is(':checked')) data['bg_repeat'] = jQuery('input[name="def-bg_repeat"]').val();
+			if(jQuery('input[name="reset-bg_repeat"]').is(':checked')) data['bg_repeat'] = jQuery('select[name="def-bg_repeat"] option:selected').val();
+			
 			if(jQuery('input[name="reset-kenburn_effect"]').is(':checked')) data['kenburn_effect'] = (jQuery('input[name="def-kenburn_effect"]').is(':checked')) ? 'on' : 'off';
 			if(jQuery('input[name="reset-kb_start_fit"]').is(':checked')) data['kb_start_fit'] = jQuery('input[name="def-kb_start_fit"]').val();
 			if(jQuery('input[name="reset-kb_easing"]').is(':checked')) data['kb_easing'] = jQuery('select[name="def-kb_easing"] option:selected').val();
 			if(jQuery('input[name="reset-kb_end_fit"]').is(':checked')) data['kb_end_fit'] = jQuery('input[name="def-kb_end_fit"]').val();
 			if(jQuery('input[name="reset-kb_duration"]').is(':checked')) data['kb_duration'] = jQuery('input[name="def-kb_duration"]').val();
-
+			
+			
+			if(jQuery('input[name="reset-kb_start_offset_x"]').is(':checked')) data['kb_start_offset_x'] = jQuery('input[name="def-kb_start_offset_x"]').val();
+			if(jQuery('input[name="reset-kb_start_offset_y"]').is(':checked')) data['kb_start_offset_y'] = jQuery('input[name="def-kb_start_offset_y"]').val();
+			
+			if(jQuery('input[name="reset-kb_end_offset_x"]').is(':checked')) data['kb_end_offset_x'] = jQuery('input[name="def-kb_end_offset_x"]').val();
+			if(jQuery('input[name="reset-kb_end_offset_y"]').is(':checked')) data['kb_end_offset_y'] = jQuery('input[name="def-kb_end_offset_y"]').val();
+			if(jQuery('input[name="reset-kb_start_rotate"]').is(':checked')) data['kb_start_rotate'] = jQuery('input[name="def-kb_start_rotate"]').val();
+			if(jQuery('input[name="reset-kb_end_rotate"]').is(':checked')) data['kb_end_rotate'] = jQuery('input[name="def-kb_end_rotate"]').val();
+			
 			UniteAdminRev.ajaxRequest('reset_slide_settings', data);
 		});
 		
@@ -910,6 +921,12 @@ var RevSliderAdmin = new function(){
 	 */
 	this.initSlidersListView = function(){
 		
+		jQuery('body').on('click', '.rs-reload-shop', function(){
+			showWaitAMinute({fadeIn:300,text:rev_lang.please_wait_a_moment});
+			
+			location.href = window.location.href+'&update_shop';
+		});
+		
 		/**
 		 * add Template Slider through Import. Check for zip name
 		 **/
@@ -918,21 +935,51 @@ var RevSliderAdmin = new function(){
 			jQuery('.rs-zip-name').text(jQuery(this).data('zipname'));
 			jQuery('.rs-uid').val(jQuery(this).data('uid'));
 			
-			jQuery("#dialog_import_template_slider").dialog({
+			//from server or from local file
+			
+			jQuery("#dialog_import_template_slider_from").dialog({
 				modal:true,
 				resizable:false,
-				width:600,
-				height:350,
-				closeOnEscape:true,
-				dialogClass:"tpdialogs",
 				buttons:{
-					"Close":function(){
+					"Local":function(){
+						jQuery(".input_import_slider").val('');
+						jQuery('.rs-import-slider-button').hide();
+						
+						jQuery("#dialog_import_template_slider").dialog({
+							modal:true,
+							resizable:false,
+							width:600,
+							height:350,
+							closeOnEscape:true,
+							dialogClass:"tpdialogs",
+							buttons:{
+								"Close":function(){
+									jQuery(this).dialog("close");
+								}
+							},
+						});	//dialog end
+						
+			
 						jQuery(this).dialog("close");
+					},
+					"Online":function(){
+						if(rs_plugin_validated){
+							//show please wait
+							showWaitAMinute({fadeIn:300,text:rev_lang.please_wait_a_moment});
+							
+							//get from server
+							jQuery('#rs-import-template-from-server').submit();
+							
+							jQuery(this).dialog("close");
+						}else{
+							alert(rev_lang.this_feature_only_if_activated);
+						}
 					}
-				},
-			});	//dialog end
+				}
+			});
 			
 			jQuery('#close-template').click();
+			
 		});
 		
 		
@@ -941,6 +988,7 @@ var RevSliderAdmin = new function(){
 		 **/
 		jQuery('body').on('click', '.template_slider_item', function(){
 			var slider_id = jQuery(this).data('sliderid');
+			
 			
 			jQuery('#dialog_duplicate_slider').dialog({
 				modal:true,
@@ -965,6 +1013,14 @@ var RevSliderAdmin = new function(){
 			});
 		});
 		
+		jQuery(".input_import_slider").change(function(){
+			if(jQuery(this).val() !== ''){
+				jQuery('.rev-import-slider-button').show();
+			}else{
+				jQuery('.rev-import-slider-button').hide();
+			}
+		});
+		
 		jQuery("#button_import_template_slider").click(function(){
 			jQuery('#template_area').addClass("show");
 			return true;
@@ -972,7 +1028,10 @@ var RevSliderAdmin = new function(){
 		
 		//import slide dialog
 		jQuery("#button_import_slider").click(function(){
-
+			jQuery('.rev-import-slider-button').hide();
+			
+			jQuery(".input_import_slider").val('');
+			
 			jQuery("#dialog_import_slider").dialog({
 				modal:true,
 				resizable:false,
@@ -1060,6 +1119,7 @@ var RevSliderAdmin = new function(){
 			var urlAjaxExport = ajaxurl+"?action="+g_uniteDirPlugin+"_ajax_action&client_action=export_slider&dummy="+useDummy+"&nonce=" + g_revNonce;
 			urlAjaxExport += "&sliderid=" + sliderID;
 			location.href = urlAjaxExport;
+			
 		});
 		
 		
@@ -1083,20 +1143,11 @@ var RevSliderAdmin = new function(){
 		jQuery(".export_slider_standalone").click(function(){
 			
 			var sliderID = this.id.replace("export_slider_standalone_","");
-
-			var rs_form = jQuery('#rs-preview-form');
+			var useDummy = false;//jQuery('input[name="export_dummy_images"]').is(':checked');
+			var urlAjaxExport = ajaxurl+"?action="+g_uniteDirPlugin+"_ajax_action&client_action=preview_slider&only_markup=true&dummy="+useDummy+"&nonce=" + g_revNonce;
+			urlAjaxExport += "&sliderid=" + sliderID;
+			location.href = urlAjaxExport;
 			
-			//set action and data
-			jQuery("#rs-client-action").val('preview_slider');
-			jQuery("#preview_sliderid").val(sliderID);
-			jQuery("#preview_slider_markup").val('true');
-			
-			rs_form.submit();
-			
-			jQuery('#rs-preview-wrapper').show();
-			
-			jQuery(window).trigger('resize');
-
 		});
 	}
 
@@ -1484,37 +1535,72 @@ var RevSliderAdmin = new function(){
 	 */
 	this.initEditSlideView = function(slideID,sliderID,is_static){
 		
+		jQuery('body').on('click', '.rs-reload-shop', function(){
+			if(confirm(rev_lang.unsaved_data_will_be_lost_proceed)){
+				showWaitAMinute({fadeIn:300,text:rev_lang.please_wait_a_moment});
+				
+				location.href = window.location.href+'&update_shop';
+			}
+		});
+		
 		/**
 		 * add Template Slider through Import, then add specific slide to current Slider and open it. Check for zip name
 		 **/
 		jQuery('body').on('click', '.template_slide_item_import', function(){
-			
-			//modify the dialog with some informations 
-			jQuery('.rs-zip-name').text(jQuery(this).data('zipname'));
-			jQuery('.rs-uid').val(jQuery(this).data('uid'));
-			jQuery('.rs-slide-number').val(jQuery(this).data('slidenumber'));
-			jQuery('.rs-slider-id').val(sliderID);
-			if(is_static){
-				jQuery('.rs-slide-id').val('static_'+sliderID);
-			}else{
-				jQuery('.rs-slide-id').val(slideID);
-			}
-			
-			jQuery("#dialog_import_template_slide").dialog({
-				modal:true,
-				resizable:false,
-				width:600,
-				height:350,
-				closeOnEscape:true,
-				dialogClass:"tpdialogs",
-				buttons:{
-					"Close":function(){
-						jQuery(this).dialog("close");
+			if(confirm(rev_lang.unsaved_data_will_be_lost_proceed)){
+				var data = jQuery(this).find('.template_slide_item_img');
+				
+				//modify the dialog with some informations 
+				jQuery('.rs-zip-name').text(data.data('zipname'));
+				jQuery('.rs-uid').val(data.data('uid'));
+				jQuery('.rs-slide-number').val(data.data('slidenumber'));
+				jQuery('.rs-slider-id').val(sliderID);
+				if(is_static){
+					jQuery('.rs-slide-id').val('static_'+sliderID);
+				}else{
+					jQuery('.rs-slide-id').val(slideID);
+				}
+				
+				jQuery("#dialog_import_template_slide_from").dialog({
+					modal:true,
+					resizable:false,
+					buttons:{
+						"Local":function(){
+							jQuery(".input_import_slider").val('');
+							jQuery('.rs-import-slider-button').hide();
+							
+							jQuery("#dialog_import_template_slide").dialog({
+								modal:true,
+								resizable:false,
+								width:600,
+								height:350,
+								closeOnEscape:true,
+								dialogClass:"tpdialogs",
+								buttons:{
+									"Close":function(){
+										jQuery(this).dialog("close");
+									}
+								},
+							});	//dialog end
+						},
+						"Online":function(){
+							if(rs_plugin_validated){
+								//show please wait
+								showWaitAMinute({fadeIn:300,text:rev_lang.please_wait_a_moment});
+								
+								//get from server
+								jQuery('#rs-import-slide-template-from-server').submit();
+								
+								jQuery(this).dialog("close");
+							}else{
+								alert(rev_lang.this_feature_only_if_activated);
+							}
+						}
 					}
-				},
-			});	//dialog end
-			
-			jQuery('#close-template').click();
+				});
+				
+				jQuery('#close-template').click();
+			}
 		});
 		
 		
@@ -1577,19 +1663,21 @@ var RevSliderAdmin = new function(){
 			},true);	//allow multiple selection
 		});
 		
-		jQuery('body').on('click', '.template_item', function(){
-			var data = { slider_id:sliderID };
-			
-			data['slide_id'] = jQuery(this).data('slideid');
-			if(is_static){
-				data['redirect_id'] = 'static_'+sliderID;
-			}else{
-				data['redirect_id'] = slideID; //is set in slide.php
+		jQuery('body').on('click', '.template_item', function(){			
+			if(confirm(rev_lang.unsaved_data_will_be_lost_proceed)){
+				var data = { slider_id:sliderID };
+				
+				data['slide_id'] = jQuery(this).data('slideid');
+				if(is_static){
+					data['redirect_id'] = 'static_'+sliderID;
+				}else{
+					data['redirect_id'] = slideID; //is set in slide.php
+				}
+				
+				UniteAdminRev.ajaxRequest('copy_slide_to_slider', data, function(){
+					jQuery('#close-template').click();
+				});
 			}
-			
-			UniteAdminRev.ajaxRequest('copy_slide_to_slider', data, function(){
-				jQuery('#close-template').click();
-			});
 		});
 		
 		//save slide actions
@@ -1619,6 +1707,7 @@ var RevSliderAdmin = new function(){
 
 				//set visual image
 				jQuery("#divbgholder").css("background-image","url("+urlImage+")");
+				jQuery('#slide_selector .list_slide_links li.selected .slide-media-container ').css("background-image","url("+urlImage+")")
 
 				//update setting input
 				jQuery("#image_url").val(urlImage);
@@ -2070,8 +2159,6 @@ var RevSliderAdmin = new function(){
 			
 			var data = {sliderid:sliderID,slideid:realSlideID,lang:lang,operation:operation};
 			
-			console.log(data);
-			
 			UniteAdminRev.ajaxRequest("slide_lang_operation", data,function(response){
 
 				objIcon.siblings(".icon_lang_loader").hide();
@@ -2111,6 +2198,7 @@ var RevSliderAdmin = new function(){
 		RevSliderSettings.onoffStatus(jQuery('input[name="save_performance"]'));
 		RevSliderSettings.onoffStatus(jQuery('input[name="video_force_cover"]'));
 		RevSliderSettings.onoffStatus(jQuery('input[name="video_nextslide"]'));
+		RevSliderSettings.onoffStatus(jQuery('input[name="video_allowfullscreen"]'));
 		RevSliderSettings.onoffStatus(jQuery('input[name="video_force_rewind"]'));
 		RevSliderSettings.onoffStatus(jQuery('input[name="video_mute"]'));
 		

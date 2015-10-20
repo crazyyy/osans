@@ -4,7 +4,7 @@ Plugin Name: Revolution Slider
 Plugin URI: http://www.revolution.themepunch.com/
 Description: Revolution Slider - Premium responsive slider
 Author: ThemePunch
-Version: 5.0.4
+Version: 5.0.9
 Author URI: http://themepunch.com
 */
 
@@ -17,7 +17,7 @@ if(class_exists('RevSliderFront')) {
 	die('ERROR: It looks like you have more than one instance of Revolution Slider installed. Please remove additional instances for this plugin to work again.');
 }
 
-$revSliderVersion = "5.0.4";
+$revSliderVersion = "5.0.9";
 $revSliderAsTheme = false;
 $revslider_screens = array();
 
@@ -36,7 +36,7 @@ if(isset($_GET['revSliderAsTheme'])){
 //set the RevSlider Plugin as a Theme. This hides the activation notice and the activation area in the Slider Overview
 function set_revslider_as_theme(){
 	global $revSliderAsTheme;
-
+	
 	if(defined('REV_SLIDER_AS_THEME')){
 		if(REV_SLIDER_AS_THEME == true)
 			$revSliderAsTheme = true;
@@ -80,9 +80,9 @@ try{
 
         extract(shortcode_atts(array('alias' => ''), $args, 'rev_slider'));
         $sliderAlias = ($alias != '') ? $alias : RevSliderFunctions::getVal($args,0);
-
+		
 		$gal_ids = RevSliderFunctionsWP::check_for_shortcodes($mid_content); //check for example on gallery shortcode and do stuff
-
+		
 		ob_start();
 		if(!empty($gal_ids)){ //add a gallery based slider
 			$slider = RevSliderOutput::putSlider($sliderAlias, '', $gal_ids);
@@ -92,23 +92,23 @@ try{
 		$content = ob_get_contents();
 		ob_clean();
 		ob_end_clean();
-
+		
 		// Do not output Slider if we are on mobile
 		$disable_on_mobile = $slider->getParam("disable_on_mobile","off");
 		if($disable_on_mobile == 'on'){
-			$mobile = (strstr($_SERVER['HTTP_USER_AGENT'],'Android') || strstr($_SERVER['HTTP_USER_AGENT'],'webOS') || strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') ||strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad') || wp_is_mobile()) ? true : false;
+			$mobile = (strstr($_SERVER['HTTP_USER_AGENT'],'Android') || strstr($_SERVER['HTTP_USER_AGENT'],'webOS') || strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') ||strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad') || strstr($_SERVER['HTTP_USER_AGENT'],'Windows Phone') || wp_is_mobile()) ? true : false;
 			if($mobile) return false;
 		}
-
+		
 		$show_alternate = $slider->getParam("show_alternative_type","off");
-
+		
 		if($show_alternate == 'mobile' || $show_alternate == 'mobile-ie8'){
 			if(wp_is_mobile()){
 				$show_alternate_image = $slider->getParam("show_alternate_image","");
 				return '<img class="tp-slider-alternative-image" src="'.$show_alternate_image.'" data-no-retina>';
 			}
 		}
-
+		
 		//handle slider output types
 		if(!empty($slider)){
 			$outputType = $slider->getParam("output_type","");
@@ -134,21 +134,21 @@ try{
 
 	//add tiny box dropdown menu
 	$tinybox = new RevSliderTinyBox();
-
-
+	
+	
 	/**
 	 * Call Extensions
 	 */
 	$revext = new RevSliderExtension();
-
+	
 	if(is_admin()){		//load admin part
-
+	
 		require_once(RS_PLUGIN_PATH . 'includes/framework/update.class.php');
 		require_once(RS_PLUGIN_PATH . 'includes/framework/newsletter.class.php');
 		require_once(RS_PLUGIN_PATH . 'admin/revslider-admin.class.php');
 
 		$productAdmin = new RevSliderAdmin(RS_PLUGIN_FILE_PATH);
-
+		
 	}else{		//load front part
 
 		/**
@@ -169,20 +169,22 @@ try{
 				$output->putErrorMessage(__("If you want to use the PHP function \"putRevSlider\" in your code please make sure to check \" ",REVSLIDER_TEXTDOMAIN).$option1Name.__(" \" in the backend's \"General Settings\" (top right panel). <br> <br> Or add the current page to the \"",REVSLIDER_TEXTDOMAIN).$option2Name.__("\" option box.", REVSLIDER_TEXTDOMAIN));
 				return(false);
 			}
-
-			// Do not output Slider if we are on mobile
+			
+			
 			ob_start();
 			$slider = RevSliderOutput::putSlider($data,$putIn);
 			$content = ob_get_contents();
 			ob_clean();
 			ob_end_clean();
-
-			$disable_on_mobile = $slider->getParam("disable_on_mobile","off");
-			if($disable_on_mobile == 'on'){
-				$mobile = (strstr($_SERVER['HTTP_USER_AGENT'],'Android') || strstr($_SERVER['HTTP_USER_AGENT'],'webOS') || strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') ||strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad') || wp_is_mobile()) ? true : false;
-				if($mobile) return false;
+			
+			if(is_object($slider)){
+				$disable_on_mobile = @$slider->getParam("disable_on_mobile","off"); // Do not output Slider if we are on mobile
+				if($disable_on_mobile == 'on'){
+					$mobile = (strstr($_SERVER['HTTP_USER_AGENT'],'Android') || strstr($_SERVER['HTTP_USER_AGENT'],'webOS') || strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') ||strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'Windows Phone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad') || wp_is_mobile()) ? true : false;
+					if($mobile) return false;
+				}
 			}
-
+			
 			echo $content;
 		}
 
@@ -199,10 +201,10 @@ try{
 
 		$productFront = new RevSliderFront(RS_PLUGIN_FILE_PATH);
 	}
-
+	
 	add_action('plugins_loaded', array( 'RevSliderFront', 'createDBTables' )); //add update checks
 	add_action('plugins_loaded', array( 'RevSliderPluginUpdate', 'do_update_checks' )); //add update checks
-
+	
 }catch(Exception $e){
 	$message = $e->getMessage();
 	$trace = $e->getTraceAsString();

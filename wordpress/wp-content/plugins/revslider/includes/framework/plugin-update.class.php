@@ -60,6 +60,14 @@ class RevSliderPluginUpdate {
 			$version = 5.0;
 			self::set_version($version);
 		}
+		
+		
+		if(version_compare($version, '5.0.7', '<')){
+			$version = '5.0.7';
+			
+			self::change_general_settings_5_0_7();
+			self::set_version($version);
+		}
 	}
 	
 	
@@ -405,7 +413,7 @@ class RevSliderPluginUpdate {
 									$anim_values = array();
 									foreach($inAnimations as $handle => $anim){
 										if($handle == $animation){
-											$anim_values = @$anim['params'];
+											$anim_values = (isset($anim['params'])) ? $anim['params'] : '';
 											if(!is_array($anim_values)) $anim_values = json_encode($anim_values);
 											break;
 										}
@@ -414,7 +422,7 @@ class RevSliderPluginUpdate {
 									$anim_endvalues = array();
 									foreach($outAnimations as $handle => $anim){
 										if($handle == $endanimation){
-											$anim_endvalues = @$anim['params'];
+											$anim_endvalues = (isset($anim['params'])) ? $anim['params'] : '';
 											if(!is_array($anim_endvalues)) $anim_endvalues = json_encode($anim_endvalues);
 											break;
 										}
@@ -887,8 +895,6 @@ class RevSliderPluginUpdate {
 	}
 	
 	
-	
-	
 	/**
 	 * remove static slide from Sliders if the setting was set to off
 	 * @since 5.0
@@ -921,6 +927,42 @@ class RevSliderPluginUpdate {
 			}
 		}
 	}
+	
+	
+	/**
+	 * change general settings of all sliders to 5.0.7
+	 * @since 5.0.7
+	 */
+	public static function change_general_settings_5_0_7($sliders = false){
+		//handle the new option for shuffle in combination with first alternative slide
+		$sr = new RevSlider();
+		$sl = new RevSliderSlide();
+		//$operations = new RevSliderOperations();
+		if($sliders === false){ //do it on all Sliders
+			$sliders = $sr->getArrSliders(false);
+		}else{
+			$sliders = array($sliders);
+		}
+		
+		if(!empty($sliders) && is_array($sliders)){
+			foreach($sliders as $slider){
+				$settings = $slider->getSettings();
+				
+				if(!isset($settings['version']) || version_compare($settings['version'], '5.0.7', '<')){
+					$start_with_slide = $slider->getParam('start_with_slide', '1');
+					
+					if($start_with_slide !== '1'){
+						$slider->updateParam(array('start_with_slide_enable' => 'on'));
+					}
+					
+					$settings['version'] = '5.0.7';
+					$slider->updateSetting(array('version' => '5.0.7'));
+				}
+
+			}
+		}
+	}
+	
 }
 
 /**

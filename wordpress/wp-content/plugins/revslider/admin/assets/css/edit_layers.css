@@ -34,7 +34,7 @@
 .ui-rotatable-handle                                                      { 	height:15px ;	width:15px;	cursor:pointer!important;	background-image:url(../images/rs_rotate.png);	background-size:100%;	right:2px;	top:2px;	position:absolute;	z-index:500; border-radius: 50%}
 .ui-rotatable-handle:hover 												  { 	background-color:#3498db;}
 
-.ui-autocomplete														  {		z-index:12000;}
+.ui-autocomplete														  {		z-index:1200000;}
 #tp-thelistofclasses .ui-autocomplete-category							  {		font-size:14px !important; color:#000; border-bottom:1px solid #d5d5d5; line-height:25px;margin-bottom:10px; font-weight: 600; padding:10px 15px 5px;}
 #tp-thelistofclasses .ui-menu-item										  {		-webkit-transition:none !important; transition:none !important; padding:0px 10px;}
 #tp-thelistofclasses .ui-menu-item a									  {		-webkit-transition:none !important; transition:none !important; font-size:11px !important; font-weight:400; color:#000; line-height:12px; display:block; padding:0px;}
@@ -491,6 +491,7 @@ span.setting_text_3 { 	color:#232323!important;	line-height:30px;	font-size:12px
 .rs-icon-rotation-end                             { 	background-image:url(../images/toolbar/icon-rotation-end.png);	background-size:37px 14px;	min-width:37px;}
 .rs-icon-edit-basic                               { 	background-image:url(../images/toolbar/tools_black.png);	background-size:18px 16px;	min-width:18px;}
 .rs-icon-desktop                                  { 	background-image:url(../images/toolbar/icon-mode-desktop-dark.png);	background-size:18px 18px;	min-width:18px;}
+.rs-icon-laptop                                  { 	background-image:url(../images/toolbar/icon-mode-laptop-dark.png);	background-size:20px 16px;	min-width:18px;}
 .rs-icon-tablet                                   { 	background-image:url(../images/toolbar/icon-mode-tablet-dark.png);	background-size:17px 20px;	min-width:17px;}
 .rs-icon-phone                                    { 	background-image:url(../images/toolbar/icon-mode-phone-dark.png);	background-size:12px 20px;	min-width:12px;}
 .rs-icon-skewx                                    { 	background-image:url(../images/toolbar/icon-skewx.png);	background-size:27px 17px;	min-width:27px;}
@@ -1493,8 +1494,10 @@ input[name="shape_padding[]"]:disabled									{	opacity: 0.5}
 
 
 
+.reverse_input_wrapper					{	border-bottom:1px solid #999;}
+.reverse_input_text						{	font-size:11px;color:#666;font-weight: 400; display: inline-block !important; margin-right:7px;}
 
-
+select[name="rev_show_the_slides"] 		{	max-width:150px;}
 
 /*********** RTL BASED SETTINGS ****************/
 

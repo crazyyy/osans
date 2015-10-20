@@ -589,33 +589,44 @@ class RevSliderOperations extends RevSliderElementsBase{
 	}
 
 	/**
-	 *
 	 * parse animation params
+	 * 5.0.5: added (R) for reverse
 	 */
 	public static function parseCustomAnimationByArray($animArray, $is = 'start'){
 		$retString = '';
 		
-		if(isset($animArray['x_'.$is]) && $animArray['x_'.$is] !== '' && $animArray['x_'.$is] !== 'inherit') $retString.= 'x:'.$animArray['x_'.$is].';'; //movex
-		if(isset($animArray['y_'.$is]) && $animArray['y_'.$is] !== '' && $animArray['y_'.$is] !== 'inherit') $retString.= 'y:'.$animArray['y_'.$is].';'; //movey
+		$reverse = (isset($animArray['x_'.$is.'_reverse']) && $animArray['x_'.$is.'_reverse'] == true) ? '(R)' : ''; //movex reverse
+		if(isset($animArray['x_'.$is]) && $animArray['x_'.$is] !== '' && $animArray['x_'.$is] !== 'inherit') $retString.= 'x:'.$animArray['x_'.$is].$reverse.';'; //movex
+		$reverse = (isset($animArray['y_'.$is.'_reverse']) && $animArray['y_'.$is.'_reverse'] == true) ? '(R)' : ''; //movey reverse
+		if(isset($animArray['y_'.$is]) && $animArray['y_'.$is] !== '' && $animArray['y_'.$is] !== 'inherit') $retString.= 'y:'.$animArray['y_'.$is].$reverse.';'; //movey
 		if(isset($animArray['z_'.$is]) && $animArray['z_'.$is] !== '' && $animArray['z_'.$is] !== 'inherit') $retString.= 'z:'.$animArray['z_'.$is].';'; //movez
 
-		if(isset($animArray['x_rotate_'.$is]) && $animArray['x_rotate_'.$is] !== '' && $animArray['x_rotate_'.$is] !== 'inherit') $retString.= 'rX:'.$animArray['x_rotate_'.$is].';'; //rotationx
-		if(isset($animArray['y_rotate_'.$is]) && $animArray['y_rotate_'.$is] !== '' && $animArray['y_rotate_'.$is] !== 'inherit') $retString.= 'rY:'.$animArray['y_rotate_'.$is].';'; //rotationy
-		if(isset($animArray['z_rotate_'.$is]) && $animArray['z_rotate_'.$is] !== '' && $animArray['z_rotate_'.$is] !== 'inherit') $retString.= 'rZ:'.$animArray['z_rotate_'.$is].';'; //rotationz
+		$reverse = (isset($animArray['x_rotate_'.$is.'_reverse']) && $animArray['x_rotate_'.$is.'_reverse'] == true) ? '(R)' : ''; //rotationx reverse
+		if(isset($animArray['x_rotate_'.$is]) && $animArray['x_rotate_'.$is] !== '' && $animArray['x_rotate_'.$is] !== 'inherit') $retString.= 'rX:'.$animArray['x_rotate_'.$is].$reverse.';'; //rotationx
+		$reverse = (isset($animArray['y_rotate_'.$is.'_reverse']) && $animArray['y_rotate_'.$is.'_reverse'] == true) ? '(R)' : ''; //rotationy reverse
+		if(isset($animArray['y_rotate_'.$is]) && $animArray['y_rotate_'.$is] !== '' && $animArray['y_rotate_'.$is] !== 'inherit') $retString.= 'rY:'.$animArray['y_rotate_'.$is].$reverse.';'; //rotationy
+		$reverse = (isset($animArray['z_rotate_'.$is.'_reverse']) && $animArray['z_rotate_'.$is.'_reverse'] == true) ? '(R)' : ''; //rotationz reverse
+		if(isset($animArray['z_rotate_'.$is]) && $animArray['z_rotate_'.$is] !== '' && $animArray['z_rotate_'.$is] !== 'inherit') $retString.= 'rZ:'.$animArray['z_rotate_'.$is].$reverse.';'; //rotationz
 
 		if(isset($animArray['scale_x_'.$is]) && $animArray['scale_x_'.$is] !== '' && $animArray['scale_x_'.$is] !== 'inherit'){ //scalex
+			$reverse = (isset($animArray['scale_x_'.$is.'_reverse']) && $animArray['scale_x_'.$is.'_reverse'] == true) ? '(R)' : ''; //scalex reverse
 			$retString.= 'sX:';
 			$retString.= ($animArray['scale_x_'.$is] == 0) ? 0 : $animArray['scale_x_'.$is];
+			$retString.= $reverse;
 			$retString.= ';';
 		}
 		if(isset($animArray['scale_y_'.$is]) && $animArray['scale_y_'.$is] !== '' && $animArray['scale_y_'.$is] !== 'inherit'){ //scaley
+			$reverse = (isset($animArray['scale_y_'.$is.'_reverse']) && $animArray['scale_y_'.$is.'_reverse'] == true) ? '(R)' : ''; //scaley reverse
 			$retString.= 'sY:';
 			$retString.= ($animArray['scale_y_'.$is] == 0) ? 0 : $animArray['scale_y_'.$is];
+			$retString.= $reverse;
 			$retString.= ';';
 		}
-
-		if(isset($animArray['skew_x_'.$is]) && $animArray['skew_x_'.$is] !== '' && $animArray['skew_x_'.$is] !== 'inherit') $retString.= 'skX:'.$animArray['skew_x_'.$is].';'; //skewx
-		if(isset($animArray['skew_y_'.$is]) && $animArray['skew_y_'.$is] !== '' && $animArray['skew_y_'.$is] !== 'inherit') $retString.= 'skY:'.$animArray['skew_y_'.$is].';'; //skewy
+		
+		$reverse = (isset($animArray['skew_x_'.$is.'_reverse']) && $animArray['skew_x_'.$is.'_reverse'] == true) ? '(R)' : ''; //skewx reverse
+		if(isset($animArray['skew_x_'.$is]) && $animArray['skew_x_'.$is] !== '' && $animArray['skew_x_'.$is] !== 'inherit') $retString.= 'skX:'.$animArray['skew_x_'.$is].$reverse.';'; //skewx
+		$reverse = (isset($animArray['skew_y_'.$is.'_reverse']) && $animArray['skew_y_'.$is.'_reverse'] == true) ? '(R)' : ''; //skewy reverse
+		if(isset($animArray['skew_y_'.$is]) && $animArray['skew_y_'.$is] !== '' && $animArray['skew_y_'.$is] !== 'inherit') $retString.= 'skY:'.$animArray['skew_y_'.$is].$reverse.';'; //skewy
 
 		if(isset($animArray['opacity_'.$is]) && $animArray['opacity_'.$is] !== '' && $animArray['opacity_'.$is] !== 'inherit'){ //captionopacity
 			$retString.= 'opacity:';
@@ -651,8 +662,10 @@ class RevSliderOperations extends RevSliderElementsBase{
 	 */
 	public static function parseCustomMaskByArray($animArray, $is = 'start'){
 		$retString = '';
-		if(isset($animArray['mask_x_'.$is]) && $animArray['mask_x_'.$is] !== '') $retString.= 'x:'.$animArray['mask_x_'.$is].';';
-		if(isset($animArray['mask_y_'.$is]) && $animArray['mask_y_'.$is] !== '') $retString.= 'y:'.$animArray['mask_y_'.$is].';';
+		$reverse = (isset($animArray['mask_x_'.$is.'_reverse']) && $animArray['mask_x_'.$is.'_reverse'] == true) ? '(R)' : '';
+		if(isset($animArray['mask_x_'.$is]) && $animArray['mask_x_'.$is] !== '') $retString.= 'x:'.$animArray['mask_x_'.$is].$reverse.';';
+		$reverse = (isset($animArray['mask_y_'.$is.'_reverse']) && $animArray['mask_y_'.$is.'_reverse'] == true) ? '(R)' : '';
+		if(isset($animArray['mask_y_'.$is]) && $animArray['mask_y_'.$is] !== '') $retString.= 'y:'.$animArray['mask_y_'.$is].$reverse.';';
 		if(isset($animArray['mask_speed_'.$is]) && $animArray['mask_speed_'.$is] !== '') $retString.= 's:'.$animArray['mask_speed_'.$is].';';
 		if(isset($animArray['mask_ease_'.$is]) && $animArray['mask_ease_'.$is] !== '') $retString.= 'e:'.$animArray['mask_ease_'.$is].';';
 		
@@ -853,11 +866,16 @@ class RevSliderOperations extends RevSliderElementsBase{
 		$db = new RevSliderDB();
 
 		$handle = $content['handle'];
-
+		
+		if(!isset($content['hover'])) $content['hover'] = '';
+		if(!isset($content['advanced'])) $content['advanced'] = array();
+		if(!isset($content['advanced']['idle'])) $content['advanced']['idle'] = array();
+		if(!isset($content['advanced']['hover'])) $content['advanced']['hover'] = array();
+		
 		$arrInsert = array();
 		$arrInsert["handle"] = '.tp-caption.'.$handle;
 		$arrInsert["params"] = stripslashes(json_encode(str_replace("'", '"', $content['idle'])));
-		$arrInsert["hover"] = stripslashes(json_encode(str_replace("'", '"', @$content['hover'])));
+		$arrInsert["hover"] = stripslashes(json_encode(str_replace("'", '"', $content['hover'])));
 		
 		if(!isset($content['settings'])) $content['settings'] = array();
 		$content['settings']['version'] = 'custom';
@@ -865,8 +883,8 @@ class RevSliderOperations extends RevSliderElementsBase{
 		$arrInsert["settings"] = stripslashes(json_encode(str_replace("'", '"', $content['settings'])));
 		
 		$arrInsert["advanced"] = array();
-		$arrInsert["advanced"]['idle'] = @$content['advanced']['idle'];
-		$arrInsert["advanced"]['hover'] = @$content['advanced']['hover'];
+		$arrInsert["advanced"]['idle'] = $content['advanced']['idle'];
+		$arrInsert["advanced"]['hover'] = $content['advanced']['hover'];
 		$arrInsert["advanced"] = stripslashes(json_encode(str_replace("'", '"', $arrInsert["advanced"])));
 		
 		$result = $db->insert(RevSliderGlobals::$table_css, $arrInsert);
@@ -903,14 +921,20 @@ class RevSliderOperations extends RevSliderElementsBase{
 		
 		$handle = $content['handle'];
 		
+		if(!isset($content['idle'])) $content['idle'] = '';
+		if(!isset($content['hover'])) $content['hover'] = '';
+		if(!isset($content['advanced'])) $content['advanced'] = array();
+		if(!isset($content['advanced']['idle'])) $content['advanced']['idle'] = array();
+		if(!isset($content['advanced']['hover'])) $content['advanced']['hover'] = array();
+		
 		$arrUpdate = array();
-		$arrUpdate["params"] = stripslashes(json_encode(str_replace("'", '"', @$content['idle'])));
-		$arrUpdate["hover"] = stripslashes(json_encode(str_replace("'", '"', @$content['hover'])));
+		$arrUpdate["params"] = stripslashes(json_encode(str_replace("'", '"', $content['idle'])));
+		$arrUpdate["hover"] = stripslashes(json_encode(str_replace("'", '"', $content['hover'])));
 		$arrUpdate["settings"] = stripslashes(json_encode(str_replace("'", '"', $settings)));
 		
 		$arrUpdate["advanced"] = array();
-		$arrUpdate["advanced"]['idle'] = @$content['advanced']['idle'];
-		$arrUpdate["advanced"]['hover'] = @$content['advanced']['hover'];
+		$arrUpdate["advanced"]['idle'] = $content['advanced']['idle'];
+		$arrUpdate["advanced"]['hover'] = $content['advanced']['hover'];
 		$arrUpdate["advanced"] = stripslashes(json_encode(str_replace("'", '"', $arrUpdate["advanced"])));
 		
 		$result = $db->update(RevSliderGlobals::$table_css, $arrUpdate, array('handle' => '.tp-caption.'.$handle));
@@ -1207,6 +1231,8 @@ class RevSliderOperations extends RevSliderElementsBase{
 			<html>
 				<head>
 					<link rel='stylesheet' href='<?php echo $urlPlugin?>css/settings.css?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>' type='text/css' media='all' />
+					<link rel='stylesheet' href='<?php echo $urlPlugin?>fonts/font-awesome/css/font-awesome.css?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>' type='text/css' media='all' />
+					<link rel='stylesheet' href='<?php echo $urlPlugin?>fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>' type='text/css' media='all' />
 					<?php
 					$db = new RevSliderDB();
 
@@ -1228,12 +1254,11 @@ class RevSliderOperations extends RevSliderElementsBase{
 						$font_url = $http.'://fonts.googleapis.com/css?family=';
 					}
 
-
 					$custom_css = RevSliderOperations::getStaticCss();
 					echo '<style type="text/css">'.RevSliderCssParser::compress_css($custom_css).'</style>';
 					?>
 
-					<script type='text/javascript' src='<?php echo $setBase; ?>ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
+					<script type='text/javascript' src='<?php echo $setBase; ?>code.jquery.com/jquery-latest.min.js'></script>
 
 					<script type='text/javascript' src='<?php echo $urlPlugin?>js/jquery.themepunch.tools.min.js?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>'></script>
 					<script type='text/javascript' src='<?php echo $urlPlugin?>js/jquery.themepunch.revolution.min.js?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>'></script>
@@ -1273,162 +1298,348 @@ class RevSliderOperations extends RevSliderElementsBase{
 	/*
 	 * show only the markup for jQuery version of plugin
 	 */
-	public function previewOutputMarkup($sliderID,$output = null){
-
+	public function previewOutputMarkup($sliderID){
+		$export_real = true; //if false, then kriki export for JavaScript Standalone version
+		
+		if($export_real){ //set all different file path's here
+			$path_fonts = 'fonts/';
+			$path_css = 'css/';
+			$path_js = 'js/';
+			$path_assets = 'assets';
+			$path_assets_raw = 'assets';
+			$path_assets_vid = 'assets';
+			$path_assets_raw_vid = 'assets';
+		}else{
+			$path_fonts = '../../revolution/fonts/';
+			$path_css = '../../revolution/css/';
+			$path_js = '../../revolution/js/';
+			$path_assets = '../../assets/images';
+			$path_assets_raw = 'assets/images';
+			$path_assets_vid = '../../assets/videos';
+			$path_assets_raw_vid = 'assets/videos';
+		}
+		
+		if(function_exists("unzip_file") == false && class_exists("ZipArchive") == false){
+			echo __('ZipArchive extension not available, please enable it to use this functionality.', REVSLIDER_TEXTDOMAIN);
+			exit;
+		}
+		
+		$zip = new ZipArchive;
+		$success = $zip->open(RevSliderGlobals::$uploadsUrlExportZip, ZIPARCHIVE::CREATE | ZipArchive::OVERWRITE);
+		
+		if($success !== true){
+			echo __("No write permissions. Can't create zip file: ", REVSLIDER_TEXTDOMAIN).RevSliderGlobals::$uploadsUrlExportZip;
+			exit;
+		}
+		
 		if($sliderID == "empty_output"){
-			$this->loadingMessageOutput();
-			exit();
+			echo __("Wrong request!", REVSLIDER_TEXTDOMAIN);
+			exit;
 		}
 
-		if($output == null)
-			$output = new RevSliderOutput();
+		$output = new RevSliderOutput();
+		$operations = new RevSliderOperations();
 
 		$slider = new RevSlider();
 		$slider->initByID($sliderID);
-		$isWpmlExists = RevSliderWpml::isWpmlExists();
-		$useWpml = $slider->getParam("use_wpml","off");
-		$wpmlActive = false;
-		if($isWpmlExists && $useWpml == "on"){
-			$wpmlActive = true;
-			$arrLanguages = RevSliderWpml::getArrLanguages(false);
-
-			//set current lang to output
-			$currentLang = RevSliderFunctions::getPostGetVariable("lang");
-
-			if(empty($currentLang))
-				$currentLang = RevSliderWpml::getCurrentLang();
-
-			if(empty($currentLang))
-				$currentLang = $arrLanguages[0];
-
-			$output->setLang($currentLang);
-
-			$selectLangChoose = RevSliderFunctions::getHTMLSelect($arrLanguages,$currentLang,"id='select_langs'",true);
-		}
-
-
+		
 		$output->setPreviewMode();
 
-		//put the output html
-		$urlPlugin = "http://yourpluginpath/";
-		$urlPreviewPattern = RevSliderBase::$url_ajax_actions."&client_action=preview_slider&only_markup=true&sliderid=".$sliderID."&lang=[lang]&nonce=[nonce]";
-		$nonce = wp_create_nonce("revslider_actions");
-
-		$setBase = (is_ssl()) ? "https://" : "http://";
 		
 		$http = (is_ssl()) ? 'https' : 'http';
 		
-		$operations = new RevSliderOperations();
 		$arrValues = $operations->getGeneralSettingsValues();
-		
 		$set_diff_font = RevSliderFunctions::getVal($arrValues, "change_font_loading",'');
 		if($set_diff_font !== ''){
 			$font_url = $set_diff_font;
 		}else{
 			$font_url = $http.'://fonts.googleapis.com/css?family=';
 		}
+
+		$static_css = RevSliderOperations::getStaticCss();
 		
-		?>
-		<html>
-		<head>
-			<script type='text/javascript' src='<?php echo $setBase; ?>ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
-		</head>
-		<body style="padding:0px;margin:0px;">
-			<?php if($wpmlActive == true):?>
-				<div style="margin-bottom:10px;text-align:center;">
-				<?php _e("Choose language",REVSLIDER_TEXTDOMAIN); ?>: <?php echo $selectLangChoose; ?>
-				</div>
-
-				<script type="text/javascript">
-					var g_previewPattern = '<?php echo $urlPreviewPattern; ?>';
-					jQuery("#select_langs").change(function(){
-						var lang = this.value;
-						var nonce = "<?php echo $nonce; ?>";
-						var pattern = g_previewPattern;
-						var urlPreview = pattern.replace("[lang]",lang).replace("[nonce]",nonce);
-						location.href = urlPreview;
-					});
-
-					jQuery('body').on('click', '#rev_replace_images', function(){
-						var from = jQuery('input[name="orig_image_path"]').val();
-						var to = jQuery('input[name="replace_image_path"]').val();
-
-						jQuery('#rev_script_content').val(jQuery('#rev_script_content').val().replace(from, to));
-						jQuery('#rev_the_content').val(jQuery('#rev_the_content').val().replace(from, to));
-						jQuery('#rev_style_content').val(jQuery('#rev_style_content').val().replace(from, to));
-						jQuery('#rev_head_content').val(jQuery('#rev_head_content').val().replace(from, to));
-					});
-
-				</script>
-			<?php endif?>
-		<?php
 		ob_start();
-		?><link rel='stylesheet' href='<?php echo $urlPlugin?>css/settings.css?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>' type='text/css' media='all' />
-		<script type='text/javascript' src='<?php echo $urlPlugin?>js/jquery.themepunch.tools.min.js?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>'></script>
-		<script type='text/javascript' src='<?php echo $urlPlugin?>js/jquery.themepunch.revolution.min.js?rev=<?php echo RevSliderGlobals::SLIDER_REVISION; ?>'></script>
-		<?php
-		$head_content = ob_get_contents();
-		ob_clean();
-		ob_end_clean();
-
-		ob_start();
-
-		$custom_css = RevSliderOperations::getStaticCss();
-		echo $custom_css."\n\n";
-
-		echo '/*****************'."\n";
-		echo ' ** '.__('CAPTIONS CSS', REVSLIDER_TEXTDOMAIN)."\n";
-		echo ' ****************/'."\n\n";
-		$db = new RevSliderDB();
-		$styles = $db->fetch(RevSliderGlobals::$table_css);
-		echo RevSliderCssParser::parseDbArrayToCss($styles, "\n");
-
-		$style_content = ob_get_contents();
-		ob_clean();
-		ob_end_clean();
-
-		ob_start();
-
-		$output->putSliderBase($sliderID);
-
+		$output->putSliderBase($sliderID, array(), true);
 		$content = ob_get_contents();
 		ob_clean();
 		ob_end_clean();
+		
+		
+		$fonts = '';
+		while(strpos($content, '<!-- FONT -->') !== false){
+			$temp_font = substr($content, strpos($content, '<!-- FONT -->'), strpos($content, '<!-- /FONT -->') + 14 - strpos($content, '<!-- FONT -->'))."\n";
+			$fonts .= $temp_font;
+			
+			$starthtml = substr($content, 0, strpos($content, '<!-- FONT -->'));
+			$endhtml = substr($content, strpos($content, '<!-- /FONT -->')+14);
+			
+			$content = $starthtml.$endhtml; //remove from html markup
+		}
+		$fonts = str_replace(array('<!-- FONT -->', '<!-- /FONT -->'), '', $fonts); //remove the tags
+		
+		$scripts = '';
+		while(strpos($content, '<!-- SCRIPT -->') !== false){
+			$temp_script = substr($content, strpos($content, '<!-- SCRIPT -->'), strpos($content, '<!-- /SCRIPT -->') + 16 - strpos($content, '<!-- SCRIPT -->'))."\n";
+			$scripts .= $temp_script;
+			
+			$starthtml = substr($content, 0, strpos($content, '<!-- SCRIPT -->'));
+			$endhtml = substr($content, strpos($content, '<!-- /SCRIPT -->')+16);
+			
+			$content = $starthtml.$endhtml; //remove from html markup
+		}
+		$scripts = str_replace(array('<!-- SCRIPT -->', '<!-- /SCRIPT -->'), '', $scripts); //remove the tags
+		
+		$styles = '';
+		while(strpos($content, '<!-- STYLE -->') !== false){
+			$temp_style = substr($content, strpos($content, '<!-- STYLE -->'), strpos($content, '<!-- /STYLE -->') + 15 - strpos($content, '<!-- STYLE -->'))."\n";
+			$styles .= $temp_style;
+			
+			$starthtml = substr($content, 0, strpos($content, '<!-- STYLE -->'));
+			$endhtml = substr($content, strpos($content, '<!-- /STYLE -->')+15);
+			
+			$content = $starthtml.$endhtml; //remove from html markup
+		}
+		$styles = str_replace(array('<!-- STYLE -->', '<!-- /STYLE -->'), '', $styles); //remove the tags
+		
+		$full_content = '';
+		
+		ob_start();
+		?><!DOCTYPE html>
+	<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+	<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+	<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+	<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
-		$script_content = substr($content, strpos($content, '<script type="text/javascript">'), strpos($content, '</script>') + 9 - strpos($content, '<script type="text/javascript">'));
-		$content = htmlentities(str_replace($script_content, '', $content));
-		$script_content = str_replace('				', '', $script_content);
-		$script_content = str_replace(array('<script type="text/javascript">', '</script>'), '', $script_content);
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title><?php echo $slider->getTitle(); ?> - Slider Revolution</title>
+		<meta name="description" content="Slider Revolution Example" />
+		<meta name="keywords" content="fullscreen image, grid layout, flexbox grid, transition" />
+		<meta name="author" content="ThemePunch" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+		<!-- LOAD JQUERY LIBRARY -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+		
+		<!-- LOADING FONTS AND ICONS -->
+		<?php echo $fonts; ?>
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo $path_fonts; ?>pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo $path_fonts; ?>font-awesome/css/font-awesome.min.css">
+		
+		<!-- REVOLUTION STYLE SHEETS -->
+		<link rel="stylesheet" type="text/css" href="<?php echo $path_css; ?>settings.css">
+		<!-- REVOLUTION LAYERS STYLES -->
+		<?php 
+		if($export_real){ 
+			echo $styles;
+			
+			if($static_css !== ''){
+				echo '<style type="text/css">';
+				echo RevSliderCssParser::compress_css($static_css);
+				echo '</style>'."\n";
+			}
+		}else{
+			?>
+			<link rel="stylesheet" type="text/css" href="<?php echo $path_css; ?>layers.css">
+			
+			<!-- REVOLUTION NAVIGATION STYLES -->
+			<link rel="stylesheet" type="text/css" href="<?php echo $path_css; ?>navigation.css">
+			
+			<link rel="stylesheet" type="text/css" href="../../assets/css/noneed.css">
+			<?php
+		}
 		?>
-		<style>
-			body 	 { font-family:sans-serif; font-size:12px;}
-			textarea { background:#f1f1f1; border:#ddd; font-size:10px; line-height:16px; margin-bottom:40px; padding:10px;}
-			.rev_cont_title { color:#000; text-decoration:none;font-size:14px; line-height:24px; font-weight:800;background: #D5D5D5;padding: 10px;}
-			.rev_cont_title a, .rev_cont_title a:visited { margin-left:25px;font-size:12px;line-height:12px;float:right;background-color:#8e44ad; color:#fff; padding:8px 10px;text-decoration:none;}
-			.rev_cont_title a:hover	  { background-color:#9b59b6;}
-		</style>
-		<p><?php $dir = wp_upload_dir(); ?>
-			<?php _e('Replace image path:', REVSLIDER_TEXTDOMAIN); ?> <?php _e('From:', REVSLIDER_TEXTDOMAIN); ?> <input type="text" name="orig_image_path" value="<?php echo @$dir['baseurl']; ?>" /> <?php _e('To:', REVSLIDER_TEXTDOMAIN); ?> <input type="text" name="replace_image_path" value="" /> <input id="rev_replace_images" type="button" name="replace_images" value="<?php _e('Replace', REVSLIDER_TEXTDOMAIN); ?>" />
-		</p>
+		<!-- REVOLUTION JS FILES -->
+		<script type="text/javascript" src="<?php echo $path_js; ?>jquery.themepunch.tools.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>jquery.themepunch.revolution.min.js"></script>
 
-		<div class="rev_cont_title"><?php _e('Header', REVSLIDER_TEXTDOMAIN); ?> <a class="button-primary revpurple export_slider_standalone copytoclip" data-idt="rev_head_content"  href="javascript:void(0);" original-title=""><?php _e('Mark to Copy', REVSLIDER_TEXTDOMAIN); ?></a><div style="clear:both"></div></div>
-		<textarea id="rev_head_content" readonly="true" style="width: 100%; height: 100px; color:#3498db"><?php echo $head_content; ?></textarea>
-		<div class="rev_cont_title"><?php _e('CSS', REVSLIDER_TEXTDOMAIN); ?><a class="button-primary revpurple export_slider_standalone copytoclip" data-idt="rev_style_content"  href="javascript:void(0);" original-title=""><?php _e('Mark to Copy', REVSLIDER_TEXTDOMAIN); ?></a></div>
-		<textarea id="rev_style_content" readonly="true" style="width: 100%; height: 100px;"><?php echo $style_content; ?></textarea>
-		<div class="rev_cont_title"><?php _e('Body', REVSLIDER_TEXTDOMAIN); ?><a class="button-primary revpurple export_slider_standalone copytoclip" data-idt="rev_the_content"  href="javascript:void(0);" original-title=""><?php _e('Mark to Copy', REVSLIDER_TEXTDOMAIN); ?></a></div>
-		<textarea id="rev_the_content" readonly="true" style="width: 100%; height: 100px;"><?php echo $content; ?></textarea>
-		<div class="rev_cont_title"><?php _e('Script', REVSLIDER_TEXTDOMAIN); ?><a class="button-primary revpurple export_slider_standalone copytoclip" data-idt="rev_script_content"  href="javascript:void(0);" original-title=""><?php _e('Mark to Copy', REVSLIDER_TEXTDOMAIN); ?></a></div>
-		<textarea id="rev_script_content" readonly="true" style="width: 100%; height: 100px;"><?php echo $script_content; ?></textarea>
+		<!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->	
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.actions.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.carousel.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.kenburn.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.layeranimation.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.migration.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.navigation.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.parallax.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.slideanims.min.js"></script>
+		<script type="text/javascript" src="<?php echo $path_js; ?>extensions/revolution.extension.video.min.js"></script>
+	</head>
+	
+	<body>
+		<?php if(!$export_real){ ?>
+		<!-- HEADER -->
+		<article class="content">
+			<!-- Add your site or application content here -->
+			<section class="header">
+				<span class="logo" style="float:left"></span>
+				<a class="button" style="float:right" href="http://www.themepunch.com/revsliderjquery-doc/get-started/"><i class="pe-7s-help2"></i>Online Documentation</a>
+				<div class="clearfix"></div>
+			</section>
+		</article>
 
-		<script>
-			jQuery('body').on('click','.copytoclip',function() {
-				jQuery("#"+jQuery(this).data('idt')).select();
-			});
-		</script>
-		</body>
-		</html>
-		<?php
+		<article class="small-history"> 
+			<h2 class="textaligncenter" style="margin-bottom:25px;">Slideshow Gallery</h2>
+			<p>The Slider below is a classic slideshow with timer, bullet and arrow navigation. Slider Revolution offers millions of layout combinations.</p>
+		</article>
+
+		<!-- SLIDER EXAMPLE -->
+		<section class="example">
+			<article class="content">
+		<?php } ?>
+	<?php
+	$head = ob_get_contents();
+	ob_clean();
+	ob_end_clean();
+
+	ob_start();
+	?>
+	<?php if(!$export_real){ ?>
+			</article>
+		</section>
+	<?php } ?>
+	</body>
+</html>
+<?php
+$footer = ob_get_contents();
+ob_clean();
+ob_end_clean();
+
+		$slider_html = $head."\n".$content."\n".$scripts."\n".$footer;
+		
+		$upload_dir = RevSliderFunctionsWP::getPathUploads();
+		$upload_dir_multisiteless = wp_upload_dir();
+		$cont_url = $upload_dir_multisiteless['baseurl'];
+		$cont_url_no_www = str_replace('www.', '', $upload_dir_multisiteless['baseurl']);
+		$upload_dir_multisiteless = $upload_dir_multisiteless['basedir'].'/';
+		
+		$search = array($cont_url, $cont_url_no_www, RS_PLUGIN_URL);
+		
+		$added = array();
+		
+		foreach($search as $s){
+			preg_match_all("/(\"|')".str_replace('/', '\/', $s)."\S+(\"|')/", $slider_html, $_files);
+			
+			if(!empty($_files) && isset($_files[0]) && !empty($_files[0])){
+				//go through all files, check for existance and add to the zip file
+				foreach($_files[0] as $_file){
+					$o = $_file;
+					$_file = str_replace(array('"', "'", $s), '', $_file);
+					
+					//check if video or image
+					$use_path = $path_assets;
+					$use_path_raw = $path_assets_raw;
+					
+					preg_match('/.*?.(?:jpg|jpeg|gif|png)/i', $_file, $match);
+					preg_match('/.*?.(?:ogv|webm|mp4)/i', $_file, $match2);
+					$f = false;
+					if(!empty($match) && isset($match[0]) && !empty($match[0])){
+						//image
+						$use_path = $path_assets;
+						$use_path_raw = $path_assets_raw;
+						$f = true;
+					}
+					if(!empty($match2) && isset($match2[0]) && !empty($match2[0])){
+						//video
+						$use_path = $path_assets_vid;
+						$use_path_raw = $path_assets_raw_vid;
+						$f = true;
+					}
+					
+					if($f == false){ 
+						//no file, just a location. So change the location accordingly by removing base and add ../../revolution
+						if(strpos($o, 'public/assets/js/') !== false){ //this will be the jsFileLocation script part
+							$slider_html = str_replace($o, '"'.$path_js.'"', $slider_html);
+						}
+						continue; //no correct file, nothing to add
+					}
+					
+					if(isset($added[$_file])) continue;
+					
+					$add = '';
+					$__file = '';
+					$repl_to = explode('/', $_file);
+					$repl_to = end($repl_to);
+					
+					$remove = false;
+					
+					if(is_file($upload_dir.$_file)){
+						$zip->addFile($upload_dir.$_file, $use_path_raw.'/'.$repl_to);
+						$remove = true;
+					}elseif(is_file($upload_dir_multisiteless.$_file)){
+						$zip->addFile($upload_dir_multisiteless.$_file, $use_path_raw.'/'.$repl_to);
+						$remove = true;
+					}elseif(is_file(RS_PLUGIN_PATH.$_file)){
+						//remove admin/assets/
+						$__file = str_replace('admin/assets/images/', '', $_file);
+						$zip->addFile(RS_PLUGIN_PATH.$_file, $use_path_raw.'/'.$__file);
+						$remove = true;
+						$add = '/';
+					}
+
+					if($remove == true){
+						$added[$_file] = true; //set as added
+						//replace file with new path
+						if($add !== '') $_file = $__file; //set the different path here
+						$slider_html = str_replace($o, '"'.$use_path.'/'.$repl_to.'"', $slider_html);
+					}
+				}
+				
+			}
+		}
+		
+		if($export_real){ //only include if real export
+			//add common files to the zip
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.actions.min.js', 'js/extensions/revolution.extension.actions.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.carousel.min.js', 'js/extensions/revolution.extension.carousel.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.kenburn.min.js', 'js/extensions/revolution.extension.kenburn.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.layeranimation.min.js', 'js/extensions/revolution.extension.layeranimation.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.migration.min.js', 'js/extensions/revolution.extension.migration.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.navigation.min.js', 'js/extensions/revolution.extension.navigation.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.parallax.min.js', 'js/extensions/revolution.extension.parallax.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.slideanims.min.js', 'js/extensions/revolution.extension.slideanims.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/extensions/revolution.extension.video.min.js', 'js/extensions/revolution.extension.video.min.js');
+			
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/jquery.themepunch.enablelog.js', 'js/jquery.themepunch.enablelog.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/jquery.themepunch.revolution.min.js', 'js/jquery.themepunch.revolution.min.js');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/jquery.themepunch.tools.min.js', 'js/jquery.themepunch.tools.min.js');
+			
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/css/settings.css', 'css/settings.css');
+			
+			
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css', 'fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/pe-icon-7-stroke/css/helper.css', 'fonts/pe-icon-7-stroke/css/helper.css');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.eot', 'fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.eot');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.svg', 'fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.svg');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.ttf', 'fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.ttf');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.woff', 'fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.woff');
+			
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/font-awesome/css/font-awesome.min.css', 'fonts/font-awesome/css/font-awesome.min.css');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/font-awesome/fonts/FontAwesome.otf', 'fonts/font-awesome/fonts/FontAwesome.otf');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/font-awesome/fonts/fontawesome-webfont.eot', 'fonts/font-awesome/fonts/fontawesome-webfont.eot');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/font-awesome/fonts/fontawesome-webfont.svg', 'fonts/font-awesome/fonts/fontawesome-webfont.svg');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/font-awesome/fonts/fontawesome-webfont.ttf', 'fonts/font-awesome/fonts/fontawesome-webfont.ttf');
+			$zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/font-awesome/fonts/fontawesome-webfont.woff', 'fonts/font-awesome/fonts/fontawesome-webfont.woff');
+			
+			
+			$notice_text = "";
+			$notice_text .= __('Using this data is only allowed with a valid licence of the jQuery Slider Revolution Plugin, which can be found at CodeCanyon: http://codecanyon.net/item/slider-revolution-responsive-jquery-plugin/2580848?ref=themepunch', REVSLIDER_TEXTDOMAIN);
+			$zip->addFromString("NOTICE.txt", $notice_text); //add slider settings
+			
+		}
+		
+		$zip->addFromString("slider.html", $slider_html); //add slider settings
+		
+		$zip->close();
+		
+		header("Content-type: application/zip");
+		header("Content-Disposition: attachment; filename=".sanitize_title($slider->getAlias()).".zip");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+		readfile(RevSliderGlobals::$uploadsUrlExportZip);
+		
+		@unlink(RevSliderGlobals::$uploadsUrlExportZip); //delete file after sending it to user
 		exit();
 	}
 
@@ -1514,7 +1725,9 @@ class RevSliderOperations extends RevSliderElementsBase{
 			}
 		}
 
-		$arrMain["fullscreen_offset_container"] = @$arrMain["fullscreen_offset_container"];
+		if(!isset($arrMain["fullscreen_offset_container"])) $arrMain["fullscreen_offset_container"] = '';
+		
+		$arrMain["fullscreen_offset_container"] = $arrMain["fullscreen_offset_container"];
 
 		$data["main"] = $arrMain;
 

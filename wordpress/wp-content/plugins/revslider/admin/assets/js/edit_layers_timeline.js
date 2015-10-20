@@ -336,11 +336,16 @@ var tpLayerTimelinesRev = new function(){
 			inp.parent().append('<div class="inp-deep-list"></div>');
 			var dl = inp.parent().find('.inp-deep-list'),
 				txt = '<span class="inp-deep-listitems">',
-				list = inp.data('selects') != undefined ? inp.data('selects').split("||") : ""
+				rev = inp.data('reverse'),
+				list = inp.data('selects') != undefined ? inp.data('selects').split("||") : "",
 				vals = inp.data('svalues') != undefined ? inp.data('svalues').split("||") : "",
-				icos = inp.data('icons') != undefined ? inp.data('icons').split("||") : "";
+				icos = inp.data('icons') != undefined ? inp.data('icons').split("||") : "",
+				id = inp.attr('id');
 				
-				
+			
+			if (rev=="on") {
+				txt = txt+"<span class='reverse_input_wrapper'><span class='reverse_input_text'>Direction Auto Reverse</span><input class='reverse_input_check tp-moderncheckbox' name='"+id+"_reverse' id='"+id+"_reverse' type='checkbox'></span>";
+			}
 			if (list!==undefined && list!="") {							
 				jQuery.each(list,function(i){
 					var v = vals[i] || "",
@@ -352,6 +357,9 @@ var tpLayerTimelinesRev = new function(){
 			txt = txt + "</span>";
 			
 			dl.append(txt);
+			if (rev=="on") {
+				RevSliderSettings.onoffStatus(jQuery('input[name="'+id+'_reverse"]'));
+			}
 		})
 
 		jQuery('body').on('click','.inp-deep-prebutton',function() {
@@ -414,6 +422,7 @@ var tpLayerTimelinesRev = new function(){
 						di = jQuery('#dialog_insert_icon');
 					di.parent().css({padding:"0px", border:"none", borderRadius:"0px"});
 					di.parent().find('.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle').css({fontSize:"12px", fontWeight:"400",lineHeight:"30px"});
+					if (sheets)
 					jQuery.each(sheets,function(index,sheet) {
 						var found = false,
 							markup = "";	
@@ -904,13 +913,20 @@ var tpLayerTimelinesRev = new function(){
 			bordercolor = deform["border-color"],
 			bordertrans = deform["border-transparency"];
 
+
 		if(is_demo && params.alias == 'First'){
 			
 		}
-
+		
 		// REMOVE SPLITS
-		if (inlayer.data('mySplitText') != undefined)
+		if (inlayer.data('mySplitText') != undefined) {
 			try{inlayer.data('mySplitText').revert();} catch(e) {}
+			if (params.type=="text" || params.type=="button") {
+				inlayer.html(params.text);
+				u.makeCurrentLayerRotatable();
+			}
+			inlayer.removeData('mySplitText')
+		}
 
 		// BACKGROUND OPACITY
 		if (Number(bgtrans)<1) {
@@ -952,19 +968,21 @@ var tpLayerTimelinesRev = new function(){
 		if(mwidth == undefined) mwidth = '';
 		if(mheight == undefined) mheight = '';
 
+		
+
 		mwidth = cmode===undefined || cmode==="custom" ?  
 				jQuery.isNumeric(mwidth) ? 
 					mwidth+"px" : mwidth.match(/px/g) ? 
 						parseInt(mwidth,0)+"px" : mwidth.match(/%/g) ? 
 							parseInt(mwidth,0)+"%" : mwidth :
-								cmode === "fullwidth" || cmode ==="cover" ? "100%" : mwidth;
+								cmode === "fullwidth" || cmode ==="cover"  || cmode ==="cover-proportional" ? "100%" : mwidth;
 
 		mheight = cmode===undefined || cmode==="custom" ?  
 				jQuery.isNumeric(mheight) ? 
 					mheight+"px" : mheight.match(/px/g) ? 
 						parseInt(mheight,0)+"px" : mheight.match(/%/g) ? 
 							parseInt(mheight,0)+"%" : mheight :
-								cmode === "fullheight" || cmode ==="cover" ? "100%" : mheight;
+								cmode === "fullheight" || cmode ==="cover" || cmode ==="cover-proportional"  ? "100%" : mheight;
 
 		
 
@@ -973,7 +991,7 @@ var tpLayerTimelinesRev = new function(){
 		caption.css({width:mwidth, height:mheight});
 		
 		var fw = parseInt(u.getVal(ss,"font-weight"),0) || 400;
-
+		
 		
 		punchgs.TweenLite.set(inlayer, {	 clearProps:"all"});
 		punchgs.TweenLite.set(inlayer, {	
@@ -1008,7 +1026,7 @@ var tpLayerTimelinesRev = new function(){
 											 fontStyle:deformidle["font-style"],
 											 textDecoration:deform["text-decoration"],
 											 borderColor:bordercolor,
-											 borderRadius:parseInt(deform["border-radius"][0],0)+"px "+parseInt(deform["border-radius"][1],0)+"px "+parseInt(deform["border-radius"][2],0)+"px "+parseInt(deform["border-radius"][3],0)+"px",
+											 borderRadius:deform["border-radius"][0]+" "+deform["border-radius"][1]+" "+deform["border-radius"][2]+" "+deform["border-radius"][3],
 											 borderWidth:parseInt(deform["border-width"],0)+"px",
 											 borderStyle:deform["border-style"],
 											 whiteSpace:u.getVal(params,"whitespace"),
@@ -2065,11 +2083,11 @@ var tpLayerTimelinesRev = new function(){
 		htmlSortbox += '		<span style="width:25px;border-right:1px solid #f1f1f1">';
 		htmlSortbox += '			<span class="till_slideend '+endslideclass+'" title="Snap to Slide End / Custom End" class="tipsy_enabled_top"><i class="eg-icon-back-in-time"></i><i class="eg-icon-download-2"></i></span>';
 		htmlSortbox += '		</span>';
-		htmlSortbox += '		<span class="sort-hover-part layer_sort_layer_text_field">';
-		htmlSortbox += '			<span class="sortbox_text"><i class="layertypeclass ';		
+		htmlSortbox += '		<span class="text-selectable sort-hover-part layer_sort_layer_text_field">';
+		htmlSortbox += '			<span class="text-selectable sortbox_text"><i class="layertypeclass ';		
 
 		quicksb += '<li id="layer_quicksort_'+serial+'" class="quicksortlayer ui-state-default">';
-		quicksb += '<div class="add-layer-button">'		
+		quicksb += '<div class="add-layer-button text-selectable">'		
 		quicksb += '<i class="';
 		switch (objLayer.type) {
 			case "text":
@@ -2088,7 +2106,7 @@ var tpLayerTimelinesRev = new function(){
 
 		htmlSortbox += '"></i>';
 		quicksb += '"></i>';
-		htmlSortbox += '				<input class="timer-layer-text" style="margin-top:-1px !important" type="text" enabled value="'+sortboxText + '">';
+		htmlSortbox += '				<input class="text-selectable timer-layer-text" style="margin-top:-1px !important" type="text" enabled value="'+sortboxText + '">';
 		quicksb += '				<span class="add-layer-txt">'+sortboxText + '</span>';
 		htmlSortbox += '			</span>';
 		htmlSortbox += '		</span>';
@@ -2149,7 +2167,7 @@ var tpLayerTimelinesRev = new function(){
 				i = b.find('i'),
 				p = b.closest('.quicksortlayer');
 
-			if (i.hasClass("eg-icon-eye")) {
+			if (p.hasClass("sortitem-hidden")) {
 				i.removeClass("eg-icon-eye").addClass("eg-icon-eye-off");
 			} else {
 				i.removeClass("eg-icon-eye-off").addClass("eg-icon-eye");
@@ -2706,10 +2724,11 @@ var tpLayerTimelinesRev = new function(){
 	var initSortbox = function(){
 
 		t.redrawSortbox();
+
 		//set the sortlist sortable
 		jQuery( ".sortlist ul" ).sortable({
 			axis:'y',
-			cancel:"#slide_in_sort",
+			cancel:"#slide_in_sort, input",
 			items:".sortablelayers",
 			connectWith:"#layers-right ul",
 			update: function(){
@@ -2719,13 +2738,15 @@ var tpLayerTimelinesRev = new function(){
 
 		//set click event
 		jQuery(".sortlist, #layers-right, .quick-layers-list").delegate("li","mousedown",function(){
-			if (jQuery(this).hasClass("ui-state-hover")) return false;
+			
+			if (jQuery(this).hasClass("ui-state-hover")) return true;
 			if (jQuery(this).hasClass("mastertimer-slide")) {
 				// SELECT THE SLIDE IN SORTS
 			} else {
 				var serial = u.getSerialFromSortID(this.id);
 				u.setLayerSelected(serial);
 			}
+			
 		});
 
 
@@ -2829,6 +2850,7 @@ var tpLayerTimelinesRev = new function(){
 			}
 
 		});
+
 	}
 
 
@@ -3013,8 +3035,10 @@ var tpLayerTimelinesRev = new function(){
 			sortItem.addClass("sortitem-hidden");
 		if (sortTimeItem)
 			sortTimeItem.addClass("sortitem-hidden");
-		if (quickItem)
+		if (quickItem) {
 			quickItem.addClass("sortitem-hidden");
+			quickItem.find('.eg-icon-eye').addClass("eg-icon-eye-off").removeClass('eg-icon-eye');
+		}
 	}
 
 	/**
@@ -3028,7 +3052,7 @@ var tpLayerTimelinesRev = new function(){
 			sortItem.removeClass("sortitem-hidden");
 		if (sortTimeItem)
 			sortTimeItem.removeClass("sortitem-hidden");
-		if (quickItem)
+		if (quickItem) 
 			quickItem.removeClass("sortitem-hidden");
 	}
 
@@ -3410,6 +3434,7 @@ var tpLayerTimelinesRev = new function(){
 
 			function findTransition() {
 				// FIND THE RIGHT TRANSITION PARAMETERS HERE
+				if (transitionsArray)
 				jQuery.each(transitionsArray,function(inde,trans) {
 					if (trans[0] == comingtransition || trans[8] == comingtransition) {
 						nexttrans = trans[1];
