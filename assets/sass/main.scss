@@ -39,6 +39,11 @@ body {
       background-image: url(../img/bg/page-blog.jpg);
     }
   }
+  &.page-template-page-subcat {
+    header {
+      background-image: url(../img/bg/category-subcat.jpg);
+    }
+  }
   &.page-template-page-cat {
     header {
       background-image: url(../img/bg/category-listing.jpg);
@@ -98,7 +103,7 @@ picture {
 .btn {
   font-family: $fosb;
   font-size: 14px !important;
-  line-height: 2.3 !important;
+  line-height: 1.8 !important;
 
   width: 100%;
   margin: 0 0 5px;
@@ -746,8 +751,8 @@ article {
     float: left;
 
     width: 190px;
-    margin: 0 0 25px;
-    margin: 0 9px;
+    min-height: 260px;
+    margin: 0 9px 10px;
 
     text-decoration: none;
     span {
