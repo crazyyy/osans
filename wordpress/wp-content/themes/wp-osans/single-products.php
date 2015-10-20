@@ -11,26 +11,6 @@
             <p>Мы свяжемся с Вами в течение 15 минут</p>
           </div><!-- /.product-additional -->
           <?php the_content(); ?>
-
-
-
-
-
-<?php
-
-if(get_field('cat-product') == "ibp")
-{
-  echo "string";
-}
-
-
-
-?>
-
-
-
-
-
         </article>
       <?php endwhile; else: ?>
         <article>
