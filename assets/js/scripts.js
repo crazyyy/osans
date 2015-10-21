@@ -19,7 +19,7 @@
 // Place any jQuery/helper plugins in here.
 
 // widget toggle open/close
-$('.widget_nav_menu .menu-item-has-children').click(function(){
+$('.widget_nav_menu .menu-item-closed').click(function(){
   event.preventDefault();
   $(this).toggleClass("menu-item-opened");
 });
