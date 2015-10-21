@@ -7,7 +7,9 @@
         <h1 class="single-title inner-title title3"><?php the_title(); ?></h1>
         <article id="post-<?php the_ID(); ?>" <?php post_class('select-equiper'); ?>>
           <div class="select-equiper-block">
-              <?php get_template_part('filter'); ?>
+              <?php include (TEMPLATEPATH . '/filter.php'); ?>
+
+
             <form action="Производитель" style="display: none;">
             <table>
               <tr>
@@ -104,6 +106,7 @@
 <!-- !!!!!!!!!!!!!! -->
 
               <?php
+
                 $args = array(
                     'post_type' => 'products',
                     'meta_query' => $meta_query,
