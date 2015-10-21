@@ -7,23 +7,23 @@
       </div><!-- /.container-descr -->
 
       <div class="equipment-list-container equipment-list-container-1 col-md-3">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-1.jpg" alt="">
-        <h4><a href="">Источники бесперебойного питания</a></h4>
+        <a href="/ibp.htm" title="Источники бесперебойного питания"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-1.jpg" alt=""></a>
+        <h4><a href="/ibp.htm">Источники бесперебойного питания</a></h4>
         <p>Высоконадежные системы резервного электропитания для любых технических задач</p>
       </div><!-- /.equipment-list-container -->
       <div class="equipment-list-container equipment-list-container-2 col-md-3">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-2.jpg" alt="">
-        <h4><a href="">Аккумуляторные батареи</a></h4>
+        <a href="/akb.htm" title="Аккумуляторные батареи"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-2.jpg" alt=""></a>
+        <h4><a href="/akb.htm">Аккумуляторные батареи</a></h4>
         <p>Для объектов с повышенными требованиями к энергоснабжению</p>
       </div><!-- /.equipment-list-container -->
       <div class="equipment-list-container equipment-list-container-3 col-md-3">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-3.jpg" alt="">
-        <h4><a href="">Дизельные электростанции</a></h4>
+        <a href="/dgu.htm" title="Дизельные электростанции"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-3.jpg" alt=""></a>
+        <h4><a href="/dgu.htm">Дизельные электростанции</a></h4>
         <p>Как небольшие установки, так и крупные энергетические станции</p>
       </div><!-- /.equipment-list-container -->
       <div class="equipment-list-container equipment-list-container-4 col-md-3">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-4.jpg" alt="">
-        <h4><a href="">Системы кондицинирования воздуха</a></h4>
+        <a href="/skv.htm" title="Системы кондицинирования воздуха"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-4.jpg" alt=""></a>
+        <h4><a href="/skv.htm">Системы кондицинирования воздуха</a></h4>
         <p>Качественные и надежные системы кондиционирования</p>
       </div><!-- /.equipment-list-container -->
 
@@ -32,13 +32,13 @@
     <article class="services ">
       <div class="row inner">
         <div class="selection-equipment col-md-6">
-          <h3><a href="">Подбор оборудования</a></h3>
-          <img src="<?php echo get_template_directory_uri(); ?>/img/content/select-equio.jpg" alt="">
+          <h3><a href="/podbor-oborudovaniya.htm">Подбор оборудования</a></h3>
+          <a href="/podbor-oborudovaniya.htm" title="Подбор оборудования"><img src="<?php echo get_template_directory_uri(); ?>/img/content/select-equio.jpg" alt=""></a>
           <p>На нашем сайте вы сможете быстро и удобно подорать всё необходимое оборудование</p>
         </div><!-- selection-equipment -->
         <div class="service-repair col-md-6">
-          <h3><a href="">Сервисное обслуживание</a></h3>
-          <img src="<?php echo get_template_directory_uri(); ?>/img/content/service-repair.jpg" alt="">
+          <h3><a href="/service.htm">Сервисное обслуживание</a></h3>
+          <a href="/service.htm" title="Сервисное обслуживание"><img src="<?php echo get_template_directory_uri(); ?>/img/content/service-repair.jpg" alt=""></a>
           <p>Мы предоставляем выгодные условия сервисного обслуживания и ремонта</p>
         </div><!-- service-repair -->
       </div><!-- /.row inner -->
@@ -50,10 +50,10 @@
         <p>В современном мире нельзя обойтись без электричества. Системы электроснабжения усложняются с каждым днем. Технический прогресс диктует необходимость выполнения всех работ связанных с электроэнергетикой только квалифицированными специалистами</p>
         <p>Наша компания – группа профессионалов в области энергетического инжиниринга. Мы успешно выполняем как весь комплекс работ, так и отдельные этапы по созданию систем электроснабжения.</p>
         <p>В настоящее время становится актуальной проблема перебоев и качества электроэнергии. Потребители электроэнергии становятся более требовательными к качеству электроэнергии.</p>
-        <a href="#" class="read-more">Подробнее о компании</a>
+        <a href="/about.htm" class="read-more">Подробнее о компании</a>
       </div><!-- /.col-md-8 about-company-content -->
       <div class="col-md-4 about-company-img">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/content/about-comp.jpg" alt="">
+        <a href="/about.htm" title="Подробнее о компании"><img src="<?php echo get_template_directory_uri(); ?>/img/content/about-comp.jpg" alt=""></a>
       </div><!-- /.col-md-4 about-company-img -->
     </article><!-- /.about-company row inner -->
 
