@@ -1,0 +1,1 @@
+<label for="product">Наименование товара</label>[text product id:product class:product]<label for="name">Ваше имя</label>[text name id:name class:name]<label for="phone">Ваш телефон</label>[text phone id:phone class:phone]<label for="textfields">Дополнительная информация</label>[textarea textfields id:textfields class:textfields]

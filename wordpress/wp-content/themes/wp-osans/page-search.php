@@ -7,7 +7,8 @@
         <h1 class="single-title inner-title title3"><?php the_title(); ?></h1>
         <article id="post-<?php the_ID(); ?>" <?php post_class('select-equiper'); ?>>
           <div class="select-equiper-block">
-            <form action="Производитель">
+              <?php get_template_part('filter'); ?>
+            <form action="Производитель" style="display: none;">
             <table>
               <tr>
                 <td>
@@ -101,7 +102,7 @@
           <div class="product-listing">
 
 <!-- !!!!!!!!!!!!!! -->
-              <?php get_template_part('filter'); ?>
+
               <?php
                 $args = array(
                     'post_type' => 'products',
