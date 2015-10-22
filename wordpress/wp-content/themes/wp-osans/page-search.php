@@ -133,7 +133,7 @@
                       </li><!-- /.product-item -->
                 <?php endforeach; ?>
                 </ul><!-- /.product-listing-container -->
-
+              <?php wp_reset_query(); ?>
 <!-- ./!!!!!!!!!!!!!! -->
 
 

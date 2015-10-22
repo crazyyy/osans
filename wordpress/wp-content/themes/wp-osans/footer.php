@@ -28,7 +28,6 @@
   <div class="modal-content-container">
     <h5 class="title24">Уточнить стоимость</h5>
     <?php echo do_shortcode('[contact-form-7 id="748" title="productsprice"]'); ?>
-    <a href='#' class='modalClose'>X</a>
   </div><!-- /.modal-content-container -->
 </div><!-- modal-content -->
 

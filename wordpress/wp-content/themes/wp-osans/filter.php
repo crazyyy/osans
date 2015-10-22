@@ -34,41 +34,59 @@ if ($p_type == 'ibp') {
     $ibp_worktime_max = isset($_REQUEST['ibp-worktime-max']) ? floatval($_REQUEST['ibp-worktime-max']) : $ibp_worktime_max_abs;
 
     ?>
-    <form id="ibp-form" method="post">
-        <div>
-            <select name="ibp-brand">
-                <option value="" <?php if ($_REQUEST['ibp-brand'] == '') echo 'selected';?>>Все производители</option>
-                <option value="AEG" <?php if ($_REQUEST['ibp-brand'] == 'AEG') echo 'selected';?>>AEG</option>
-                <option value="EATON" <?php if ($_REQUEST['ibp-brand'] == 'EATON') echo 'selected';?>>EATON</option>
-                <option value="General Electric" <?php if ($_REQUEST['ibp-brand'] == 'General Electric') echo 'selected';?>>General Electric</option>
-                <option value="Chloride" <?php if ($_REQUEST['ibp-brand'] == 'Chloride') echo 'selected';?>>Chloride</option>
-                <option value="APC" <?php if ($_REQUEST['ibp-brand'] == 'APC') echo 'selected';?>>APC</option>
-                <option value="VISION" <?php if ($_REQUEST['ibp-brand'] == 'VISION') echo 'selected';?>>VISION</option>
-            </select>
-        </div>
-        <div>Мощность ИБП (ВА) от
-            <input type="text" name="ibp-power-va-min" value="<?=$ibp_power_va_min;?>">
-             до
-            <input type="text" name="ibp-power-va-max" value="<?=$ibp_power_va_max;?>">
-        </div>
-        <div>Мощность ИБП (Вт) от
-            <input type="text" name="ibp-power-wt-min" value="<?=$ibp_power_wt_min;?>">
-            до
-            <input type="text" name="ibp-power-wt-max" value="<?=$ibp_power_wt_max;?>">
-        </div>
-        <div>Входное напряжение (В) от
-            <input type="text" name="ibp-input-u-min" value="<?=$ibp_input_u_min;?>">
-            до
-            <input type="text" name="ibp-input-u-max" value="<?=$ibp_input_u_max;?>">
-        </div>
-        <div>Время работы при 100% нагрузке от встроенных АКБ (мин) от
-            <input type="text" name="ibp-worktime-min" value="<?=$ibp_worktime_min;?>">
-            до
-            <input type="text" name="ibp-worktime-max" value="<?=$ibp_worktime_max;?>">
-        </div>
+
+
+    <form id="ibp-form" class="row" method="post">
+      <div class="col-md-12">
+        <select name="ibp-brand">
+          <option value="" <?php if ($_REQUEST['ibp-brand'] == '') echo 'selected';?>>Все производители</option>
+          <option value="AEG" <?php if ($_REQUEST['ibp-brand'] == 'AEG') echo 'selected';?>>AEG</option>
+          <option value="EATON" <?php if ($_REQUEST['ibp-brand'] == 'EATON') echo 'selected';?>>EATON</option>
+          <option value="General Electric" <?php if ($_REQUEST['ibp-brand'] == 'General Electric') echo 'selected';?>>General Electric</option>
+          <option value="Chloride" <?php if ($_REQUEST['ibp-brand'] == 'Chloride') echo 'selected';?>>Chloride</option>
+          <option value="APC" <?php if ($_REQUEST['ibp-brand'] == 'APC') echo 'selected';?>>APC</option>
+          <option value="VISION" <?php if ($_REQUEST['ibp-brand'] == 'VISION') echo 'selected';?>>VISION</option>
+        </select>
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Мощность ИБП (ВА)</span>
+        <label for="ibp-power-va-min">от</label>
+        <input type="text" name="ibp-power-va-min" id="ibp-power-va-min" value="<?=$ibp_power_va_min;?>">
+        <label for="ibp-power-va-max">до</label>
+        <input type="text" name="ibp-power-va-max" id="ibp-power-va-max" value="<?=$ibp_power_va_max;?>">
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Мощность ИБП (Вт)</span>
+        <label for="ibp-power-wt-min">от</label>
+        <input type="text" name="ibp-power-wt-min" id="ibp-power-wt-min" value="<?=$ibp_power_wt_min;?>">
+        <label for="ibp-power-wt-max">до</label>
+        <input type="text" name="ibp-power-wt-max" id="ibp-power-wt-max" value="<?=$ibp_power_wt_max;?>">
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Входное напряжение (В)</span>
+        <label for="ibp-input-u-min">от</label>
+        <input type="text" name="ibp-input-u-min" id="ibp-input-u-min" value="<?=$ibp_input_u_min;?>">
+        <label for="ibp-input-u-max">до</label>
+        <input type="text" name="ibp-input-u-max" id="ibp-input-u-max" value="<?=$ibp_input_u_max;?>">
+      </div>
+
+      <div class="col-md-6 pretty-selectors">
+        <span>Время работы при 100% нагрузке от встроенных АКБ (мин)</span>
+        <label for="ibp-worktime-min">от</label>
+        <input type="text" name="ibp-worktime-min" id="ibp-worktime-min" value="<?=$ibp_worktime_min;?>">
+        <label for="ibp-worktime-max">до</label>
+        <input type="text" name="ibp-worktime-max" id="ibp-worktime-max" value="<?=$ibp_worktime_max;?>">
+      </div>
+
+      <div class="col-md-4">
         <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
+      </div>
+      <div class="col-md-4 col-md-offset-4">
         <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
+      </div>
     </form>
+
+
 <?php
     $meta_query = array(
         'relation' => 'AND',
@@ -180,31 +198,46 @@ if ($p_type == 'akb') {
 
 
     ?>
-    <form id="akb-form" method="post">
-        <div>
-            <select name="akb-brand">
-                <option value="" <?php if ($_REQUEST['akb-brand'] == '') echo 'selected';?>>Все производители</option>
-            </select>
-        </div>
-        <div>Номинальное напряжение (В) от
-            <input type="text" name="akb-nominal-u-min" value="<?=$akb_nominal_u_min;?>">
-            до
-            <input type="text" name="akb-nominal-u-max" value="<?=$akb_nominal_u_max;?>">
-        </div>
-        <div>Емкость С10 1,8В/эл, 20°С, (Ач) от
-            <input type="text" name="akb-capacity-min" value="<?=$akb_capacity_min;?>">
-            до
-            <input type="text" name="akb-capacity-max" value="<?=$akb_capacity_max;?>">
-        </div>
-        <div>Ток разряда при I10, (А) от
-            <input type="text" name="akb-final-i-min" value="<?=$akb_final_i_min;?>">
-            до
-            <input type="text" name="akb-final-i-max" value="<?=$akb_final_i_max;?>">
-        </div>
 
+
+    <form id="akb-form" class="row" method="post">
+      <div class="col-md-12">
+        <select name="akb-brand">
+          <option value="" <?php if ($_REQUEST['akb-brand'] == '') echo 'selected';?>>Все производители</option>
+        </select>
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Номинальное напряжение (В)</span>
+        <label for="akb-nominal-u-min">от</label>
+        <input type="text" name="akb-nominal-u-min" id="akb-nominal-u-min" value="<?=$akb_nominal_u_min;?>">
+        <label for="akb-nominal-u-max">до</label>
+        <input type="text" name="akb-nominal-u-max" id="akb-nominal-u-max" value="<?=$akb_nominal_u_max;?>">
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Емкость С10 1,8В/эл, 20°С, (Ач)</span>
+        <label for="akb-capacity-min">от</label>
+        <input type="text" name="akb-capacity-min" id="akb-capacity-min" value="<?=$akb_capacity_min;?>">
+        <label for="akb-capacity-max">до</label>
+        <input type="text" name="akb-capacity-max" id="akb-capacity-max" value="<?=$akb_capacity_max;?>">
+      </div>
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Ток разряда при I10, (А)</span>
+          <label for="akb-final-i-min">от</label>
+          <input type="text" name="akb-final-i-min" id="akb-final-i-min" value="<?=$akb_final_i_min;?>">
+          <label for="akb-final-i-max">до</label>
+          <input type="text" name="akb-final-i-max" id="akb-final-i-max" value="<?=$akb_final_i_max;?>">
+        </div>
+      </div><!-- nopadding -->
+
+      <div class="col-md-4">
         <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
+      </div>
+      <div class="col-md-4 col-md-offset-4">
         <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
+      </div>
     </form>
+
     <?php
     $meta_query = array(
         'relation' => 'AND',
@@ -301,37 +334,53 @@ if ($p_type == 'dgu') {
     $dgu_fuel_capacity_max = isset($_REQUEST['dgu-fuel-capacity-max']) ? floatval($_REQUEST['dgu-fuel-capacity-max']) : $dgu_fuel_capacity_max_abs;
 
     ?>
-    <form id="dgu-form" method="post">
-        <div>
+
+    <form id="dgu-form" class="row" method="post">
+      <div class="col-md-12">
         <select name="dgu-brand">
-            <option value="" <?php if ($_REQUEST['dgu-brand'] == '') echo 'selected';?>>Все производители</option>
-            <option value="Gesan" <?php if ($_REQUEST['dgu-brand'] == 'Gesan') echo 'selected';?>>Gesan</option>
-            <option value="FG Wilson" <?php if ($_REQUEST['dgu-brand'] == 'FG Wilson') echo 'selected';?>>FG Wilson</option>
+          <option value="" <?php if ($_REQUEST['dgu-brand'] == '') echo 'selected';?>>Все производители</option>
+          <option value="Gesan" <?php if ($_REQUEST['dgu-brand'] == 'Gesan') echo 'selected';?>>Gesan</option>
+          <option value="FG Wilson" <?php if ($_REQUEST['dgu-brand'] == 'FG Wilson') echo 'selected';?>>FG Wilson</option>
         </select>
-        </div>
-        <div>Основная мощность (кВА/кВт) от
-            <input type="text" name="dgu-main-power-min" value="<?=$dgu_main_power_min;?>">
-            до
-            <input type="text" name="dgu-main-power-max" value="<?=$dgu_main_power_max;?>">
-        </div>
-        <div>Резервная мощность (кВА/кВт) от
-            <input type="text" name="dgu-reserve-power-min" value="<?=$dgu_reserve_power_min;?>">
-            до
-            <input type="text" name="dgu-reserve-power-max" value="<?=$dgu_reserve_power_max;?>">
-        </div>
-        <div>Расход топлива (л/час) от
-            <input type="text" name="dgu-fuel-consumption-min" value="<?=$dgu_fuel_consumption_min;?>">
-            до
-            <input type="text" name="dgu-fuel-consumption-max" value="<?=$dgu_fuel_consumption_max;?>">
-        </div>
-        <div>Объем встроенного бака (л) от
-            <input type="text" name="dgu-fuel-capacity-min" value="<?=$dgu_fuel_capacity_min;?>">
-            до
-            <input type="text" name="dgu-fuel-capacity-max" value="<?=$dgu_fuel_capacity_max;?>">
-        </div>
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Основная мощность (кВА/кВт)</span>
+        <label for="dgu-main-power-min">от</label>
+        <input type="text" name="dgu-main-power-min" id="dgu-main-power-min" value="<?=$dgu_main_power_min;?>">
+        <label for="dgu-main-power-max">до</label>
+        <input type="text" name="dgu-main-power-max" id="dgu-main-power-max" value="<?=$dgu_main_power_max;?>">
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Резервная мощность (кВА/кВт)</span>
+        <label for="dgu-reserve-power-min">от</label>
+        <input type="text" name="dgu-reserve-power-min" id="dgu-reserve-power-min" value="<?=$dgu_reserve_power_min;?>">
+        <label for="dgu-reserve-power-max">до</label>
+        <input type="text" name="dgu-reserve-power-max" id="dgu-reserve-power-max" value="<?=$dgu_reserve_power_max;?>">
+      </div>
+      <div class="col-md-6 pretty-selectors">
+        <span>Расход топлива (л/час)</span>
+        <label for="dgu-fuel-consumption-min">от</label>
+        <input type="text" name="dgu-fuel-consumption-min" id="dgu-fuel-consumption-min" value="<?=$dgu_fuel_consumption_min;?>">
+        <label for="dgu-fuel-consumption-max">до</label>
+        <input type="text" name="dgu-fuel-consumption-max" id="dgu-fuel-consumption-max" value="<?=$dgu_fuel_consumption_max;?>">
+      </div>
+
+      <div class="col-md-6 pretty-selectors">
+        <span>Объем встроенного бака (л)</span>
+        <label for="dgu-fuel-capacity-mi">от</label>
+        <input type="text" name="dgu-fuel-capacity-min" id="dgu-fuel-capacity-min" value="<?=$dgu_fuel_capacity_min;?>">
+        <label for="dgu-fuel-capacity-max">до</label>
+        <input type="text" name="dgu-fuel-capacity-max" id="dgu-fuel-capacity-max" value="<?=$dgu_fuel_capacity_max;?>">
+      </div>
+
+      <div class="col-md-4">
         <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
+      </div>
+      <div class="col-md-4 col-md-offset-4">
         <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
+      </div>
     </form>
+
     <?php
     $meta_query = array(
         'relation' => 'AND',

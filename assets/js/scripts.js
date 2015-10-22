@@ -63,11 +63,12 @@ this.d.container.hide().remove();this.d.overlay.hide();this.d.iframe&&this.d.ifr
 jQuery(function ($) {
   // Load dialog on page load
   //$('#basic-modal-content').modal();
-
-  // Load dialog on click
+  var inputProduct = $('#product');
   $('.btn-order').click(function (e) {
+    var productName = $(this).attr('data-produt-name');
+    // alert(productName);
+    inputProduct.val(productName);
     $('#modal-content').modal({
-
     });
     return false;
   });
