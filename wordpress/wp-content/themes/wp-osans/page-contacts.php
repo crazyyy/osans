@@ -32,9 +32,4 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/gmap.js"></script>
   </div><!-- /.row mapser -->
-  <div class="row inner">
-    <div class="col-md-12 breads">
-      <?php if (function_exists('dimox_breadcrumbs')) dimox_breadcrumbs(); ?>
-    </div><!-- /.col-12-breads -->
-  </div><!-- row -->
 <?php get_footer(); ?>

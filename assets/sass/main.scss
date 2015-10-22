@@ -10,10 +10,10 @@
 @import 'import/tables';
 @import 'import/mixin';
 @import 'import/wordpress';
-/* @import 'modal/basic'; */
 @import 'modal/basic_ie';
 @import 'sprite';
 @import 'font_fontawesome';
+@import 'gort';
 
 
 body {
@@ -27,7 +27,7 @@ body {
 
   -webkit-font-smoothing: antialiased;
   header {
-    background-image: url(../img/bg/page-blog.jpg);
+    background-image: url(../img/bg/category-default.jpg);
   }
   &.home {
     header {
@@ -1128,6 +1128,9 @@ article {
     a {
       color: $gray;
       border-bottom: 1px solid $red;
+      &:hover {
+        color: $red;
+      }
     }
     &:after {
       position: absolute;

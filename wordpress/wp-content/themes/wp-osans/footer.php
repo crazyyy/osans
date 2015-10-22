@@ -1,3 +1,4 @@
+    <?php get_template_part('include-breadcrumbs'); ?>
   </section><!-- /section -->
 </div><!-- /wrapper -->
 
@@ -22,18 +23,17 @@
   </div><!-- /.inner -->
 </footer>
 
-  <!-- modal content -->
-  <div id="modal-content">
-    <div class="modal-content-container">
-      <h5 class="title24">Уточнить стоимость</h5>
-      <?php echo do_shortcode('[contact-form-7 id="748" title="productsprice"]'); ?>
-      <a href='#' class='modalClose'>X</a>
-    </div><!-- /.modal-content-container -->
-  </div><!-- modal-content -->
+<!-- modal content -->
+<div id="modal-content">
+  <div class="modal-content-container">
+    <h5 class="title24">Уточнить стоимость</h5>
+    <?php echo do_shortcode('[contact-form-7 id="748" title="productsprice"]'); ?>
+    <a href='#' class='modalClose'>X</a>
+  </div><!-- /.modal-content-container -->
+</div><!-- modal-content -->
 
-
-    <?php wp_footer(); ?>
-    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
+  <?php wp_footer(); ?>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
 
 </body>
 </html>

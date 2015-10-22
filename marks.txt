@@ -18,9 +18,6 @@ http://take.ms/5SkdU - кое-где слипаются
 http://take.ms/rOn3LB - тут нужно форматирование текста (списки, H2-4, отступы, и т.д.) макет nord-energo_goods_page-single.psd
 
 http://take.ms/x7VXbh - в таблицах тоже утступы
-
-
-
 для продукции можно как-то сделать, чтоб картинка в шапке была такая-же, как для категории, чтоб вручную не добавлять шапку для каждого товара?
 
 Пейдж
@@ -32,8 +29,6 @@ http://osans.dev/about.htm - тоже форматирование текста
 в хедере, как в подкатегории http://take.ms/cdyV2
 [12:46:32 | Змінено в 12:46:41] Дмитрий Александрович: понял, другой посмотр
 
-
-
 у страниц подбора оборудования не включается шапка. стоит /page-blog.jpg
 http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-akb.htm
 http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-dgu.htm
@@ -41,9 +36,8 @@ http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-ibp.htm
 http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-skv.htm
 
 можешь у инпутов ввода текста убрать скругление углов?
-
+	
 сделай просто чтоб текст Подбор оборудования красным становился по ховеру
-
 
 еще забыл. будешь делать: можешь прилепить крошки к футеру http://take.ms/6yoQG, растянуть по ширине, как в котактах?
 
