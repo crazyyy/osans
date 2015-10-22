@@ -1,30 +1,3 @@
-// Avoid `console` errors in browsers that lack a console.
-(function () {
-  var method;
-  var noop = function () {};
-  var methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'];
-  var length = methods.length;
-  var console = (window.console = window.console || {});
-
-  while (length--) {
-    method = methods[length];
-
-    // Only stub undefined methods.
-    if (!console[method]) {
-        console[method] = noop;
-    }
-}
-}());
-
-// Place any jQuery/helper plugins in here.
-
-$(".widget_nav_menu a[href='#']").removeAttr("href").css("cursor","pointer");
-
-// widget toggle open/close
-$('.widget_nav_menu .menu-item-closed').click(function(){
-  $(this).toggleClass("menu-item-opened");
-});
-
 /*
  * SimpleModal 1.4.4 - jQuery Plugin
  * http://simplemodal.com/
@@ -51,27 +24,3 @@ f>d?d:this.o.minWidth&&"auto"!==c&&f<c?c:f:c;this.d.container.css({height:b,widt
 a=e+a;this.d.container.css({left:b,top:a})},watchTab:function(a){if(0<b(a.target).parents(".simplemodal-container").length){if(this.inputs=b(":input:enabled:visible:first, :input:enabled:visible:last",this.d.data[0]),!a.shiftKey&&a.target===this.inputs[this.inputs.length-1]||a.shiftKey&&a.target===this.inputs[0]||0===this.inputs.length)a.preventDefault(),this.focus(a.shiftKey?"last":"first")}else a.preventDefault(),this.focus()},open:function(){this.d.iframe&&this.d.iframe.show();b.isFunction(this.o.onOpen)?
 this.o.onOpen.apply(this,[this.d]):(this.d.overlay.show(),this.d.container.show(),this.d.data.show());this.o.focus&&this.focus();this.bindEvents()},close:function(){if(!this.d.data)return!1;this.unbindEvents();if(b.isFunction(this.o.onClose)&&!this.occb)this.occb=!0,this.o.onClose.apply(this,[this.d]);else{if(this.d.placeholder){var a=b("#simplemodal-placeholder");this.o.persist?a.replaceWith(this.d.data.removeClass("simplemodal-data").css("display",this.display)):(this.d.data.hide().remove(),a.replaceWith(this.d.orig))}else this.d.data.hide().remove();
 this.d.container.hide().remove();this.d.overlay.hide();this.d.iframe&&this.d.iframe.hide().remove();this.d.overlay.remove();this.d={}}}}});
-/*
- * SimpleModal Basic Modal Dialog
- * http://simplemodal.com
- *
- * Copyright (c) 2013 Eric Martin - http://ericmmartin.com
- *
- * Licensed under the MIT license:
- *   http://www.opensource.org/licenses/mit-license.php
- */
-
-jQuery(function ($) {
-  // Load dialog on page load
-  //$('#basic-modal-content').modal();
-  var inputProduct = $('#product');
-  $('.btn-order').click(function (e) {
-    var productName = $(this).attr('data-produt-name');
-    // alert(productName);
-    inputProduct.val(productName);
-    $('#modal-content').modal({
-      closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>"
-    });
-    return false;
-  });
-});

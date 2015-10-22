@@ -934,7 +934,8 @@ article {
 }
 .product-additional {
   float: right;
-
+position: relative;
+z-index: 5;
   width: 250px;
   margin: 0 0 20px 30px;
   img {
@@ -1408,7 +1409,7 @@ article {
       @extend .dblock;
       @include sprite($sprite-modal-close);
       &:hover {
-        @include sprite($sprite-widgmodal-close-hover);
+        @include sprite($sprite-modal-close-hover);
       }
     }
   }
