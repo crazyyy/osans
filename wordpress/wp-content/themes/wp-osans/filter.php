@@ -13,28 +13,39 @@ if ($currentID == 725) $p_type = 'skv';
 
 if ($p_type == 'ibp') {
 
-    $ibp_power_va_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-va-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_power_va_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-va-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_power_va_min = isset($_REQUEST['ibp-power-va-min']) ? intval($_REQUEST['ibp-power-va-min']) : $ibp_power_va_min_abs;
-    $ibp_power_va_max = isset($_REQUEST['ibp-power-va-max']) ? intval($_REQUEST['ibp-power-va-max']) : $ibp_power_va_max_abs;
+    $ibp_power_va_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-va-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_power_va_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-va-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_power_va_min = isset($_REQUEST['ibp-power-va-min']) ? floatval($_REQUEST['ibp-power-va-min']) : $ibp_power_va_min_abs;
+    $ibp_power_va_max = isset($_REQUEST['ibp-power-va-max']) ? floatval($_REQUEST['ibp-power-va-max']) : $ibp_power_va_max_abs;
 
-    $ibp_power_wt_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-wt-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_power_wt_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-wt-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_power_wt_min = isset($_REQUEST['ibp-power-wt-min']) ? intval($_REQUEST['ibp-power-wt-min']) : $ibp_power_wt_min_abs;
-    $ibp_power_wt_max = isset($_REQUEST['ibp-power-wt-max']) ? intval($_REQUEST['ibp-power-wt-max']) : $ibp_power_wt_max_abs;
+    $ibp_power_wt_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-wt-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_power_wt_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-power-wt-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_power_wt_min = isset($_REQUEST['ibp-power-wt-min']) ? floatval($_REQUEST['ibp-power-wt-min']) : $ibp_power_wt_min_abs;
+    $ibp_power_wt_max = isset($_REQUEST['ibp-power-wt-max']) ? floatval($_REQUEST['ibp-power-wt-max']) : $ibp_power_wt_max_abs;
 
-    $ibp_input_u_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-input-u-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_input_u_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-input-u-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_input_u_min = isset($_REQUEST['ibp-input-u-min']) ? intval($_REQUEST['ibp-input-u-min']) : $ibp_input_u_min_abs;
-    $ibp_input_u_max = isset($_REQUEST['ibp-input-u-max']) ? intval($_REQUEST['ibp-input-u-max']) : $ibp_input_u_max_abs;
+    $ibp_input_u_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-input-u-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_input_u_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-input-u-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_input_u_min = isset($_REQUEST['ibp-input-u-min']) ? floatval($_REQUEST['ibp-input-u-min']) : $ibp_input_u_min_abs;
+    $ibp_input_u_max = isset($_REQUEST['ibp-input-u-max']) ? floatval($_REQUEST['ibp-input-u-max']) : $ibp_input_u_max_abs;
 
-    $ibp_worktime_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-worktime-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_worktime_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-worktime-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $ibp_worktime_min = isset($_REQUEST['ibp-worktime-min']) ? intval($_REQUEST['ibp-worktime-min']) : $ibp_worktime_min_abs;
-    $ibp_worktime_max = isset($_REQUEST['ibp-worktime-max']) ? intval($_REQUEST['ibp-worktime-max']) : $ibp_worktime_max_abs;
+    $ibp_worktime_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-worktime-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_worktime_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-worktime-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $ibp_worktime_min = isset($_REQUEST['ibp-worktime-min']) ? floatval($_REQUEST['ibp-worktime-min']) : $ibp_worktime_min_abs;
+    $ibp_worktime_max = isset($_REQUEST['ibp-worktime-max']) ? floatval($_REQUEST['ibp-worktime-max']) : $ibp_worktime_max_abs;
 
     ?>
     <form id="ibp-form" method="post">
+        <div>
+            <select name="ibp-brand">
+                <option value="" <?php if ($_REQUEST['ibp-brand'] == '') echo 'selected';?>>Все производители</option>
+                <option value="AEG" <?php if ($_REQUEST['ibp-brand'] == 'AEG') echo 'selected';?>>AEG</option>
+                <option value="EATON" <?php if ($_REQUEST['ibp-brand'] == 'EATON') echo 'selected';?>>EATON</option>
+                <option value="General Electric" <?php if ($_REQUEST['ibp-brand'] == 'General Electric') echo 'selected';?>>General Electric</option>
+                <option value="Chloride" <?php if ($_REQUEST['ibp-brand'] == 'Chloride') echo 'selected';?>>Chloride</option>
+                <option value="APC" <?php if ($_REQUEST['ibp-brand'] == 'APC') echo 'selected';?>>APC</option>
+                <option value="VISION" <?php if ($_REQUEST['ibp-brand'] == 'VISION') echo 'selected';?>>VISION</option>
+            </select>
+        </div>
         <div>Мощность ИБП (ВА) от
             <input type="text" name="ibp-power-va-min" value="<?=$ibp_power_va_min;?>">
              до
@@ -138,29 +149,43 @@ if ($p_type == 'ibp') {
             )
         )
     );
+    if (isset($_REQUEST['ibp-brand']) && $_REQUEST['ibp-brand'] != '') {
+        $brand_query = array(
+            array(
+                'key' => 'ibp-brand',
+                'value' => $_REQUEST['ibp-brand']
+            )
+        );
+        array_push($meta_query, $brand_query);
+    }
 }
 
 
 if ($p_type == 'akb') {
 
-    $akb_nominal_u_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-nominal-u-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $akb_nominal_u_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-nominal-u-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $akb_nominal_u_min = isset($_REQUEST['akb-nominal-u-min']) ? intval($_REQUEST['akb-nominal-u-min']) : $akb_nominal_u_min_abs;
-    $akb_nominal_u_max = isset($_REQUEST['akb-nominal-u-max']) ? intval($_REQUEST['akb-nominal-u-max']) : $akb_nominal_u_max_abs;
+    $akb_nominal_u_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-nominal-u-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $akb_nominal_u_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-nominal-u-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $akb_nominal_u_min = isset($_REQUEST['akb-nominal-u-min']) ? floatval($_REQUEST['akb-nominal-u-min']) : $akb_nominal_u_min_abs;
+    $akb_nominal_u_max = isset($_REQUEST['akb-nominal-u-max']) ? floatval($_REQUEST['akb-nominal-u-max']) : $akb_nominal_u_max_abs;
 
-    $akb_capacity_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-capacity-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $akb_capacity_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-capacity-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $akb_capacity_min = isset($_REQUEST['akb-capacity-min']) ? intval($_REQUEST['akb-capacity-min']) : $akb_capacity_min_abs;
-    $akb_capacity_max = isset($_REQUEST['akb-capacity-max']) ? intval($_REQUEST['akb-capacity-max']) : $akb_capacity_max_abs;
+    $akb_capacity_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-capacity-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $akb_capacity_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-capacity-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $akb_capacity_min = isset($_REQUEST['akb-capacity-min']) ? floatval($_REQUEST['akb-capacity-min']) : $akb_capacity_min_abs;
+    $akb_capacity_max = isset($_REQUEST['akb-capacity-max']) ? floatval($_REQUEST['akb-capacity-max']) : $akb_capacity_max_abs;
 
-    $akb_final_i_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-final-i-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $akb_final_i_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-final-i-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $akb_final_i_min = isset($_REQUEST['akb-final-i-min']) ? intval($_REQUEST['akb-final-i-min']) : $akb_final_i_min_abs;
-    $akb_final_i_max = isset($_REQUEST['akb-final-i-max']) ? intval($_REQUEST['akb-final-i-max']) : $akb_final_i_max_abs;
+    $akb_final_i_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-final-i-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $akb_final_i_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-final-i-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $akb_final_i_min = isset($_REQUEST['akb-final-i-min']) ? floatval($_REQUEST['akb-final-i-min']) : $akb_final_i_min_abs;
+    $akb_final_i_max = isset($_REQUEST['akb-final-i-max']) ? floatval($_REQUEST['akb-final-i-max']) : $akb_final_i_max_abs;
 
 
     ?>
     <form id="akb-form" method="post">
+        <div>
+            <select name="akb-brand">
+                <option value="" <?php if ($_REQUEST['akb-brand'] == '') echo 'selected';?>>Все производители</option>
+            </select>
+        </div>
         <div>Номинальное напряжение (В) от
             <input type="text" name="akb-nominal-u-min" value="<?=$akb_nominal_u_min;?>">
             до
@@ -241,33 +266,49 @@ if ($p_type == 'akb') {
             )
         )
     );
+    if (isset($_REQUEST['akb-brand']) && $_REQUEST['akb-brand'] != '') {
+        $brand_query = array(
+            array(
+                'key' => 'akb-brand',
+                'value' => $_REQUEST['akb-brand']
+            )
+        );
+        array_push($meta_query, $brand_query);
+    }
 }
 
 
 if ($p_type == 'dgu') {
 
-    $dgu_main_power_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-main-power-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_main_power_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-main-power-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_main_power_min = isset($_REQUEST['dgu-main-power-min']) ? intval($_REQUEST['dgu-main-power-min']) : $dgu_main_power_min_abs;
-    $dgu_main_power_max = isset($_REQUEST['dgu-main-power-max']) ? intval($_REQUEST['dgu-main-power-max']) : $dgu_main_power_max_abs;
+    $dgu_main_power_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-main-power-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_main_power_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-main-power-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_main_power_min = isset($_REQUEST['dgu-main-power-min']) ? floatval($_REQUEST['dgu-main-power-min']) : $dgu_main_power_min_abs;
+    $dgu_main_power_max = isset($_REQUEST['dgu-main-power-max']) ? floatval($_REQUEST['dgu-main-power-max']) : $dgu_main_power_max_abs;
 
-    $dgu_reserve_power_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-reserve-power-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_reserve_power_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-reserve-power-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_reserve_power_min = isset($_REQUEST['dgu-reserve-power-min']) ? intval($_REQUEST['dgu-reserve-power-min']) : $dgu_reserve_power_min_abs;
-    $dgu_reserve_power_max = isset($_REQUEST['dgu-reserve-power-max']) ? intval($_REQUEST['dgu-reserve-power-max']) : $dgu_reserve_power_max_abs;
+    $dgu_reserve_power_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-reserve-power-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_reserve_power_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-reserve-power-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_reserve_power_min = isset($_REQUEST['dgu-reserve-power-min']) ? floatval($_REQUEST['dgu-reserve-power-min']) : $dgu_reserve_power_min_abs;
+    $dgu_reserve_power_max = isset($_REQUEST['dgu-reserve-power-max']) ? floatval($_REQUEST['dgu-reserve-power-max']) : $dgu_reserve_power_max_abs;
 
-    $dgu_fuel_consumption_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-consumption-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_fuel_consumption_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-consumption-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_fuel_consumption_min = isset($_REQUEST['dgu-fuel-consumption-min']) ? intval($_REQUEST['dgu-fuel-consumption-min']) : $dgu_fuel_consumption_min_abs;
-    $dgu_fuel_consumption_max = isset($_REQUEST['dgu-fuel-consumption-max']) ? intval($_REQUEST['dgu-fuel-consumption-max']) : $dgu_fuel_consumption_max_abs;
+    $dgu_fuel_consumption_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-consumption-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_fuel_consumption_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-consumption-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_fuel_consumption_min = isset($_REQUEST['dgu-fuel-consumption-min']) ? floatval($_REQUEST['dgu-fuel-consumption-min']) : $dgu_fuel_consumption_min_abs;
+    $dgu_fuel_consumption_max = isset($_REQUEST['dgu-fuel-consumption-max']) ? floatval($_REQUEST['dgu-fuel-consumption-max']) : $dgu_fuel_consumption_max_abs;
 
-    $dgu_fuel_capacity_min_abs = $wpdb->get_var("SELECT MIN(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-capacity-min' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_fuel_capacity_max_abs = $wpdb->get_var("SELECT MAX(m.meta_value + 0.0) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-capacity-max' AND m.post_id=p.ID AND p.post_status='publish'");
-    $dgu_fuel_capacity_min = isset($_REQUEST['dgu-fuel-capacity-min']) ? intval($_REQUEST['dgu-fuel-capacity-min']) : $dgu_fuel_capacity_min_abs;
-    $dgu_fuel_capacity_max = isset($_REQUEST['dgu-fuel-capacity-max']) ? intval($_REQUEST['dgu-fuel-capacity-max']) : $dgu_fuel_capacity_max_abs;
+    $dgu_fuel_capacity_min_abs = $wpdb->get_var("SELECT MIN(FLOOR(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-capacity-min' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_fuel_capacity_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-capacity-max' AND m.post_id=p.ID AND p.post_status='publish'");
+    $dgu_fuel_capacity_min = isset($_REQUEST['dgu-fuel-capacity-min']) ? floatval($_REQUEST['dgu-fuel-capacity-min']) : $dgu_fuel_capacity_min_abs;
+    $dgu_fuel_capacity_max = isset($_REQUEST['dgu-fuel-capacity-max']) ? floatval($_REQUEST['dgu-fuel-capacity-max']) : $dgu_fuel_capacity_max_abs;
 
     ?>
     <form id="dgu-form" method="post">
+        <div>
+        <select name="dgu-brand">
+            <option value="" <?php if ($_REQUEST['dgu-brand'] == '') echo 'selected';?>>Все производители</option>
+            <option value="Gesan" <?php if ($_REQUEST['dgu-brand'] == 'Gesan') echo 'selected';?>>Gesan</option>
+            <option value="FG Wilson" <?php if ($_REQUEST['dgu-brand'] == 'FG Wilson') echo 'selected';?>>FG Wilson</option>
+        </select>
+        </div>
         <div>Основная мощность (кВА/кВт) от
             <input type="text" name="dgu-main-power-min" value="<?=$dgu_main_power_min;?>">
             до
@@ -371,4 +412,13 @@ if ($p_type == 'dgu') {
             )
         )
     );
+    if (isset($_REQUEST['dgu-brand']) && $_REQUEST['dgu-brand'] != '') {
+        $brand_query = array(
+            array(
+                'key' => 'dgu-brand',
+                'value' => $_REQUEST['dgu-brand']
+            )
+        );
+        array_push($meta_query, $brand_query);
+    }
 }

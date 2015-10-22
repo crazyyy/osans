@@ -19,6 +19,8 @@ http://take.ms/rOn3LB - тут нужно форматирование текста (списки, H2-4, отступы, 
 
 http://take.ms/x7VXbh - в таблицах тоже утступы
 
+
+
 для продукции можно как-то сделать, чтоб картинка в шапке была такая-же, как для категории, чтоб вручную не добавлять шапку для каждого товара?
 
 Пейдж
@@ -32,8 +34,22 @@ http://osans.dev/about.htm - тоже форматирование текста
 
 
 
+у страниц подбора оборудования не включается шапка. стоит /page-blog.jpg
+http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-akb.htm
+http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-dgu.htm
+http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-ibp.htm
+http://nordenergo.dimcheg.ru/podbor-oborudovaniya/podbor-skv.htm
+
+можешь у инпутов ввода текста убрать скругление углов?
+
+сделай просто чтоб текст Подбор оборудования красным становился по ховеру
+
+
+еще забыл. будешь делать: можешь прилепить крошки к футеру http://take.ms/6yoQG, растянуть по ширине, как в котактах?
+
 
 http://take.ms/XjcaD - в категории не хватает названия в шапке
 -- допполем якщо є - значит є
 http://take.ms/IZjpf - для этого можно ховер сделать?
 -- да, але я в слоях не знайшов, правда я не всі макети передивлявся
+
