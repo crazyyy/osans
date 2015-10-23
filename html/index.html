@@ -14,7 +14,6 @@
 
   <!-- icons -->
   <link href="favicon.ico" rel="shortcut icon">
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
   <!-- css + javascript -->
   <link rel="stylesheet" href="style.css" media="all">
@@ -102,10 +101,24 @@
 
 
 
-      <label for="amount">Price range:</label>
-      <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
-<div id="slider-range"></div>
+
+
+
+
+<div class="example">
+
+  <div id="html5" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
+  </div>
+
+  <select id="input-select"></select>
+  <input type="number" id="input-number">
+
+</div><!-- example -->
+
+
+
+
 
 
       </div>
@@ -117,26 +130,57 @@
 
 
   <script src="js/jquery.js"></script>
-  <script src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/nouislider.min.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
 
+<script>
+var select = document.getElementById('input-select');
 
-  <script>
-  $(function() {
-    $( "#slider-range" ).slider({
-      range: true,
-      min: 0,
-      max: 500,
-      values: [ 75, 300 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-      }
-    });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-  });
-  </script>
+// Append the option elements
+for ( var i = -20; i <= 40; i++ ){
+
+  var option = document.createElement("option");
+    option.text = i;
+    option.value = i;
+
+  select.appendChild(option);
+}
+</script>
+<script>
+var html5Slider = document.getElementById('html5');
+
+noUiSlider.create(html5Slider, {
+  start: [ 10, 30 ],
+  connect: true,
+  range: {
+    'min': -20,
+    'max': 40
+  }
+});
+</script>
+<script>
+var inputNumber = document.getElementById('input-number');
+
+html5Slider.noUiSlider.on('update', function( values, handle ) {
+
+  var value = values[handle];
+
+  if ( handle ) {
+    inputNumber.value = value;
+  } else {
+    select.value = Math.round(value);
+  }
+});
+
+select.addEventListener('change', function(){
+  html5Slider.noUiSlider.set([this.value, null]);
+});
+
+inputNumber.addEventListener('change', function(){
+  html5Slider.noUiSlider.set([null, this.value]);
+});
+</script>
 
 
 
