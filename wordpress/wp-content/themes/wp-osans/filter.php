@@ -817,14 +817,6 @@ if ($p_type == 'dgu') {
 
 
 
-
-
-
-
-
-
-
-
     <?php
     $meta_query = array(
         'relation' => 'AND',
