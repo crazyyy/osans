@@ -134,11 +134,11 @@ if ($p_type == 'ibp') {
       });
 
       ibpPowerVAMax.addEventListener('change', function(){
-          ibpPowerVA.noUiSlider.set([this.value, null]);
+        ibpPowerVA.noUiSlider.set([null, this.value]);
       });
 
       ibpPowerVAMin.addEventListener('change', function(){
-          ibpPowerVA.noUiSlider.set([null, this.value]);
+        ibpPowerVA.noUiSlider.set([this.value, null]);
       });
 
 
@@ -167,11 +167,11 @@ if ($p_type == 'ibp') {
       });
 
       ibpPowerWTMax.addEventListener('change', function(){
-          ibpPowerWT.noUiSlider.set([this.value, null]);
+        ibpPowerWT.noUiSlider.set([null, this.value]);
       });
 
       ibpPowerWTMin.addEventListener('change', function(){
-          ibpPowerWT.noUiSlider.set([null, this.value]);
+        ibpPowerWT.noUiSlider.set([this.value, null]);
       });
 
       var ibpInputUMin = document.getElementById('ibp-input-u-min');
@@ -199,11 +199,11 @@ if ($p_type == 'ibp') {
       });
 
       ibpInputUMax.addEventListener('change', function(){
-          ibpInputU.noUiSlider.set([this.value, null]);
+        ibpInputU.noUiSlider.set([null, this.value]);
       });
 
       ibpInputUMin.addEventListener('change', function(){
-          ibpInputU.noUiSlider.set([null, this.value]);
+        ibpInputU.noUiSlider.set([this.value, null]);
       });
 
 
@@ -232,11 +232,11 @@ if ($p_type == 'ibp') {
       });
 
       ibpWorktimeMax.addEventListener('change', function(){
-          ibpWorktime.noUiSlider.set([this.value, null]);
+        ibpWorktime.noUiSlider.set([null, this.value]);
       });
 
       ibpWorktimeMin.addEventListener('change', function(){
-          ibpWorktime.noUiSlider.set([null, this.value]);
+        ibpWorktime.noUiSlider.set([this.value, null]);
       });
 
     </script>
@@ -432,11 +432,11 @@ if ($p_type == 'akb') {
         });
 
         akbNominalUMax.addEventListener('change', function(){
-            akbNominalU.noUiSlider.set([this.value, null]);
+          akbNominalU.noUiSlider.set([null, this.value]);
         });
 
         akbNominalUMin.addEventListener('change', function(){
-            akbNominalU.noUiSlider.set([null, this.value]);
+          akbNominalU.noUiSlider.set([this.value, null]);
         });
 
 
@@ -465,11 +465,11 @@ if ($p_type == 'akb') {
         });
 
         akbCapacityMax.addEventListener('change', function(){
-            akbCapacity.noUiSlider.set([this.value, null]);
+          akbCapacity.noUiSlider.set([null, this.value]);
         });
 
         akbCapacityMin.addEventListener('change', function(){
-            akbCapacity.noUiSlider.set([null, this.value]);
+          akbCapacity.noUiSlider.set([this.value, null]);
         });
 
         var akbFinalIMin = document.getElementById('akb-final-i-min');
@@ -497,11 +497,11 @@ if ($p_type == 'akb') {
         });
 
         akbFinalIMax.addEventListener('change', function(){
-            akbFinalI.noUiSlider.set([this.value, null]);
+          akbFinalI.noUiSlider.set([null, this.value]);
         });
 
         akbFinalIMin.addEventListener('change', function(){
-            akbFinalI.noUiSlider.set([null, this.value]);
+          akbFinalI.noUiSlider.set([this.value, null]);
         });
 
       </script>
@@ -700,14 +700,12 @@ if ($p_type == 'dgu') {
       });
 
       dguMainPowerMax.addEventListener('change', function(){
-          dguMainPower.noUiSlider.set([this.value, null]);
+        dguMainPower.noUiSlider.set([null, this.value]);
       });
 
       dguMainPowerMin.addEventListener('change', function(){
-          dguMainPower.noUiSlider.set([null, this.value]);
+        dguMainPower.noUiSlider.set([this.value, null]);
       });
-
-
 
       var dguReservePowerMin = document.getElementById('dgu-reserve-power-min');
       var dguReservePowerMax = document.getElementById('dgu-reserve-power-max');
@@ -734,11 +732,11 @@ if ($p_type == 'dgu') {
       });
 
       dguReservePowerMax.addEventListener('change', function(){
-          dguReservePower.noUiSlider.set([this.value, null]);
+        dguReservePower.noUiSlider.set([null, this.value]);
       });
 
       dguReservePowerMin.addEventListener('change', function(){
-          dguReservePower.noUiSlider.set([null, this.value]);
+        dguReservePower.noUiSlider.set([this.value, null]);
       });
 
 
@@ -768,14 +766,12 @@ if ($p_type == 'dgu') {
       });
 
       dguFuelConsumptionMax.addEventListener('change', function(){
-          dguFuelConsumption.noUiSlider.set([this.value, null]);
+        dguFuelConsumption.noUiSlider.set([null, this.value]);
       });
 
       dguFuelConsumptionMin.addEventListener('change', function(){
-          dguFuelConsumption.noUiSlider.set([null, this.value]);
+        dguFuelConsumption.noUiSlider.set([this.value, null]);
       });
-
-
 
       var dguFuelCapacityMin = document.getElementById('dgu-fuel-capacity-min');
       var dguFuelCapacityMax = document.getElementById('dgu-fuel-capacity-max');
@@ -802,11 +798,11 @@ if ($p_type == 'dgu') {
       });
 
       dguFuelCapacityMax.addEventListener('change', function(){
-          dguFuelCapacity.noUiSlider.set([this.value, null]);
+        dguFuelCapacity.noUiSlider.set([null, this.value]);
       });
 
       dguFuelCapacityMin.addEventListener('change', function(){
-          dguFuelCapacity.noUiSlider.set([null, this.value]);
+        dguFuelCapacity.noUiSlider.set([this.value, null]);
       });
     </script>
 
