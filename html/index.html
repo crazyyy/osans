@@ -100,25 +100,10 @@
         </form>
 
 
+        <div id="html5" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
 
-
-
-
-
-
-<div class="example">
-
-  <div id="html5" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
-  </div>
-
-  <select id="input-select"></select>
-  <input type="number" id="input-number">
-
-</div><!-- example -->
-
-
-
-
+        <input type="number" id="input-number">
+        <input type="number" id="input-number-two">
 
 
       </div>
@@ -135,32 +120,22 @@
   <script type="text/javascript" src="js/scripts.js"></script>
 
 <script>
-  var select = document.getElementById('input-select');
 
-  // Append the option elements
-  for ( var i = -20; i <= 40; i++ ){
-    var option = document.createElement("option");
-    option.text = i;
-    option.value = i;
 
-    select.appendChild(option);
-  }
-</script>
-<script>
-
-  var html5Slider = document.getElementById('html5');
-
-  noUiSlider.create(html5Slider, {
-    start: [ 10, 30 ],
-    connect: true,
-    range: {
-      'min': -20,
-      'max': 40
-    }
-  });
 </script>
 <script>
   var inputNumber = document.getElementById('input-number');
+  var inputNumberTwo = document.getElementById('input-number-two');
+  var html5Slider = document.getElementById('html5');
+
+  noUiSlider.create(html5Slider, {
+    start: [ 220, 380 ],
+    connect: true,
+    range: {
+      'min': 110,
+      'max': 660
+    }
+  });
 
   html5Slider.noUiSlider.on('update', function( values, handle ) {
 
@@ -169,17 +144,19 @@
     if ( handle ) {
       inputNumber.value = value;
     } else {
-      select.value = Math.round(value);
+      inputNumberTwo.value = value;
     }
   });
 
-  select.addEventListener('change', function(){
+  inputNumberTwo.addEventListener('change', function(){
     html5Slider.noUiSlider.set([this.value, null]);
   });
 
   inputNumber.addEventListener('change', function(){
     html5Slider.noUiSlider.set([null, this.value]);
   });
+
+
 </script>
 
 
