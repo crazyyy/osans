@@ -11,7 +11,7 @@ var gulp = require('gulp'),
   });
 
 /* if work with html == true, else - false */
-var htmlOWp = true,
+var htmlOWp = false,
   wpThemeName = 'wp-osans',
   wpDomain = 'osans.dev';
 

@@ -8,6 +8,11 @@
         <article id="post-<?php the_ID(); ?>" <?php post_class('select-equiper'); ?>>
           <div class="select-equiper-block">
 
+
+
+            <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>
+            <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/nouislider.min.js"></script>
+
             <?php get_template_part('filter'); ?>
 
           </div><!-- /.select-equiper block -->
