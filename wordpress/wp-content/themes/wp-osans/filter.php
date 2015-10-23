@@ -243,31 +243,6 @@ if ($p_type == 'ibp') {
 
     </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
     $meta_query = array(
         'relation' => 'AND',
@@ -630,7 +605,6 @@ if ($p_type == 'dgu') {
     $dgu_fuel_capacity_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-capacity-max' AND m.post_id=p.ID AND p.post_status='publish'");
     $dgu_fuel_capacity_min = isset($_REQUEST['dgu-fuel-capacity-min']) ? floatval($_REQUEST['dgu-fuel-capacity-min']) : $dgu_fuel_capacity_min_abs;
     $dgu_fuel_capacity_max = isset($_REQUEST['dgu-fuel-capacity-max']) ? floatval($_REQUEST['dgu-fuel-capacity-max']) : $dgu_fuel_capacity_max_abs;
-    include ('dgu.js.php');
 
     ?>
 
@@ -642,39 +616,58 @@ if ($p_type == 'dgu') {
           <option value="FG Wilson" <?php if ($_REQUEST['dgu-brand'] == 'FG Wilson') echo 'selected';?>>FG Wilson</option>
         </select>
       </div>
-      <div class="col-md-6 pretty-selectors">
-        <span>Основная мощность (кВА/кВт)</span>
-        <label for="dgu-main-power-min">от</label>
-        <input type="text" name="dgu-main-power-min" id="dgu-main-power-min" value="<?=$dgu_main_power_min;?>">
-        <label for="dgu-main-power-max">до</label>
-        <input type="text" name="dgu-main-power-max" id="dgu-main-power-max" value="<?=$dgu_main_power_max;?>">
-          <div id="dgu-main-power" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-      </div>
-      <div class="col-md-6 pretty-selectors">
-        <span>Резервная мощность (кВА/кВт)</span>
-        <label for="dgu-reserve-power-min">от</label>
-        <input type="text" name="dgu-reserve-power-min" id="dgu-reserve-power-min" value="<?=$dgu_reserve_power_min;?>">
-        <label for="dgu-reserve-power-max">до</label>
-        <input type="text" name="dgu-reserve-power-max" id="dgu-reserve-power-max" value="<?=$dgu_reserve_power_max;?>">
-          <div id="dgu-reserve-power" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-      </div>
-      <div class="col-md-6 pretty-selectors">
-        <span>Расход топлива (л/час)</span>
-        <label for="dgu-fuel-consumption-min">от</label>
-        <input type="text" name="dgu-fuel-consumption-min" id="dgu-fuel-consumption-min" value="<?=$dgu_fuel_consumption_min;?>">
-        <label for="dgu-fuel-consumption-max">до</label>
-        <input type="text" name="dgu-fuel-consumption-max" id="dgu-fuel-consumption-max" value="<?=$dgu_fuel_consumption_max;?>">
-          <div id="fuel-consumption" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-      </div>
 
-      <div class="col-md-6 pretty-selectors">
-        <span>Объем встроенного бака (л)</span>
-        <label for="dgu-fuel-capacity-mi">от</label>
-        <input type="text" name="dgu-fuel-capacity-min" id="dgu-fuel-capacity-min" value="<?=$dgu_fuel_capacity_min;?>">
-        <label for="dgu-fuel-capacity-max">до</label>
-        <input type="text" name="dgu-fuel-capacity-max" id="dgu-fuel-capacity-max" value="<?=$dgu_fuel_capacity_max;?>">
-          <div id="fuel-capacity" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-      </div>
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Основная мощность (кВА/кВт)</span>
+          <label for="dgu-main-power-min">от</label>
+          <input type="text" name="dgu-main-power-min" id="dgu-main-power-min" value="<?=$dgu_main_power_min;?>">
+          <label for="dgu-main-power-max">до</label>
+          <input type="text" name="dgu-main-power-max" id="dgu-main-power-max" value="<?=$dgu_main_power_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="dgu-main-power"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
+
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Резервная мощность (кВА/кВт)</span>
+          <label for="dgu-reserve-power-min">от</label>
+          <input type="text" name="dgu-reserve-power-min" id="dgu-reserve-power-min" value="<?=$dgu_reserve_power_min;?>">
+          <label for="dgu-reserve-power-max">до</label>
+          <input type="text" name="dgu-reserve-power-max" id="dgu-reserve-power-max" value="<?=$dgu_reserve_power_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="dgu-reserve-power"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
+
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Расход топлива (л/час)</span>
+          <label for="dgu-fuel-consumption-min">от</label>
+          <input type="text" name="dgu-fuel-consumption-min" id="dgu-fuel-consumption-min" value="<?=$dgu_fuel_consumption_min;?>">
+          <label for="dgu-fuel-consumption-max">до</label>
+          <input type="text" name="dgu-fuel-consumption-max" id="dgu-fuel-consumption-max" value="<?=$dgu_fuel_consumption_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="fuel-consumption"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
+
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Объем встроенного бака (л)</span>
+          <label for="dgu-fuel-capacity-mi">от</label>
+          <input type="text" name="dgu-fuel-capacity-min" id="dgu-fuel-capacity-min" value="<?=$dgu_fuel_capacity_min;?>">
+          <label for="dgu-fuel-capacity-max">до</label>
+          <input type="text" name="dgu-fuel-capacity-max" id="dgu-fuel-capacity-max" value="<?=$dgu_fuel_capacity_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="fuel-capacity"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
 
       <div class="col-md-4">
         <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
@@ -683,6 +676,154 @@ if ($p_type == 'dgu') {
         <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
       </div>
     </form>
+
+
+    <script>
+      var dguMainPowerMin = document.getElementById('dgu-main-power-min');
+      var dguMainPowerMax = document.getElementById('dgu-main-power-max');
+      var dguMainPower = document.getElementById('dgu-main-power');
+
+      noUiSlider.create(dguMainPower, {
+          start: [ <?=$dgu_main_power_min_abs;?>, <?=$dgu_main_power_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$dgu_main_power_min_abs;?>,
+              'max': <?=$dgu_main_power_max_abs;?>
+          }
+      });
+
+      dguMainPower.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              dguMainPowerMin.value = Math.round(value);
+          } else {
+              dguMainPowerMax.value = Math.round(value);
+          }
+      });
+
+      dguMainPowerMax.addEventListener('change', function(){
+          dguMainPower.noUiSlider.set([this.value, null]);
+      });
+
+      dguMainPowerMin.addEventListener('change', function(){
+          dguMainPower.noUiSlider.set([null, this.value]);
+      });
+
+
+
+      var dguReservePowerMin = document.getElementById('dgu-reserve-power-min');
+      var dguReservePowerMax = document.getElementById('dgu-reserve-power-max');
+      var dguReservePower = document.getElementById('dgu-reserve-power');
+
+      noUiSlider.create(dguReservePower, {
+          start: [ <?=$dgu_reserve_power_min_abs;?>, <?=$dgu_reserve_power_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$dgu_reserve_power_min_abs;?>,
+              'max': <?=$dgu_reserve_power_max_abs;?>
+          }
+      });
+
+      dguReservePower.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              dguReservePowerMin.value = Math.round(value);
+          } else {
+              dguReservePowerMax.value = Math.round(value);
+          }
+      });
+
+      dguReservePowerMax.addEventListener('change', function(){
+          dguReservePower.noUiSlider.set([this.value, null]);
+      });
+
+      dguReservePowerMin.addEventListener('change', function(){
+          dguReservePower.noUiSlider.set([null, this.value]);
+      });
+
+
+
+      var dguFuelConsumptionMin = document.getElementById('dgu-fuel-consumption-min');
+      var dguFuelConsumptionMax = document.getElementById('dgu-fuel-consumption-max');
+      var dguFuelConsumption = document.getElementById('dgu-fuel-consumption');
+
+      noUiSlider.create(dguFuelConsumption, {
+          start: [ <?=$dgu_fuel_consumption_min_abs;?>, <?=$dgu_fuel_consumption_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$dgu_fuel_consumption_min_abs;?>,
+              'max': <?=$dgu_fuel_consumption_max_abs;?>
+          }
+      });
+
+      dguFuelConsumption.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              dguFuelConsumptionMin.value = Math.round(value);
+          } else {
+              dguFuelConsumptionMax.value = Math.round(value);
+          }
+      });
+
+      dguFuelConsumptionMax.addEventListener('change', function(){
+          dguFuelConsumption.noUiSlider.set([this.value, null]);
+      });
+
+      dguFuelConsumptionMin.addEventListener('change', function(){
+          dguFuelConsumption.noUiSlider.set([null, this.value]);
+      });
+
+
+
+      var dguFuelCapacityMin = document.getElementById('dgu-fuel-capacity-min');
+      var dguFuelCapacityMax = document.getElementById('dgu-fuel-capacity-max');
+      var dguFuelCapacity = document.getElementById('dgu-fuel-capacity');
+
+      noUiSlider.create(dguFuelCapacity, {
+          start: [ <?=$dgu_fuel_capacity_min_abs;?>, <?=$dgu_fuel_capacity_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$dgu_fuel_capacity_min_abs;?>,
+              'max': <?=$dgu_fuel_capacity_max_abs;?>
+          }
+      });
+
+      dguFuelCapacity.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              dguFuelCapacityMin.value = Math.round(value);
+          } else {
+              dguFuelCapacityMax.value = Math.round(value);
+          }
+      });
+
+      dguFuelCapacityMax.addEventListener('change', function(){
+          dguFuelCapacity.noUiSlider.set([this.value, null]);
+      });
+
+      dguFuelCapacityMin.addEventListener('change', function(){
+          dguFuelCapacity.noUiSlider.set([null, this.value]);
+      });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
 
     <?php
     $meta_query = array(
