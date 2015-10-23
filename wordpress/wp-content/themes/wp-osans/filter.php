@@ -114,7 +114,7 @@ if ($p_type == 'ibp') {
       var ibpPowerVA = document.getElementById('ibp-power-va');
 
       noUiSlider.create(ibpPowerVA, {
-          start: [ <?=$ibp_power_va_min_abs;?>, <?=$ibp_power_va_max_abs;?> ],
+          start: [ <?=$ibp_power_va_min;?>, <?=$ibp_power_va_max;?> ],
           connect: true,
           range: {
               'min': <?=$ibp_power_va_min_abs;?>,
@@ -147,7 +147,7 @@ if ($p_type == 'ibp') {
       var ibpPowerWT = document.getElementById('ibp-power-wt');
 
       noUiSlider.create(ibpPowerWT, {
-          start: [ <?=$ibp_power_wt_min_abs;?>, <?=$ibp_power_wt_max_abs;?> ],
+          start: [ <?=$ibp_power_wt_min;?>, <?=$ibp_power_wt_max;?> ],
           connect: true,
           range: {
               'min': <?=$ibp_power_wt_min_abs;?>,
@@ -179,7 +179,7 @@ if ($p_type == 'ibp') {
       var ibpInputU = document.getElementById('ibp-input-u');
 
       noUiSlider.create(ibpInputU, {
-          start: [ <?=$ibp_input_u_min_abs;?>, <?=$ibp_input_u_max_abs;?> ],
+          start: [ <?=$ibp_input_u_min;?>, <?=$ibp_input_u_max;?> ],
           connect: true,
           range: {
               'min': <?=$ibp_input_u_min_abs;?>,
@@ -212,7 +212,7 @@ if ($p_type == 'ibp') {
       var ibpWorktime = document.getElementById('ibp-worktime');
 
       noUiSlider.create(ibpWorktime, {
-          start: [ <?=$ibp_worktime_min_abs;?>, <?=$ibp_worktime_max_abs;?> ],
+          start: [ <?=$ibp_worktime_min;?>, <?=$ibp_worktime_max;?> ],
           connect: true,
           range: {
               'min': <?=$ibp_worktime_min_abs;?>,
@@ -412,7 +412,7 @@ if ($p_type == 'akb') {
         var akbNominalU = document.getElementById('akb-nominal-u');
 
         noUiSlider.create(akbNominalU, {
-            start: [ <?=$akb_nominal_u_min_abs;?>, <?=$akb_nominal_u_max_abs;?> ],
+            start: [ <?=$akb_nominal_u_min;?>, <?=$akb_nominal_u_max;?> ],
             connect: true,
             range: {
                 'min': <?=$akb_nominal_u_min_abs;?>,
@@ -445,7 +445,7 @@ if ($p_type == 'akb') {
         var akbCapacity = document.getElementById('akb-capacity');
 
         noUiSlider.create(akbCapacity, {
-            start: [ <?=$akb_capacity_min_abs;?>, <?=$akb_capacity_max_abs;?> ],
+            start: [ <?=$akb_capacity_min;?>, <?=$akb_capacity_max;?> ],
             connect: true,
             range: {
                 'min': <?=$akb_capacity_min_abs;?>,
@@ -477,7 +477,7 @@ if ($p_type == 'akb') {
         var akbFinalI = document.getElementById('akb-final-i');
 
         noUiSlider.create(akbFinalI, {
-            start: [ <?=$akb_final_i_min_abs;?>, <?=$akb_final_i_max_abs;?> ],
+            start: [ <?=$akb_final_i_min;?>, <?=$akb_final_i_max;?> ],
             connect: true,
             range: {
                 'min': <?=$akb_final_i_min_abs;?>,
@@ -680,7 +680,7 @@ if ($p_type == 'dgu') {
       var dguMainPower = document.getElementById('dgu-main-power');
 
       noUiSlider.create(dguMainPower, {
-          start: [ <?=$dgu_main_power_min_abs;?>, <?=$dgu_main_power_max_abs;?> ],
+          start: [ <?=$dgu_main_power_min;?>, <?=$dgu_main_power_max;?> ],
           connect: true,
           range: {
               'min': <?=$dgu_main_power_min_abs;?>,
@@ -712,7 +712,7 @@ if ($p_type == 'dgu') {
       var dguReservePower = document.getElementById('dgu-reserve-power');
 
       noUiSlider.create(dguReservePower, {
-          start: [ <?=$dgu_reserve_power_min_abs;?>, <?=$dgu_reserve_power_max_abs;?> ],
+          start: [ <?=$dgu_reserve_power_min;?>, <?=$dgu_reserve_power_max;?> ],
           connect: true,
           range: {
               'min': <?=$dgu_reserve_power_min_abs;?>,
@@ -746,7 +746,7 @@ if ($p_type == 'dgu') {
       var dguFuelConsumption = document.getElementById('dgu-fuel-consumption');
 
       noUiSlider.create(dguFuelConsumption, {
-          start: [ <?=$dgu_fuel_consumption_min_abs;?>, <?=$dgu_fuel_consumption_max_abs;?> ],
+          start: [ <?=$dgu_fuel_consumption_min;?>, <?=$dgu_fuel_consumption_max;?> ],
           connect: true,
           range: {
               'min': <?=$dgu_fuel_consumption_min_abs;?>,
@@ -778,7 +778,7 @@ if ($p_type == 'dgu') {
       var dguFuelCapacity = document.getElementById('dgu-fuel-capacity');
 
       noUiSlider.create(dguFuelCapacity, {
-          start: [ <?=$dgu_fuel_capacity_min_abs;?>, <?=$dgu_fuel_capacity_max_abs;?> ],
+          start: [ <?=$dgu_fuel_capacity_min;?>, <?=$dgu_fuel_capacity_max;?> ],
           connect: true,
           range: {
               'min': <?=$dgu_fuel_capacity_min_abs;?>,
