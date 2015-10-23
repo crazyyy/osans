@@ -32,9 +32,7 @@ if ($p_type == 'ibp') {
     $ibp_worktime_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-worktime-max' AND m.post_id=p.ID AND p.post_status='publish'");
     $ibp_worktime_min = isset($_REQUEST['ibp-worktime-min']) ? floatval($_REQUEST['ibp-worktime-min']) : $ibp_worktime_min_abs;
     $ibp_worktime_max = isset($_REQUEST['ibp-worktime-max']) ? floatval($_REQUEST['ibp-worktime-max']) : $ibp_worktime_max_abs;
-    include ('ibp.js.php');
     ?>
-
 
     <form id="ibp-form" class="row" method="post">
       <div class="col-md-12">
@@ -48,39 +46,58 @@ if ($p_type == 'ibp') {
           <option value="VISION" <?php if ($_REQUEST['ibp-brand'] == 'VISION') echo 'selected';?>>VISION</option>
         </select>
       </div>
-      <div class="col-md-6 pretty-selectors">
-        <span>Мощность ИБП (ВА)</span>
-        <label for="ibp-power-va-min">от</label>
-        <input type="text" name="ibp-power-va-min" id="ibp-power-va-min" value="<?=$ibp_power_va_min;?>">
-        <label for="ibp-power-va-max">до</label>
-        <input type="text" name="ibp-power-va-max" id="ibp-power-va-max" value="<?=$ibp_power_va_max;?>">
-      </div>
-        <div id="ibp-power-va" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-      <div class="col-md-6 pretty-selectors">
-        <span>Мощность ИБП (Вт)</span>
-        <label for="ibp-power-wt-min">от</label>
-        <input type="text" name="ibp-power-wt-min" id="ibp-power-wt-min" value="<?=$ibp_power_wt_min;?>">
-        <label for="ibp-power-wt-max">до</label>
-        <input type="text" name="ibp-power-wt-max" id="ibp-power-wt-max" value="<?=$ibp_power_wt_max;?>">
-      </div>
-        <div id="ibp-power-wt" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-      <div class="col-md-6 pretty-selectors">
-        <span>Входное напряжение (В)</span>
-        <label for="ibp-input-u-min">от</label>
-        <input type="text" name="ibp-input-u-min" id="ibp-input-u-min" value="<?=$ibp_input_u_min;?>">
-        <label for="ibp-input-u-max">до</label>
-        <input type="text" name="ibp-input-u-max" id="ibp-input-u-max" value="<?=$ibp_input_u_max;?>">
-      </div>
-        <div id="ibp-input-u" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
 
-      <div class="col-md-6 pretty-selectors">
-        <span>Время работы при 100% нагрузке от встроенных АКБ (мин)</span>
-        <label for="ibp-worktime-min">от</label>
-        <input type="text" name="ibp-worktime-min" id="ibp-worktime-min" value="<?=$ibp_worktime_min;?>">
-        <label for="ibp-worktime-max">до</label>
-        <input type="text" name="ibp-worktime-max" id="ibp-worktime-max" value="<?=$ibp_worktime_max;?>">
-      </div>
-        <div id="ibp-worktime" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Мощность ИБП (ВА)</span>
+          <label for="ibp-power-va-min">от</label>
+          <input type="text" name="ibp-power-va-min" id="ibp-power-va-min" value="<?=$ibp_power_va_min;?>">
+          <label for="ibp-power-va-max">до</label>
+          <input type="text" name="ibp-power-va-max" id="ibp-power-va-max" value="<?=$ibp_power_va_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="ibp-power-va"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
+
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Мощность ИБП (Вт)</span>
+          <label for="ibp-power-wt-min">от</label>
+          <input type="text" name="ibp-power-wt-min" id="ibp-power-wt-min" value="<?=$ibp_power_wt_min;?>">
+          <label for="ibp-power-wt-max">до</label>
+          <input type="text" name="ibp-power-wt-max" id="ibp-power-wt-max" value="<?=$ibp_power_wt_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="ibp-power-wt"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
+
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Входное напряжение (В)</span>
+          <label for="ibp-input-u-min">от</label>
+          <input type="text" name="ibp-input-u-min" id="ibp-input-u-min" value="<?=$ibp_input_u_min;?>">
+          <label for="ibp-input-u-max">до</label>
+          <input type="text" name="ibp-input-u-max" id="ibp-input-u-max" value="<?=$ibp_input_u_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="ibp-input-u"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
+
+      <div class="row nopadding">
+        <div class="col-md-6 pretty-selectors">
+          <span>Время работы при 100% нагрузке от встроенных АКБ (мин)</span>
+          <label for="ibp-worktime-min">от</label>
+          <input type="text" name="ibp-worktime-min" id="ibp-worktime-min" value="<?=$ibp_worktime_min;?>">
+          <label for="ibp-worktime-max">до</label>
+          <input type="text" name="ibp-worktime-max" id="ibp-worktime-max" value="<?=$ibp_worktime_max;?>">
+        </div><!-- pretty-selectors -->
+        <div class="col-md-6 pretty-selectors">
+          <div id="ibp-worktime"></div>
+        </div><!-- pretty-selectors -->
+      </div><!-- nopadding -->
 
       <div class="col-md-4">
         <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
@@ -89,6 +106,166 @@ if ($p_type == 'ibp') {
         <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
       </div>
     </form>
+
+
+    <script>
+      var ibpPowerVAMin = document.getElementById('ibp-power-va-min');
+      var ibpPowerVAMax = document.getElementById('ibp-power-va-max');
+      var ibpPowerVA = document.getElementById('ibp-power-va');
+
+      noUiSlider.create(ibpPowerVA, {
+          start: [ <?=$ibp_power_va_min_abs;?>, <?=$ibp_power_va_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$ibp_power_va_min_abs;?>,
+              'max': <?=$ibp_power_va_max_abs;?>
+          }
+      });
+
+      ibpPowerVA.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              ibpPowerVAMin.value = Math.round(value);
+          } else {
+              ibpPowerVAMax.value = Math.round(value);
+          }
+      });
+
+      ibpPowerVAMax.addEventListener('change', function(){
+          ibpPowerVA.noUiSlider.set([this.value, null]);
+      });
+
+      ibpPowerVAMin.addEventListener('change', function(){
+          ibpPowerVA.noUiSlider.set([null, this.value]);
+      });
+
+
+      var ibpPowerWTMin = document.getElementById('ibp-power-wt-min');
+      var ibpPowerWTMax = document.getElementById('ibp-power-wt-max');
+      var ibpPowerWT = document.getElementById('ibp-power-wt');
+
+      noUiSlider.create(ibpPowerWT, {
+          start: [ <?=$ibp_power_wt_min_abs;?>, <?=$ibp_power_wt_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$ibp_power_wt_min_abs;?>,
+              'max': <?=$ibp_power_wt_max_abs;?>
+          }
+      });
+
+      ibpPowerWT.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              ibpPowerWTMin.value = Math.round(value);
+          } else {
+              ibpPowerWTMax.value = Math.round(value);
+          }
+      });
+
+      ibpPowerWTMax.addEventListener('change', function(){
+          ibpPowerWT.noUiSlider.set([this.value, null]);
+      });
+
+      ibpPowerWTMin.addEventListener('change', function(){
+          ibpPowerWT.noUiSlider.set([null, this.value]);
+      });
+
+
+
+      var ibpInputUMin = document.getElementById('ibp-input-u-min');
+      var ibpInputUMax = document.getElementById('ibp-input-u-max');
+      var ibpInputU = document.getElementById('ibp-input-u');
+
+      noUiSlider.create(ibpInputU, {
+          start: [ <?=$ibp_input_u_min_abs;?>, <?=$ibp_input_u_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$ibp_input_u_min_abs;?>,
+              'max': <?=$ibp_input_u_max_abs;?>
+          }
+      });
+
+      ibpInputU.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              ibpInputUMin.value = Math.round(value);
+          } else {
+              ibpInputUMax.value = Math.round(value);
+          }
+      });
+
+      ibpInputUMax.addEventListener('change', function(){
+          ibpInputU.noUiSlider.set([this.value, null]);
+      });
+
+      ibpInputUMin.addEventListener('change', function(){
+          ibpInputU.noUiSlider.set([null, this.value]);
+      });
+
+
+      var ibpWorktimeMin = document.getElementById('ibp-worktime-min');
+      var ibpWorktimeMax = document.getElementById('ibp-worktime-max');
+      var ibpWorktime = document.getElementById('ibp-worktime');
+
+      noUiSlider.create(ibpWorktime, {
+          start: [ <?=$ibp_worktime_min_abs;?>, <?=$ibp_worktime_max_abs;?> ],
+          connect: true,
+          range: {
+              'min': <?=$ibp_worktime_min_abs;?>,
+              'max': <?=$ibp_worktime_max_abs;?>
+          }
+      });
+
+      ibpWorktime.noUiSlider.on('update', function( values, handle ) {
+
+          var value = values[handle];
+
+          if ( handle ) {
+              ibpWorktimeMin.value = Math.round(value);
+          } else {
+              ibpWorktimeMax.value = Math.round(value);
+          }
+      });
+
+      ibpWorktimeMax.addEventListener('change', function(){
+          ibpWorktime.noUiSlider.set([this.value, null]);
+      });
+
+      ibpWorktimeMin.addEventListener('change', function(){
+          ibpWorktime.noUiSlider.set([null, this.value]);
+      });
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <?php
@@ -263,7 +440,6 @@ if ($p_type == 'akb') {
         var akbNominalUMax = document.getElementById('akb-nominal-u-max');
         var akbNominalU = document.getElementById('akb-nominal-u');
 
-
         noUiSlider.create(akbNominalU, {
             start: [ <?=$akb_nominal_u_min_abs;?>, <?=$akb_nominal_u_max_abs;?> ],
             connect: true,
@@ -278,9 +454,9 @@ if ($p_type == 'akb') {
             var value = values[handle];
 
             if ( handle ) {
-                akbNominalUMin.value = value;
+                akbNominalUMin.value = Math.round(value);
             } else {
-                akbNominalUMax.value = value;
+                akbNominalUMax.value = Math.round(value);
             }
         });
 
@@ -291,7 +467,6 @@ if ($p_type == 'akb') {
         akbNominalUMin.addEventListener('change', function(){
             akbNominalU.noUiSlider.set([null, this.value]);
         });
-
 
 
         var akbCapacityMin = document.getElementById('akb-capacity-min');
@@ -312,9 +487,9 @@ if ($p_type == 'akb') {
             var value = values[handle];
 
             if ( handle ) {
-                akbCapacityMin.value = value;
+                akbCapacityMin.value = Math.round(value);
             } else {
-                akbCapacityMax.value = value;
+                akbCapacityMax.value = Math.round(value);
             }
         });
 
@@ -344,9 +519,9 @@ if ($p_type == 'akb') {
             var value = values[handle];
 
             if ( handle ) {
-                akbFinalIMin.value = value;
+                akbFinalIMin.value = Math.round(value);
             } else {
-                akbFinalIMax.value = value;
+                akbFinalIMax.value = Math.round(value);
             }
         });
 
