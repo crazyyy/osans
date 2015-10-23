@@ -55,8 +55,8 @@ if ($p_type == 'ibp') {
           <label for="ibp-power-va-max">до</label>
           <input type="text" name="ibp-power-va-max" id="ibp-power-va-max" value="<?=$ibp_power_va_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="ibp-power-va"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="ibp-power-va" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -68,8 +68,8 @@ if ($p_type == 'ibp') {
           <label for="ibp-power-wt-max">до</label>
           <input type="text" name="ibp-power-wt-max" id="ibp-power-wt-max" value="<?=$ibp_power_wt_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="ibp-power-wt"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="ibp-power-wt" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -81,8 +81,8 @@ if ($p_type == 'ibp') {
           <label for="ibp-input-u-max">до</label>
           <input type="text" name="ibp-input-u-max" id="ibp-input-u-max" value="<?=$ibp_input_u_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="ibp-input-u"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="ibp-input-u" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -94,8 +94,8 @@ if ($p_type == 'ibp') {
           <label for="ibp-worktime-max">до</label>
           <input type="text" name="ibp-worktime-max" id="ibp-worktime-max" value="<?=$ibp_worktime_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="ibp-worktime"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="ibp-worktime" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -127,9 +127,9 @@ if ($p_type == 'ibp') {
           var value = values[handle];
 
           if ( handle ) {
-              ibpPowerVAMin.value = Math.round(value);
+            ibpPowerVAMax.value = Math.round(value);
           } else {
-              ibpPowerVAMax.value = Math.round(value);
+            ibpPowerVAMin.value = Math.round(value);
           }
       });
 
@@ -160,9 +160,9 @@ if ($p_type == 'ibp') {
           var value = values[handle];
 
           if ( handle ) {
-              ibpPowerWTMin.value = Math.round(value);
+            ibpPowerWTMax.value = Math.round(value);
           } else {
-              ibpPowerWTMax.value = Math.round(value);
+            ibpPowerWTMin.value = Math.round(value);
           }
       });
 
@@ -173,8 +173,6 @@ if ($p_type == 'ibp') {
       ibpPowerWTMin.addEventListener('change', function(){
           ibpPowerWT.noUiSlider.set([null, this.value]);
       });
-
-
 
       var ibpInputUMin = document.getElementById('ibp-input-u-min');
       var ibpInputUMax = document.getElementById('ibp-input-u-max');
@@ -194,9 +192,9 @@ if ($p_type == 'ibp') {
           var value = values[handle];
 
           if ( handle ) {
-              ibpInputUMin.value = Math.round(value);
+            ibpInputUMax.value = Math.round(value);
           } else {
-              ibpInputUMax.value = Math.round(value);
+            ibpInputUMin.value = Math.round(value);
           }
       });
 
@@ -227,9 +225,9 @@ if ($p_type == 'ibp') {
           var value = values[handle];
 
           if ( handle ) {
-              ibpWorktimeMin.value = Math.round(value);
+            ibpWorktimeMax.value = Math.round(value);
           } else {
-              ibpWorktimeMax.value = Math.round(value);
+            ibpWorktimeMin.value = Math.round(value);
           }
       });
 
@@ -354,8 +352,6 @@ if ($p_type == 'akb') {
 
     ?>
 
-
-
     <form id="akb-form" class="row" method="post">
       <div class="col-md-12">
         <select name="akb-brand">
@@ -371,8 +367,8 @@ if ($p_type == 'akb') {
           <label for="akb-nominal-u-max">до</label>
           <input type="text" name="akb-nominal-u-max" id="akb-nominal-u-max" value="<?=$akb_nominal_u_max;?>">
         </div>
-        <div class="col-md-6 pretty-selectors">
-          <div id="akb-nominal-u"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="akb-nominal-u" class="selector-range-main"></div>
         </div>
       </div>
 
@@ -384,8 +380,8 @@ if ($p_type == 'akb') {
           <label for="akb-capacity-max">до</label>
           <input type="text" name="akb-capacity-max" id="akb-capacity-max" value="<?=$akb_capacity_max;?>">
         </div>
-        <div class="col-md-6 pretty-selectors">
-          <div id="akb-capacity"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="akb-capacity" class="selector-range-main"></div>
         </div>
       </div>
 
@@ -397,8 +393,8 @@ if ($p_type == 'akb') {
           <label for="akb-final-i-max">до</label>
           <input type="text" name="akb-final-i-max" id="akb-final-i-max" value="<?=$akb_final_i_max;?>">
         </div>
-        <div class="col-md-6 pretty-selectors">
-          <div id="akb-final-i"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="akb-final-i" class="selector-range-main"></div>
         </div>
       </div><!-- nopadding -->
 
@@ -429,9 +425,9 @@ if ($p_type == 'akb') {
             var value = values[handle];
 
             if ( handle ) {
-                akbNominalUMin.value = Math.round(value);
+              akbNominalUMax.value = Math.round(value);
             } else {
-                akbNominalUMax.value = Math.round(value);
+              akbNominalUMin.value = Math.round(value);
             }
         });
 
@@ -462,9 +458,9 @@ if ($p_type == 'akb') {
             var value = values[handle];
 
             if ( handle ) {
-                akbCapacityMin.value = Math.round(value);
+              akbCapacityMax.value = Math.round(value);
             } else {
-                akbCapacityMax.value = Math.round(value);
+              akbCapacityMin.value = Math.round(value);
             }
         });
 
@@ -494,9 +490,9 @@ if ($p_type == 'akb') {
             var value = values[handle];
 
             if ( handle ) {
-                akbFinalIMin.value = Math.round(value);
+              akbFinalIMax.value = Math.round(value);
             } else {
-                akbFinalIMax.value = Math.round(value);
+              akbFinalIMin.value = Math.round(value);
             }
         });
 
@@ -625,8 +621,8 @@ if ($p_type == 'dgu') {
           <label for="dgu-main-power-max">до</label>
           <input type="text" name="dgu-main-power-max" id="dgu-main-power-max" value="<?=$dgu_main_power_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="dgu-main-power"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="dgu-main-power" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -638,8 +634,8 @@ if ($p_type == 'dgu') {
           <label for="dgu-reserve-power-max">до</label>
           <input type="text" name="dgu-reserve-power-max" id="dgu-reserve-power-max" value="<?=$dgu_reserve_power_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="dgu-reserve-power"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="dgu-reserve-power" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -651,8 +647,8 @@ if ($p_type == 'dgu') {
           <label for="dgu-fuel-consumption-max">до</label>
           <input type="text" name="dgu-fuel-consumption-max" id="dgu-fuel-consumption-max" value="<?=$dgu_fuel_consumption_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="fuel-consumption"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="dgu-fuel-consumption" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -664,8 +660,8 @@ if ($p_type == 'dgu') {
           <label for="dgu-fuel-capacity-max">до</label>
           <input type="text" name="dgu-fuel-capacity-max" id="dgu-fuel-capacity-max" value="<?=$dgu_fuel_capacity_max;?>">
         </div><!-- pretty-selectors -->
-        <div class="col-md-6 pretty-selectors">
-          <div id="fuel-capacity"></div>
+        <div class="col-md-6 pretty-selectors selector-range">
+          <div id="dgu-fuel-capacity" class="selector-range-main"></div>
         </div><!-- pretty-selectors -->
       </div><!-- nopadding -->
 
@@ -697,9 +693,9 @@ if ($p_type == 'dgu') {
           var value = values[handle];
 
           if ( handle ) {
-              dguMainPowerMin.value = Math.round(value);
+            dguMainPowerMax.value = Math.round(value);
           } else {
-              dguMainPowerMax.value = Math.round(value);
+            dguMainPowerMin.value = Math.round(value);
           }
       });
 
@@ -731,9 +727,9 @@ if ($p_type == 'dgu') {
           var value = values[handle];
 
           if ( handle ) {
-              dguReservePowerMin.value = Math.round(value);
+            dguReservePowerMax.value = Math.round(value);
           } else {
-              dguReservePowerMax.value = Math.round(value);
+            dguReservePowerMin.value = Math.round(value);
           }
       });
 
@@ -765,9 +761,9 @@ if ($p_type == 'dgu') {
           var value = values[handle];
 
           if ( handle ) {
-              dguFuelConsumptionMin.value = Math.round(value);
+            dguFuelConsumptionMax.value = Math.round(value);
           } else {
-              dguFuelConsumptionMax.value = Math.round(value);
+            dguFuelConsumptionMin.value = Math.round(value);
           }
       });
 
@@ -799,9 +795,9 @@ if ($p_type == 'dgu') {
           var value = values[handle];
 
           if ( handle ) {
-              dguFuelCapacityMin.value = Math.round(value);
+            dguFuelCapacityMax.value = Math.round(value);
           } else {
-              dguFuelCapacityMax.value = Math.round(value);
+            dguFuelCapacityMin.value = Math.round(value);
           }
       });
 
@@ -813,9 +809,6 @@ if ($p_type == 'dgu') {
           dguFuelCapacity.noUiSlider.set([null, this.value]);
       });
     </script>
-
-
-
 
     <?php
     $meta_query = array(
