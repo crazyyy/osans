@@ -205,108 +205,45 @@ if ($p_type == 'akb') {
 
     ?>
 
+<div id="html5" class=""></div>
+        <input type="number" id="input-number">
+        <input type="number" id="input-number-two">
+
 
 
 <script>
-    var akbNominalUMin = document.getElementById('akb-nominal-u-min');
-    var akbNominalUMax = document.getElementById('akb-nominal-u-max');
-    var akbNominalU = document.getElementById('akb-nominal-u');
+  var inputNumber = document.getElementById('input-number');
+  var inputNumberTwo = document.getElementById('input-number-two');
+  var html5Slider = document.getElementById('html5');
 
+  noUiSlider.create(html5Slider, {
+    start: [ 220, 380 ],
+    connect: true,
+    range: {
+      'min': 110,
+      'max': 660
+    }
+  });
 
-    noUiSlider.create(akbNominalU, {
-        start: [ <?=$akb_nominal_u_min_abs;?>, <?=$akb_nominal_u_max_abs;?> ],
-        connect: true,
-        range: {
-            'min': <?=$akb_nominal_u_min_abs;?>,
-            'max': <?=$akb_nominal_u_max_abs;?>
-        }
-    });
+  html5Slider.noUiSlider.on('update', function( values, handle ) {
 
-    akbNominalU.noUiSlider.on('update', function( values, handle ) {
+    var value = values[handle];
 
-        var value = values[handle];
+    if ( handle ) {
+      inputNumber.value = value;
+    } else {
+      inputNumberTwo.value = value;
+    }
+  });
 
-        if ( handle ) {
-            akbNominalUMin.value = value;
-        } else {
-            akbNominalUMax.value = value;
-        }
-    });
+  inputNumberTwo.addEventListener('change', function(){
+    html5Slider.noUiSlider.set([this.value, null]);
+  });
 
-    akbNominalUMax.addEventListener('change', function(){
-        akbNominalU.noUiSlider.set([this.value, null]);
-    });
+  inputNumber.addEventListener('change', function(){
+    html5Slider.noUiSlider.set([null, this.value]);
+  });
 
-    akbNominalUMin.addEventListener('change', function(){
-        akbNominalU.noUiSlider.set([null, this.value]);
-    });
-
-
-
-    var akbCapacityMin = document.getElementById('akb-capacity-min');
-    var akbCapacityMax = document.getElementById('akb-capacity-max');
-    var akbCapacity = document.getElementById('akb-capacity');
-
-    noUiSlider.create(akbCapacity, {
-        start: [ <?=$akb_capacity_min_abs;?>, <?=$akb_capacity_max_abs;?> ],
-        connect: true,
-        range: {
-            'min': <?=$akb_capacity_min_abs;?>,
-            'max': <?=$akb_capacity_max_abs;?>
-        }
-    });
-
-    akbCapacity.noUiSlider.on('update', function( values, handle ) {
-
-        var value = values[handle];
-
-        if ( handle ) {
-            akbCapacityMin.value = value;
-        } else {
-            akbCapacityMax.value = value;
-        }
-    });
-
-    akbCapacityMax.addEventListener('change', function(){
-        akbCapacity.noUiSlider.set([this.value, null]);
-    });
-
-    akbCapacityMin.addEventListener('change', function(){
-        akbCapacity.noUiSlider.set([null, this.value]);
-    });
-
-
-    var akbFinalIMin = document.getElementById('akb-final-i-min');
-    var akbFinalIMax = document.getElementById('akb-final-i-max');
-    var akbFinalI = document.getElementById('akb-final-i');
-
-    noUiSlider.create(akbFinalI, {
-        start: [ <?=$akb_final_i_min_abs;?>, <?=$akb_final_i_max_abs;?> ],
-        connect: true,
-        range: {
-            'min': <?=$akb_final_i_min_abs;?>,
-            'max': <?=$akb_final_i_max_abs;?>
-        }
-    });
-
-    akbFinalI.noUiSlider.on('update', function( values, handle ) {
-
-        var value = values[handle];
-
-        if ( handle ) {
-            akbFinalIMin.value = value;
-        } else {
-            akbFinalIMax.value = value;
-        }
-    });
-
-    akbFinalIMax.addEventListener('change', function(){
-        akbFinalI.noUiSlider.set([this.value, null]);
-    });
-
-    akbFinalIMin.addEventListener('change', function(){
-        akbFinalI.noUiSlider.set([null, this.value]);
-    });
 
 </script>
 
@@ -320,59 +257,6 @@ if ($p_type == 'akb') {
 
 
 
-
-
-
-
-
-
-
-    <form id="akb-form" class="row" method="post">
-      <div class="col-md-12">
-        <select name="akb-brand">
-          <option value="" <?php if ($_REQUEST['akb-brand'] == '') echo 'selected';?>>Все производители</option>
-        </select>
-      </div>
-      <div class="col-md-6 pretty-selectors">
-        <span>Номинальное напряжение (В)</span>
-        <label for="akb-nominal-u-min">от</label>
-        <input type="text" name="akb-nominal-u-min" id="akb-nominal-u-min" value="<?=$akb_nominal_u_min;?>">
-        <label for="akb-nominal-u-max">до</label>
-        <input type="text" name="akb-nominal-u-max" id="akb-nominal-u-max" value="<?=$akb_nominal_u_max;?>">
-      </div>
-
-
-      <div class="col-md-6 pretty-selectors">
-        <div id="akb-nominal-u"></div>
-      </div>
-
-
-      <div class="col-md-6 pretty-selectors">
-        <span>Емкость С10 1,8В/эл, 20°С, (Ач)</span>
-        <label for="akb-capacity-min">от</label>
-        <input type="text" name="akb-capacity-min" id="akb-capacity-min" value="<?=$akb_capacity_min;?>">
-        <label for="akb-capacity-max">до</label>
-        <input type="text" name="akb-capacity-max" id="akb-capacity-max" value="<?=$akb_capacity_max;?>">
-          <div id="akb-capacity" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-      </div>
-      <div class="row nopadding">
-        <div class="col-md-6 pretty-selectors">
-          <span>Ток разряда при I10, (А)</span>
-          <label for="akb-final-i-min">от</label>
-          <input type="text" name="akb-final-i-min" id="akb-final-i-min" value="<?=$akb_final_i_min;?>">
-          <label for="akb-final-i-max">до</label>
-          <input type="text" name="akb-final-i-max" id="akb-final-i-max" value="<?=$akb_final_i_max;?>">
-            <div id="akb-final-i" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
-        </div>
-      </div><!-- nopadding -->
-
-      <div class="col-md-4">
-        <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
-      </div>
-      <div class="col-md-4 col-md-offset-4">
-        <button type="reset" value="reset" class="btn-gray">Очистить форму</button>
-      </div>
-    </form>
 
     <?php
     $meta_query = array(
