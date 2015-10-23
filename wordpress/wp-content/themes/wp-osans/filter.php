@@ -32,7 +32,7 @@ if ($p_type == 'ibp') {
     $ibp_worktime_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'ibp-worktime-max' AND m.post_id=p.ID AND p.post_status='publish'");
     $ibp_worktime_min = isset($_REQUEST['ibp-worktime-min']) ? floatval($_REQUEST['ibp-worktime-min']) : $ibp_worktime_min_abs;
     $ibp_worktime_max = isset($_REQUEST['ibp-worktime-max']) ? floatval($_REQUEST['ibp-worktime-max']) : $ibp_worktime_max_abs;
-
+    include ('ibp.js.php');
     ?>
 
 
@@ -55,6 +55,7 @@ if ($p_type == 'ibp') {
         <label for="ibp-power-va-max">до</label>
         <input type="text" name="ibp-power-va-max" id="ibp-power-va-max" value="<?=$ibp_power_va_max;?>">
       </div>
+        <div id="ibp-power-va" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       <div class="col-md-6 pretty-selectors">
         <span>Мощность ИБП (Вт)</span>
         <label for="ibp-power-wt-min">от</label>
@@ -62,6 +63,7 @@ if ($p_type == 'ibp') {
         <label for="ibp-power-wt-max">до</label>
         <input type="text" name="ibp-power-wt-max" id="ibp-power-wt-max" value="<?=$ibp_power_wt_max;?>">
       </div>
+        <div id="ibp-power-wt" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       <div class="col-md-6 pretty-selectors">
         <span>Входное напряжение (В)</span>
         <label for="ibp-input-u-min">от</label>
@@ -69,6 +71,7 @@ if ($p_type == 'ibp') {
         <label for="ibp-input-u-max">до</label>
         <input type="text" name="ibp-input-u-max" id="ibp-input-u-max" value="<?=$ibp_input_u_max;?>">
       </div>
+        <div id="ibp-input-u" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
 
       <div class="col-md-6 pretty-selectors">
         <span>Время работы при 100% нагрузке от встроенных АКБ (мин)</span>
@@ -77,6 +80,7 @@ if ($p_type == 'ibp') {
         <label for="ibp-worktime-max">до</label>
         <input type="text" name="ibp-worktime-max" id="ibp-worktime-max" value="<?=$ibp_worktime_max;?>">
       </div>
+        <div id="ibp-worktime" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
 
       <div class="col-md-4">
         <button type="submit" value="submit" class="btn-red">Подобрать продукцию</button>
@@ -195,7 +199,7 @@ if ($p_type == 'akb') {
     $akb_final_i_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'akb-final-i-max' AND m.post_id=p.ID AND p.post_status='publish'");
     $akb_final_i_min = isset($_REQUEST['akb-final-i-min']) ? floatval($_REQUEST['akb-final-i-min']) : $akb_final_i_min_abs;
     $akb_final_i_max = isset($_REQUEST['akb-final-i-max']) ? floatval($_REQUEST['akb-final-i-max']) : $akb_final_i_max_abs;
-
+    include ('akb.js.php');
 
     ?>
 
@@ -212,6 +216,7 @@ if ($p_type == 'akb') {
         <input type="text" name="akb-nominal-u-min" id="akb-nominal-u-min" value="<?=$akb_nominal_u_min;?>">
         <label for="akb-nominal-u-max">до</label>
         <input type="text" name="akb-nominal-u-max" id="akb-nominal-u-max" value="<?=$akb_nominal_u_max;?>">
+          <div id="akb-nominal-u" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       </div>
       <div class="col-md-6 pretty-selectors">
         <span>Емкость С10 1,8В/эл, 20°С, (Ач)</span>
@@ -219,6 +224,7 @@ if ($p_type == 'akb') {
         <input type="text" name="akb-capacity-min" id="akb-capacity-min" value="<?=$akb_capacity_min;?>">
         <label for="akb-capacity-max">до</label>
         <input type="text" name="akb-capacity-max" id="akb-capacity-max" value="<?=$akb_capacity_max;?>">
+          <div id="akb-capacity" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       </div>
       <div class="row nopadding">
         <div class="col-md-6 pretty-selectors">
@@ -227,6 +233,7 @@ if ($p_type == 'akb') {
           <input type="text" name="akb-final-i-min" id="akb-final-i-min" value="<?=$akb_final_i_min;?>">
           <label for="akb-final-i-max">до</label>
           <input type="text" name="akb-final-i-max" id="akb-final-i-max" value="<?=$akb_final_i_max;?>">
+            <div id="akb-final-i" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
         </div>
       </div><!-- nopadding -->
 
@@ -332,6 +339,7 @@ if ($p_type == 'dgu') {
     $dgu_fuel_capacity_max_abs = $wpdb->get_var("SELECT MAX(CEILING(m.meta_value)) FROM $wpdb->postmeta m, $wpdb->posts p WHERE m.meta_key = 'dgu-fuel-capacity-max' AND m.post_id=p.ID AND p.post_status='publish'");
     $dgu_fuel_capacity_min = isset($_REQUEST['dgu-fuel-capacity-min']) ? floatval($_REQUEST['dgu-fuel-capacity-min']) : $dgu_fuel_capacity_min_abs;
     $dgu_fuel_capacity_max = isset($_REQUEST['dgu-fuel-capacity-max']) ? floatval($_REQUEST['dgu-fuel-capacity-max']) : $dgu_fuel_capacity_max_abs;
+    include ('dgu.js.php');
 
     ?>
 
@@ -349,6 +357,7 @@ if ($p_type == 'dgu') {
         <input type="text" name="dgu-main-power-min" id="dgu-main-power-min" value="<?=$dgu_main_power_min;?>">
         <label for="dgu-main-power-max">до</label>
         <input type="text" name="dgu-main-power-max" id="dgu-main-power-max" value="<?=$dgu_main_power_max;?>">
+          <div id="dgu-main-power" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       </div>
       <div class="col-md-6 pretty-selectors">
         <span>Резервная мощность (кВА/кВт)</span>
@@ -356,6 +365,7 @@ if ($p_type == 'dgu') {
         <input type="text" name="dgu-reserve-power-min" id="dgu-reserve-power-min" value="<?=$dgu_reserve_power_min;?>">
         <label for="dgu-reserve-power-max">до</label>
         <input type="text" name="dgu-reserve-power-max" id="dgu-reserve-power-max" value="<?=$dgu_reserve_power_max;?>">
+          <div id="dgu-reserve-power" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       </div>
       <div class="col-md-6 pretty-selectors">
         <span>Расход топлива (л/час)</span>
@@ -363,6 +373,7 @@ if ($p_type == 'dgu') {
         <input type="text" name="dgu-fuel-consumption-min" id="dgu-fuel-consumption-min" value="<?=$dgu_fuel_consumption_min;?>">
         <label for="dgu-fuel-consumption-max">до</label>
         <input type="text" name="dgu-fuel-consumption-max" id="dgu-fuel-consumption-max" value="<?=$dgu_fuel_consumption_max;?>">
+          <div id="fuel-consumption" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       </div>
 
       <div class="col-md-6 pretty-selectors">
@@ -371,6 +382,7 @@ if ($p_type == 'dgu') {
         <input type="text" name="dgu-fuel-capacity-min" id="dgu-fuel-capacity-min" value="<?=$dgu_fuel_capacity_min;?>">
         <label for="dgu-fuel-capacity-max">до</label>
         <input type="text" name="dgu-fuel-capacity-max" id="dgu-fuel-capacity-max" value="<?=$dgu_fuel_capacity_max;?>">
+          <div id="fuel-capacity" class="noUi-target noUi-ltr noUi-horizontal noUi-background"></div>
       </div>
 
       <div class="col-md-4">
