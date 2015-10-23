@@ -1,13 +1,5 @@
 <?php if(get_field('subtitle')) { echo '<h3 class="col-md-12 subtitle">' . get_field('subtitle') . '</h3><!-- /.subtitle -->'; } ?>
 
-
-<?php if(get_field('header-image')) { ?>
-<style>
-  header {
-    background-image: url(<?php the_field('header-image'); ?>) !important;
-  }
-</style>
-<?php } ?>
 <?php if(get_field('cat-product') == "ibp") { ?>
   <style>
     header {
@@ -36,6 +28,12 @@
     }
   </style>
   <h3 class="col-md-12 subtitle">Системы кондиционирования воздуха</h3><!-- /.subtitle -->
+<?php } else if(get_field('header-image')) { ?>
+  <style>
+    header {
+      background-image: url(<?php the_field('header-image'); ?>) !important;
+    }
+  </style>
 <?php } else { ?>
   <style>
     header {
@@ -43,3 +41,7 @@
     }
   </style>
 <?php } ?>
+
+
+
+
