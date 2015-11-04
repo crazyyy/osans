@@ -356,6 +356,8 @@ if ($p_type == 'akb') {
       <div class="col-md-12">
         <select name="akb-brand">
           <option value="" <?php if ($_REQUEST['akb-brand'] == '') echo 'selected';?>>Все производители</option>
+            <option value="C&D" <?php if ($_REQUEST['akb-brand'] == 'C&D') echo 'selected';?>>C&D</option>
+            <option value="FIAMM" <?php if ($_REQUEST['akb-brand'] == 'FIAMM') echo 'selected';?>>FIAMM</option>
         </select>
       </div>
 

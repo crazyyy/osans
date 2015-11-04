@@ -8,7 +8,7 @@
           <div class="product-additional">
             <?php the_post_thumbnail(); // Fullsize image for the single post ?>
             <a href="#" data-produt-id="<?php the_ID(); ?>" data-produt-name="<?php the_title(); ?>" class="btn btn-red btn-order">Уточнить стоимость</a>
-            <p>Мы свяжемся с Вами в течение 15 минут</p>
+            <div class="smallp">Мы свяжемся с Вами в течение 15 минут</div>
           </div><!-- /.product-additional -->
           <?php the_content(); ?>
         </article>
