@@ -1,0 +1,45 @@
+@media (max-width: 991px) {
+  .inner {
+    width: 100%;
+  }
+  .equipment-list-container {
+    display: inline-block;
+    float: left;
+
+    width: 50%;
+    min-height: 350px;
+    margin-bottom: 20px;
+  }
+
+  .about-company {
+    .about-company-img {
+      display: none;
+    }
+  }
+
+  .our-clients {
+    @extend .clearfix;
+    .our-clients-logo {
+      float: left;
+
+      width: 50%;
+    }
+  }
+
+  footer {
+    height: 740px;
+    .contact-phone,
+    .contact-adress,
+    .contact-mail {
+      width: 320px !important;
+      height: auto;
+      margin: 0 auto 10px;
+      &:before {
+        left: 38%;
+      }
+    }
+    .copy {
+      padding-top: 0;
+    }
+  }
+}

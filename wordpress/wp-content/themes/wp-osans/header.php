@@ -27,13 +27,17 @@
 
   <div class="header-top inner row">
 
-    <nav class="col-md-7 header-top-nav">
-      <?php wpeTopHeadNav(); ?>
-    </nav><!-- header-top-nav -->
-    <div class="col-md-5 header-top-contact">
-      <a href="mailto:info@nord-energo.ru" class="mail">info@nord-energo.ru</a>
-      <a href="tel:+74956661364" class="phone">+7 (495) <span>666-13-64</span></a>
-    </div><!-- header-top-contact -->
+    <div class="col-md-12">
+      <nav class="header-top-nav">
+        <?php wpeTopHeadNav(); ?>
+      </nav><!-- header-top-nav -->
+      <div class="header-top-contact">
+        <a href="mailto:info@nord-energo.ru" class="mail">info@nord-energo.ru</a>
+        <a href="tel:+74956661364" class="phone">+7 (495) <span>666-13-64</span></a>
+      </div><!-- header-top-contact -->
+
+    </div>
+
 
   </div><!-- /.header-top -->
 

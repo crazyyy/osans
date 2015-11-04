@@ -259,6 +259,8 @@ picture {
   padding: 15px 0 0;
 }
 .header-top-nav {
+  float: left;
+
   padding-left: 0;
   ul {
     margin: 0;
@@ -285,6 +287,8 @@ picture {
   }
 }
 .header-top-contact {
+  float: right;
+
   padding-right: 0;
   .phone,
   .mail {
@@ -733,19 +737,29 @@ article {
   margin-bottom: 60px;
 
   text-align: center;
-  &:after {
-    position: absolute;
-    top: 150px;
-    right: 25px;
+  .withimg {
+    position: relative;
 
-    @extend .dblock;
-  }
-  img {
+    display: block;
+
     width: 205px;
     height: 205px;
-    margin-bottom: 30px;
+    margin: 0 auto 30px;
 
     border-radius: 50%;
+    img {
+      width: 205px;
+      height: 205px;
+
+      border-radius: 50%;
+    }
+    &:after {
+      position: absolute;
+      top: 160px;
+      right: 20px;
+
+      @extend .dblock;
+    }
   }
   h4 {
     font-size: 16px;
@@ -753,33 +767,47 @@ article {
     margin-bottom: 25px;
     padding: 0 5px;
     a {
+      /* text-decoration: underline; */
       color: $gray;
+    }
+    &:hover {
+      a {
+        color: $red;
+      }
     }
   }
   &.equipment-list-container-1 {
-    &:after {
-      @include sprite($sprite-ico-acum);
+    .withimg {
+      &:after {
+        @include sprite($sprite-ico-acum);
+      }
     }
   }
   &.equipment-list-container-2 {
     h4 {
       padding: 0 10px;
     }
-    &:after {
-      @include sprite($sprite-ico-batter);
+    .withimg {
+      &:after {
+        @include sprite($sprite-ico-batter);
+      }
     }
   }
   &.equipment-list-container-3 {
-    &:after {
-      @include sprite($sprite-ico-gener);
+    .withimg {
+      &:after {
+        @include sprite($sprite-ico-gener);
+      }
     }
   }
   &.equipment-list-container-4 {
     h4 {
       padding: 0;
     }
-    &:after {
-      @include sprite($sprite-ico-note);
+    .withimg {
+      &:after {
+        @include sprite($sprite-ico-note);
+      }
     }
   }
 }
@@ -909,26 +937,51 @@ article {
   padding-bottom: 70px;
   .our-clients-logo {
     height: 160px;
+    padding: 0;
 
-    border: 1px solid $base-border-color;
+    @extend .clearfix;
+    .inside {
+      width: 160px;
+      height: 100%;
 
-    @extend .align-center-parent;
-    img {
-      @extend .align-center;
+      border: 1px solid $base-border-color;
+
+      @extend .align-center-parent;
+      img {
+        @extend .align-center;
+      }
+    }
+    &.our-clients-logo-1,
+    &.our-clients-logo-3,
+    &.our-clients-logo-5,
+    &.our-clients-logo-7 {
+      .inside {
+        float: right;
+      }
+    }
+    &.our-clients-logo-2,
+    &.our-clients-logo-4,
+    &.our-clients-logo-6,
+    &.our-clients-logo-8 {
+      .inside {
+        float: left;
+      }
     }
     &.our-clients-logo-1,
     &.our-clients-logo-2,
     &.our-clients-logo-3,
     &.our-clients-logo-4 {
-      border-bottom: 0;
+      .inside {
+        border-bottom: 0;
+      }
     }
     &.our-clients-logo-2,
-    &.our-clients-logo-3,
     &.our-clients-logo-4,
     &.our-clients-logo-6,
-    &.our-clients-logo-7,
     &.our-clients-logo-8 {
-      border-left: 0;
+      .inside {
+        border-left: 0;
+      }
     }
   }
 }
@@ -1427,18 +1480,6 @@ article {
   background-color: #000;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 footer {
   height: $footer;
   margin: $footer_margin auto 0;
@@ -1446,7 +1487,7 @@ footer {
   color: #fff;
   background-color: $blue;
   .inner {
-    height: $footer;
+    height: 100%;
     padding-top: 70px;
   }
   h5 {
@@ -1580,34 +1621,34 @@ article {
   }
 }
 
-.widget_nav_menu li {
-  position: relative;
+.widget_nav_menu {
+  li {
+    position: relative;
 
-  margin: 0;
-  padding: 15px 20px 15px 25px;
+    margin: 0;
+    padding: 15px 20px 15px 25px;
 
-  border-bottom: 1px solid #e1e1e1;
-  &::before {
-    position: absolute;
-    top: 22px;
-    left: 7px;
-
-    width: 4px;
-    height: 4px;
-
-    background-image: url('../img/sprite.png');
-    background-position: -166px -152px;
+    border-bottom: 1px solid #e1e1e1;
+    &:before {
+      position: absolute;
+      top: 22px;
+      left: 7px;
+    }
   }
 }
 
-.about-company .about-company-content .read-more {
-  font-family: 'OpenSansBold';
-  font-size: 14px;
+.about-company {
+  .about-company-content {
+    .read-more {
+      font-family: $fosb;
+      font-size: 14px;
 
-  position: relative;
+      position: relative;
 
-  color: #df4a37;
-  border-bottom: 1px solid #e74c3c;
+      color: #df4a37;
+      border-bottom: 1px solid #e74c3c;
+    }
+  }
 }
 
 .smallp {
@@ -1649,21 +1690,28 @@ table.small_table {
   border-collapse: collapse;
 }
 
-article.products ol li {
-  margin: 0 0 10px;
-  padding: 0;
+article {
+  &.products {
+    ol {
+      li {
+        margin: 0 0 10px;
+        padding: 0;
+      }
+    }
+  }
 }
-
 form {
-  .pretty-selectors input {
-    width: 90px;
-    margin-right: 10px;
+  .pretty-selectors {
+    input {
+      width: 90px;
+      margin-right: 10px;
 
-    background-color: #f9f9f9;
+      background-color: #f9f9f9;
+    }
   }
   select,
   input {
-    font-family: 'OpenSansRegular';
+    font-family: $fosr;
     font-size: 12px;
 
     width: 260px;
@@ -1678,7 +1726,7 @@ input {
   &[type='button'],
   &[type='reset'],
   &[type='submit'] {
-    font-family: 'OpenSansBold';
+    font-family: $fosb;
     font-size: 14px;
     line-height: 1;
 
@@ -1691,7 +1739,7 @@ input {
 }
 
 button {
-  font-family: 'OpenSansBold';
+  font-family: $fosb;
   font-size: 14px;
   line-height: 1;
 
@@ -1727,4 +1775,6 @@ button {
   padding: 12px 0;
 }
 
+/* @import 'media/media991';
+@import 'media/media945'; */
 @import 'import/print';

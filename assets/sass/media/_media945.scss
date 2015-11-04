@@ -1,0 +1,36 @@
+@media (max-width: 945px) {
+  .header-top-nav {
+    display: block;
+
+    width: 30px;
+    height: 25px;
+
+    cursor: pointer;
+
+    @include sprite($sprite-header-top-nav);
+    .top-headnav {
+      display: none;
+    }
+  }
+
+  nav {
+    &.nav {
+      top: 30px;
+      right: 20px;
+
+      width: 45px;
+      height: 40px;
+
+      cursor: pointer;
+
+      @include sprite($sprite-nav-nav);
+      .headnav {
+        display: none;
+      }
+    }
+  }
+
+  .hesperiden.tparrows {
+    display: none;
+  }
+}

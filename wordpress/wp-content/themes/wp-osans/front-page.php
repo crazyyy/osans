@@ -7,22 +7,22 @@
       </div><!-- /.container-descr -->
 
       <div class="equipment-list-container equipment-list-container-1 col-md-3">
-        <a href="/ibp.htm" title="Источники бесперебойного питания"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-1.jpg" alt=""></a>
+        <a href="/ibp.htm" class="withimg" title="Источники бесперебойного питания"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-1.jpg" alt=""></a>
         <h4><a href="/ibp.htm">Источники бесперебойного питания</a></h4>
         <p>Высоконадежные системы резервного электропитания для любых технических задач</p>
       </div><!-- /.equipment-list-container -->
       <div class="equipment-list-container equipment-list-container-2 col-md-3">
-        <a href="/akb.htm" title="Аккумуляторные батареи"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-2.jpg" alt=""></a>
+        <a href="/akb.htm" class="withimg" title="Аккумуляторные батареи"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-2.jpg" alt=""></a>
         <h4><a href="/akb.htm">Аккумуляторные батареи</a></h4>
         <p>Для объектов с повышенными требованиями к энергоснабжению</p>
       </div><!-- /.equipment-list-container -->
       <div class="equipment-list-container equipment-list-container-3 col-md-3">
-        <a href="/dgu.htm" title="Дизельные электростанции"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-3.jpg" alt=""></a>
+        <a href="/dgu.htm" class="withimg" title="Дизельные электростанции"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-3.jpg" alt=""></a>
         <h4><a href="/dgu.htm">Дизельные электростанции</a></h4>
         <p>Как небольшие установки, так и крупные энергетические станции</p>
       </div><!-- /.equipment-list-container -->
       <div class="equipment-list-container equipment-list-container-4 col-md-3">
-        <a href="/skv.htm" title="Системы кондицинирования воздуха"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-4.jpg" alt=""></a>
+        <a href="/skv.htm" class="withimg" title="Системы кондицинирования воздуха"><img src="<?php echo get_template_directory_uri(); ?>/img/content/equipment-list-container-4.jpg" alt=""></a>
         <h4><a href="/skv.htm">Системы кондицинирования воздуха</a></h4>
         <p>Качественные и надежные системы кондиционирования</p>
       </div><!-- /.equipment-list-container -->
@@ -62,14 +62,46 @@
       <div class="container-descr col-md-12">
         Силами нашей компании было спроектировано и сдано в эксплуатацию множестворазноплановых систем энергоснабжения
       </div><!-- /.container-descr col-md-12 -->
-      <div class="our-clients-logo our-clients-logo-1 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-1.png" alt=""></div>
-      <div class="our-clients-logo our-clients-logo-2 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-2.png" alt=""></div>
-      <div class="our-clients-logo our-clients-logo-3 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-3.png" alt=""></div>
-      <div class="our-clients-logo our-clients-logo-4 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-4.png" alt=""></div>
-      <div class="our-clients-logo our-clients-logo-5 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-5.png" alt=""></div>
-      <div class="our-clients-logo our-clients-logo-6 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-6.png" alt=""></div>
-      <div class="our-clients-logo our-clients-logo-7 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-7.png" alt=""></div>
-      <div class="our-clients-logo our-clients-logo-8 col-md-3"><img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-8.png" alt=""></div>
+      <div class="our-clients-logo our-clients-logo-1 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-1.png" alt=""></div>
+        </div><!-- /.inside -->
+
+      <div class="our-clients-logo our-clients-logo-2 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-2.png" alt="">
+        </div><!-- /.inside -->
+      </div>
+      <div class="our-clients-logo our-clients-logo-3 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-3.png" alt="">
+        </div><!-- /.inside -->
+      </div>
+      <div class="our-clients-logo our-clients-logo-4 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-4.png" alt="">
+        </div><!-- /.inside -->
+      </div>
+      <div class="our-clients-logo our-clients-logo-5 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-5.png" alt="">
+        </div><!-- /.inside -->
+      </div>
+      <div class="our-clients-logo our-clients-logo-6 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-6.png" alt="">
+        </div><!-- /.inside -->
+      </div>
+      <div class="our-clients-logo our-clients-logo-7 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-7.png" alt="">
+        </div><!-- /.inside -->
+      </div>
+      <div class="our-clients-logo our-clients-logo-8 col-md-3">
+        <div class="inside">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/content/clients/clients-8.png" alt="">
+        </div><!-- /.inside -->
+      </div>
     </article><!-- /.row inner our-clients -->
 
 <?php get_footer(); ?>
